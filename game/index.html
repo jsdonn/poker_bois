@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"> </script>
+  <link rel="icon" href="images/favicon.ico" type: image/x-icon" />
+  <title> Poker Bois - Game </title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="board">
+      <section id="community-cards">
+        <!-- one idea for showing these cards is: have a box over them and once
+          a round has completed, remove the next box accordingly -->
+        <img class="flop" src="../images/cards/AS.png" id="flop1">
+        <img class="flop" src="../images/cards/AS.png" id="flop2">
+        <img class="flop" src="../images/cards/AS.png" id="flop3">
+        <img class="turn" src="../images/cards/AS.png" id="turn1">
+        <img class="river" src="../images/cards/AS.png" id="river1">
+      </section>
+      <section id="players">
+        <div class="player-space" id="left-top">
+          <p> Player 1 </p>
+          <b> $69.69 </b>
+          <img class="first" src="../images/cards/AS.png">
+          <img class="second" src="../images/cards/AH.png">
+          <p id="bet-size"> $4.20 </p>
+        </div>
+        <div class="player-space" id="left-bottom">
+          <p> Player 2 </p>
+          <b> $69.69 </b>
+          <img class="first" src="../images/cards/AS.png">
+          <img class="second" src="../images/cards/AH.png">
+        </div>
+        <div class="player-space" id="bottom-left">
+          <p> Player 3 </p>
+          <b> $69.69 </b>
+          <img class="first" src="../images/cards/AS.png">
+          <img class="second" src="../images/cards/AH.png">
+        </div> 
+        <div class="player-space" id="bottom-center">
+          <p> Player 4 </p>
+          <b> $69.69 </b>
+          <img class="first" src="../images/cards/AS.png">
+          <img class="second" src="../images/cards/AH.png">
+        </div> 
+        <div class="player-space" id="bottom-right">
+          <p> Player 5 </p>
+          <b> $69.69 </b>
+          <img class="first" src="../images/cards/AS.png">
+          <img class="second" src="../images/cards/AH.png">
+        </div> 
+        <div class="player-space" id="right-bottom">
+          <p> Player 6 </p>
+          <b> $69.69 </b>
+          <img class="first" src="../images/cards/AS.png">
+          <img class="second" src="../images/cards/AH.png">
+        </div> 
+        <div class="player-space" id="right-top">
+          <p> Player 7 </p>
+          <b> $69.69 </b>
+          <img class="first" src="../images/cards/AS.png">
+          <img class="second" src="../images/cards/AH.png">
+        </div> 
+        <div class="player-space" id="top-right">
+          <p> Player 8 </p>
+          <b> $69.69 </b>
+          <img class="first" src="../images/cards/AS.png">
+          <img class="second" src="../images/cards/AH.png">
+        </div> 
+        <div class="player-space" id="top-left">
+          <p> Player 9 </p>
+          <b> $69.69 </b>
+          <img class="first" src="../images/cards/AS.png">
+          <img class="second" src="../images/cards/AH.png">
+        </div> 
+      </section> 
+    </div>
+    <div class="interface">
+      <div class="container" id="hand">
+        <h1>Your Hand:</h1>
+        <br>
+        <img src="../images/cards/AS.png" id="first-card">
+        <img src="../images/cards/AH.png" id="second-card">
+      </div>
+      <div class="container" id="user-input">
+        <br>
+        <button class="btn" id="fold">Fold</button>
+        <button class="btn" id="call">Call</button>
+        <br>
+        <button class="btn" id="raise">Raise</button>
+        <input type="text" name="raise-amount">
+        <br>
+        <button class="btn" id="half-pot">1/2 Pot</button>
+        <button class="btn" id="three-fourths-pot">3/4 Pot</button>
+        <button class="btn" id="pot">Pot</button>
+      </div>
+      <div class="container" id="other-options">
+        <button class="btn" id="leave">Leave Game</button>
+        <br>
+        <h2>Show Cards</h2>
+        <button class="btn" id="both">Both</button>
+        <button class="btn" id="l">L</button>
+        <button class="btn" id="r">R</button>
+        <hr>
+        <button class="btn" id="clock">Call Clock</button>
+        <button class="btn" id="straddle">Straddle</button>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <small> &copy; 2019 Justin Donn | Matin Kassaian | Christopher Wang </small>
+  </div>
+</body>
+</html>

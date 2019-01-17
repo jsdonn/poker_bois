@@ -1,0 +1,74 @@
+html, body {
+	height: 100%;
+}
+
+.wrapper {
+	width: 60%;
+	display: inline-block;
+	position: relative;
+	background: blue;
+	margin: 0;
+	overflow: hidden;
+	background-image: url("images/poker_background.jpg");
+	background-size: 100% 100%;
+}
+
+.wrapper:after {
+	padding-top: 75%;
+	display: block;
+	content: '';
+}
+
+.full-container {
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin: 0;
+	position: absolute;
+
+}
+
+img.full {
+	max-width: 60%;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: auto;
+	top: 0;
+	opacity: 0.4;
+	position: fixed;
+	
+}
+
+.container {
+	height: 100%;
+	position: relative;
+	z-index: 2;
+	display: block;
+	text-align: center;
+	top: 55%;
+	color: white;
+}
+
+h2 {
+	position: relative;
+	font-size: 70px;
+	margin-bottom: 30px;
+	/* 7vw is good, but dodsn't work */
+}
+
+.btn {
+	cursor: pointer;
+	color: black;
+	position: relative;
+	display: inline-block;
+}
+
+form {
+	position: relative;
+	display: inline-block;
+	margin-right: 10px;
+	padding: 0 5px;
+}
+

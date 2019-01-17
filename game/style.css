@@ -1,0 +1,260 @@
+html, body {
+  height: 100%;
+}
+
+/*@media screen and (min-width: 801px) {
+  button {
+    padding: 1% 2%;
+    font-size: 1vw;
+    margin: 2%;
+  }
+  h1 {
+    font-size: 2vw;
+  }
+  h4 {
+    font-size: 1.5vw;
+  }
+  #both, #left, #right {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  h1 {
+    font-size: 20px;
+  }
+  h4 {
+    font-size: 12px;
+  }
+  button {
+    padding: 5px 10px;
+    font-size: 14px;
+    margin: 5px;
+  }
+  #both, #left, #right {
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+} */
+
+.wrapper {
+  width: 800px; /* was 60% */
+  display: inline-block;
+  position: relative;
+  background: blue;
+  margin: 0;
+  overflow: hidden;
+  background-image: url("../images/4by3.png");
+  background-size: 100% 100%;
+  border: solid black;
+  border-radius: 10px;
+}
+
+.wrapper:after {
+  padding-top: 75%;
+  display: block;
+  content: '';
+}
+
+.board {
+  background-color: purple;
+  height: 75%;
+  width: 100%;
+  position: absolute;
+}
+
+#community-cards {
+  width: 300px;
+  background-color: yellow;
+  height: 100px;
+  top: 175px;
+  left: 250px;
+  position: relative;
+  border-radius: 10px;
+}
+
+#flop1 {
+  left: 10%;
+}
+#flop2 {
+  left: 30%;
+}
+#flop3 {
+  left: 50%;
+}
+#turn1 {
+  left: 70%;
+}
+#river1 {
+  left: 90%;
+}
+
+
+.player-space {
+  width: 150px;
+  height: 120px;
+  border-radius: 20px;
+  background-color: gray;
+  position: absolute;
+  text-align: left;
+}
+
+.player-space img, #community-cards img {
+  display: inline-block;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.player-space img {
+  top: 60%;
+  max-height: 65%;
+  max-width: 65%;
+}
+
+#community-cards img {
+  top: 50%;
+  max-height: 80%;
+  max-width: 80%;
+}
+
+.player-space .first {
+  left: 30%;
+}
+
+.player-space .second {
+  left: 70%;
+}
+
+.player-space p, b {
+  margin-top: 5px;
+  font-size: 18px;
+  display: inline-block;
+}
+.player-space b {
+  padding-right: 3px;
+}
+
+.player-space p {
+  margin-left: 12px;
+}
+#left-top, #right-top {
+  top: 102.5px;
+}
+#left-top, #left-bottom {
+  left: 10px;
+}
+#bottom-left, #bottom-right, #bottom-center {
+  bottom: 10px;
+}
+#right-top, #right-bottom {
+  right: 10px;
+}
+#left-bottom, #right-bottom {
+  top: 227.5px;
+}
+#top-left, #bottom-left {
+  left: 170px;
+}
+#top-right, #bottom-right {
+  right: 170px;
+}
+#top-right, #top-left {
+  top: 10px;
+}
+#bottom-center {
+  left: 325px;
+}
+
+.interface img {
+  max-width: 10%;
+  height: auto;
+}
+
+.container {
+  background: blue;
+  width: 33.33%;
+  height: 25%;
+  top: 75%;
+  display: block;
+  margin: 0;
+  text-align: center;
+  position: absolute;
+  border-top: solid black;
+  border-width: 2px;
+}
+
+#hand {
+  background: green;
+  left: 0;
+  border-right: solid black;
+  border-width: 2px;
+}
+
+#user-input {
+  left: 33.33%;
+  background: red;
+  border-width: 2px;
+  border-left: solid black;
+  border-right: solid black;
+  border-width: 2px;
+}
+
+#other-options {
+  right: 0;
+  background: orange;
+  border-left: solid black;
+  border-width: 2px;
+}
+
+h1 {
+  font-size: 25px;
+  margin-top: 5px;
+}
+
+.container img {
+  display: inline-block;
+  position: absolute;
+  top: 60%;
+  max-height: 65%;
+  max-width: 65%;
+  transform: translate(-50%, -50%);
+}
+
+#first-card {
+  left: 35%;
+}
+#second-card {
+  left: 65%;
+}
+
+button {
+  background-image: linear-gradient(90deg , rgb(214,219,223) 0%, rgb(244,244,248) 100%);
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  margin: 5px;
+}
+
+h2 {
+  display: inline-block;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+#both, #l, #r, #half-pot, #three-fourths-pot, #pot {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+#fold, #call, #raise, #leave {
+  font-weight: 600;
+}
+
+#leave {
+  margin-top: 10px;
+}
+
+hr {
+  border: 1px solid blue;
+}
