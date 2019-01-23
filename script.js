@@ -1,5 +1,10 @@
+
+
 function goToGame() {
-	document.getElementbyId("username").value = document.
+	localStorage.setItem("username", document.getElementById("username").value);
+	localStorage.setItem("buyIn", document.getElementById("buy-in").value);
+	document.location.href ='game/index.html';
+
 }
 
 function store() {

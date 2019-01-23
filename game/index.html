@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
-  <script src="script.js"> </script>
+  <!-- moved scripts to bottom of body -->
   <link rel="icon" href="images/favicon.ico" type: image/x-icon" />
   <title> Poker Bois - Game </title>
 </head>
@@ -22,59 +22,94 @@
       </section>
       <section id="players">
         <div class="player-space" id="left-top">
-          <p> Player 1 </p>
-          <b> $69.69 </b>
+          <p id="player1"> Player 1 </p>
+          <div class="right-align">
+            <b id="stack-p1"> $69.69 </b>
+          </div>
           <img class="first" src="../images/cards/AS.png">
           <img class="second" src="../images/cards/AH.png">
-          <p id="bet-size"> $4.20 </p>
+          <p class="bet-size" id="bet-size-p1"> $40.20 </p>
+          <img class="dealer-chip" id="dealer-chip-p1" src="../images/dealer.png">
         </div>
         <div class="player-space" id="left-bottom">
           <p> Player 2 </p>
-          <b> $69.69 </b>
+          <div class="right-align">
+            <b> $69.69 </b>
+          </div>
           <img class="first" src="../images/cards/AS.png">
           <img class="second" src="../images/cards/AH.png">
+          <p class="bet-size" id="bet-size-p2"> $40.20 </p>
+          <img class="dealer-chip" id="dealer-chip-p2" src="../images/dealer.png">
         </div>
         <div class="player-space" id="bottom-left">
           <p> Player 3 </p>
-          <b> $69.69 </b>
+          <div class="right-align">
+            <b> $69.69 </b>
+         </div>
           <img class="first" src="../images/cards/AS.png">
           <img class="second" src="../images/cards/AH.png">
+          <p class="bet-size" id="bet-size-p3"> $40.20 </p>
+          <img class="dealer-chip" id="dealer-chip-p3" src="../images/dealer.png">
         </div> 
         <div class="player-space" id="bottom-center">
           <p> Player 4 </p>
-          <b> $69.69 </b>
+          <div class="right-align">
+            <b> $69.69 </b>
+          </div>
           <img class="first" src="../images/cards/AS.png">
           <img class="second" src="../images/cards/AH.png">
+          <p class="bet-size" id="bet-size-p4"> $40.20 </p>
+          <img class="dealer-chip" id="dealer-chip-p4" src="../images/dealer.png">
         </div> 
         <div class="player-space" id="bottom-right">
           <p> Player 5 </p>
-          <b> $69.69 </b>
+          <div class="right-align">
+            <b> $69.69 </b>
+          </div>
           <img class="first" src="../images/cards/AS.png">
           <img class="second" src="../images/cards/AH.png">
+          <p class="bet-size" id="bet-size-p5"> $40.20 </p>
+          <img class="dealer-chip" id="dealer-chip-p5" src="../images/dealer.png">
         </div> 
         <div class="player-space" id="right-bottom">
           <p> Player 6 </p>
-          <b> $69.69 </b>
+          <div class="right-align">
+            <b> $69.69 </b>
+          </div>
           <img class="first" src="../images/cards/AS.png">
           <img class="second" src="../images/cards/AH.png">
+          <p class="bet-size" id="bet-size-p6"> $40.20 </p>
+          <img class="dealer-chip" id="dealer-chip-p6" src="../images/dealer.png">
         </div> 
         <div class="player-space" id="right-top">
           <p> Player 7 </p>
-          <b> $69.69 </b>
+          <div class="right-align">
+            <b> $69.69 </b>
+          </div>
           <img class="first" src="../images/cards/AS.png">
           <img class="second" src="../images/cards/AH.png">
+          <p class="bet-size" id="bet-size-p7"> $40.20 </p>
+          <img class="dealer-chip" id="dealer-chip-p7" src="../images/dealer.png">
         </div> 
         <div class="player-space" id="top-right">
           <p> Player 8 </p>
-          <b> $69.69 </b>
+          <div class="right-align">
+            <b> $69.69 </b>
+          </div>
           <img class="first" src="../images/cards/AS.png">
           <img class="second" src="../images/cards/AH.png">
+          <p class="bet-size" id="bet-size-p8"> $40.20 </p>
+          <img class="dealer-chip" id="dealer-chip-p8" src="../images/dealer.png">
         </div> 
         <div class="player-space" id="top-left">
           <p> Player 9 </p>
-          <b> $69.69 </b>
+          <div class="right-align">
+            <b> $69.69 </b>
+          </div>
           <img class="first" src="../images/cards/AS.png">
           <img class="second" src="../images/cards/AH.png">
+          <p class="bet-size" id="bet-size-p9"> $40.20 </p>
+          <img class="dealer-chip" id="dealer-chip-p9" src="../images/dealer.png">
         </div> 
       </section> 
     </div>
@@ -113,5 +148,7 @@
   <div id="footer">
     <small> &copy; 2019 Justin Donn | Matin Kassaian | Christopher Wang </small>
   </div>
+  <script src="../script.js"> </script>
+  <script src="script.js"> </script>
 </body>
 </html>

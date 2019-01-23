@@ -45,7 +45,8 @@ html, body {
   background: blue;
   margin: 0;
   overflow: hidden;
-  background-image: url("../images/4by3.png");
+  background-image: url("../images/4by3.png"); 
+  /* need to add background picture here */
   background-size: 100% 100%;
   border: solid black;
   border-radius: 10px;
@@ -98,6 +99,7 @@ html, body {
   background-color: gray;
   position: absolute;
   text-align: left;
+  display: inline-block;
 }
 
 .player-space img, #community-cards img {
@@ -135,6 +137,12 @@ html, body {
   padding-right: 3px;
 }
 
+.right-align {
+  text-align: right;
+  float: right;
+  margin-right: 10px;
+}
+
 .player-space p {
   margin-left: 12px;
 }
@@ -164,6 +172,85 @@ html, body {
 }
 #bottom-center {
   left: 325px;
+}
+
+.bet-size {
+  position: absolute;
+}
+
+#bet-size-p1 {
+  right: -40%;
+  top: 50%;
+}
+
+#bet-size-p2 {
+  right: -40%;
+  bottom: 40%;
+}
+
+#bet-size-p3, #bet-size-p4, #bet-size-p5 {
+  top: -25%;
+  left: 25%;
+}
+
+#bet-size-p6 {
+  left: -45%;
+  bottom: 40%;
+}
+
+#bet-size-p7 {
+  left: -45%;
+  top: 50%;
+}
+
+#bet-size-p8, #bet-size-p9 {
+  left: 25%;
+  bottom: -35%;
+}
+
+.dealer-chip {
+  width: 20%;
+  height: auto;
+}
+
+#dealer-chip-p1 {
+  right: -35%;
+  top: 88%;
+}
+
+#dealer-chip-p2 {
+  right: -35%;
+  top: 15%;
+}
+
+#dealer-chip-p3, #dealer-chip-p4 {
+  right: -10%;
+  top: -15%;
+}
+
+#dealer-chip-p5 {
+  left: 10%;
+  top: -15%;
+}
+
+#dealer-chip-p6 {
+  left: -15%;
+  top: 15%;
+}
+
+#dealer-chip-p7 {
+  left: -15%;
+  top: 88%;
+}
+
+#dealer-chip-p8 {
+  left: 10%;
+  top: 115%;
+}
+
+#dealer-chip-p9 {
+  right: -10%;
+  top: 115%;
 }
 
 .interface img {
