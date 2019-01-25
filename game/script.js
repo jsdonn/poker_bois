@@ -1,8 +1,9 @@
-var myName = localStorage.getItem("username"); // need to send this to matin
-var myIndex = -1; // will set later 
+var myName = localStorage.getItem("username");
+var myIndex = -1; // this is set when client receives data from server
 var inPlayers = [];
 var newRound = true;
 
+// data to be received from server
 var holeCards;
 var riverHoleCards;
 var communityCards;
@@ -16,34 +17,40 @@ var stacks;
 var playerNames;
 var pot;
 
-
-
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var dataArray;
 ws.onmessage = function(event) {
 	dataDict = event.data;
+
 	holeCards = dataDict["hole_cards"];
+	// TODO: display the cards of all players who make it to the end of the river
 	riverHoleCards = dataDict["river_hole_cards"]; // make this at the end???
 	communityCards = dataDict["board_cards"];
 	currPlayerTurn = dataDict["cur_turn"];
 	numPlayers = dataDict["num_players"];
+
 	// if the dealer position has moved, it is a new round
 	if (dealer != dataDict["dealer"]) {
 		newRound = true;
 	} else {
 		newRound = false;
 	}
+
 	dealer = dataDict["dealer"];
 	smallBlind = dataDict["sb"];
 	bigBlind = dataDict["bb"];
+
 	// display small/big blind in the corner, just need to do it once
 	bets = dataDict["bets"];
 	stacks = dataDict["stacks"];
 	playerNames = dataDict["names"];
 	pot = dataDict["pot"];
+
+	// set myIndex, should only have to do once
 	if (myIndex < 0) {
 		myIndex = playerNames.indexOf(myName);
-	} // should only have to do the first time
+	}
+
 	// reset inPlayers and hide fold message at the start of each new round 
 	if (newRound) {
 		inPlayers = [];
@@ -52,10 +59,12 @@ ws.onmessage = function(event) {
 		}
 		document.getElementById("fold-message").style.visibility = "hidden";
 	}
+
 	// update playerspaces (make visible if the player exists)
 	for (i = 0; i < numPlayers; i++) {
 		document.getElementById("p" + i.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
 	}
+
 	updateVariables();
 }
 
@@ -65,7 +74,7 @@ function updateVariables() {
 	updateCards("first-p" + ((myIndex + 1).toString()), holeCards[0]); // hole card 1 @ playerspace
 	updateCards("second-p" + ((myIndex + 1).toString()), holeCards[1]); // hole card 2 @ playerspace
 	updateCommunityCards(); // flop, turn, river
-	updateCurrentTurn();
+	updateCurrentTurn(); // show user input if it's my turn, change current player's background to blue
 	updateDealerStacksAndNames();
 	updateBetsAndFolds();
 }
@@ -107,6 +116,8 @@ function updateCurrentTurn() {
 	var actualCurrPlayer = currPlayerTurn + 1;
 	document.getElementById("p" + actualCurrPlayer.toString()).style.backgroundColor = "deepskyblue";
 	if (actualCurrPlayer == myIndex) {
+		// display current bet on Call button
+		document.getElementById("call").innerHTML = "Call " + Math.max(bets).toString();
 		showUserInput();
 	} else {
 		hideUserInput();
@@ -165,7 +176,6 @@ function updateBetsAndFolds() {
 			document.getElementById("first-p" + actualPlayer.toString()).style.visibility = "hidden";
 			document.getElementById("second-p" + actualPlayer.toString()).style.visibility = "hidden";
 			document.getElementById("fold-message").style.visibility = "visible";
-			// does this work? first-p# and second-p# don't have visibility attributes
 		} else { // check or call or raise
 			document.getElementById("bet-size-p" + actualPlayer.toString()).innerHTML = bets[i].toString();
 		}
@@ -180,16 +190,16 @@ function changeRaise(scalar) {
 
 function send(arg) {
 	var data;
-	if (arg == 'raise') {
+	if (arg == "raise") {
 		data = "0 " + document.getElementById("raise-amount").value;
 	}
-	if (arg == 'call') {
+	if (arg == "call") {
 		data = "0 " + Math.max(bets).toString();
 	}
-	if (arg = 'leave') {
+	if (arg = "leave") {
 		data = "";
 	}
-	if (typeof arg == "number") {
+	if (typeof arg === "number") {
 		data = "0 " + arg.toString();
 	}
 	ws.send(data);
