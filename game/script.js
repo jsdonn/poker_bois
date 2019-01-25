@@ -1,3 +1,14 @@
+// TODO: fold pile
+// 		 display check/fold/raise etc text when people make those actions
+// 		 river hole cards
+//		 animations for text appearing and disappearing
+//		 find actual backgrounds for everything
+//		 display pot
+//		 display small/big blinds
+//		 auto check/auto fold
+//		 clock animation
+//		 straddle, left, right (show cards) = toggle
+
 var myName = localStorage.getItem("username");
 var myIndex = -1; // this is set when client receives data from server
 var inPlayers = [];
@@ -137,18 +148,6 @@ function showUserInput () {
 	/* no idea if this works */
 }
 
-/* function updateDealer() {
-	var actualDealer = dealer + 1;
-	for (i = 0; i < numPlayers; i++) {
-		if (i == actualDealer) {
-			document.getElementById("dealer-chip-p" + actualDealer.toString()).style.visibility = "visible";
-		} else {
-			document.getElementById("dealer-chip-p" + actualDealer.toString()).style.visibility = "hidden";
-		}
-	}
-	// no idea if this works
-} */
-
 function updateDealerStacksAndNames() {
 	var actualPlayer;
 	var actualDealer = dealer + 1;
@@ -176,6 +175,7 @@ function updateBetsAndFolds() {
 			document.getElementById("first-p" + actualPlayer.toString()).style.visibility = "hidden";
 			document.getElementById("second-p" + actualPlayer.toString()).style.visibility = "hidden";
 			document.getElementById("fold-message").style.visibility = "visible";
+			document.getElementById("action-text").style.visibility = "visible";
 		} else { // check or call or raise
 			document.getElementById("bet-size-p" + actualPlayer.toString()).innerHTML = bets[i].toString();
 		}

@@ -1,12 +1,14 @@
 html, body {
 	height: 100%;
+	margin: 0;
+	overflow: hidden;
 }
 
 .wrapper {
-	width: 60%;
+	height: 100vh;
+	width: 133vh;
 	display: inline-block;
 	position: relative;
-	background: blue;
 	margin: 0;
 	overflow: hidden;
 	background-image: url("images/poker_background.jpg");

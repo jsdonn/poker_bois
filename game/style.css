@@ -108,7 +108,6 @@ body {
   visibility: hidden;
 }
 
-
 .player-space {
   width: 18.75%; /* 150px */
   height: 26.67%; /* 120px */
@@ -145,7 +144,7 @@ body {
   left: 70%;
 }
 
-.player-space p, b {
+.player-space > .toggle-visibility p, b {
   margin-top: 5px;
   display: inline-block;
 }
@@ -159,7 +158,7 @@ body {
   margin-right: 10px;
 }
 
-.player-space p {
+.player-space > .toggle-visibility p {
   margin-left: 12px;
 }
 #p1, #p7 {
@@ -192,7 +191,7 @@ body {
 
 .toggle-visibility {
    visibility: hidden;
-  /* CHANGE THIS WHEN ACTUALLY PLAYING */
+  /* UNCOMMENT THIS WHEN ACTUALLY PLAYING */
 }
 
 .bet-size {
@@ -273,6 +272,24 @@ body {
 #dealer-chip-p9 {
   right: -10%;
   top: 115%;
+}
+
+.action-text {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  /* visibility: hidden; */
+}
+
+.action-text p {
+  padding-top: 30%;
 }
 
 .interface img {
