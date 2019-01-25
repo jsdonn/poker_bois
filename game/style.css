@@ -1,45 +1,57 @@
 html, body {
   height: 100%;
+  margin: 0;
+  overflow: hidden;
 }
 
-/*@media screen and (min-width: 801px) {
-  button {
-    padding: 1% 2%;
-    font-size: 1vw;
-    margin: 2%;
-  }
-  h1 {
-    font-size: 2vw;
-  }
-  h4 {
-    font-size: 1.5vw;
-  }
-  #both, #left, #right {
-    margin-left: 5px;
-    margin-right: 5px;
-  }
+body {
+  background-image: url(../images/emile1.png);
+  background-repeat: repeat;
+  background-size: 150px;
 }
 
-@media screen and (max-width: 800px) {
-  h1 {
-    font-size: 20px;
+/* @media screen and (min-width: 601px) {
+  .wrapper {
+    min-width: 600px;
+    width: 60%;
   }
-  h4 {
-    font-size: 12px;
-  }
-  button {
-    padding: 5px 10px;
+  .player-space p, b {
     font-size: 14px;
-    margin: 5px;
   }
-  #both, #left, #right {
-    margin-left: 2px;
-    margin-right: 2px;
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper {
+    width: 600px;
+  }
+  .player-space p, b {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .wrapper {
+    min-width: 600px;
+    width: 60%;
+  }
+  .player-space p, b {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 781px) {
+  .wrapper {
+    min-width: 600px;
+    width: 60%;
+  }
+  .player-space p, b {
+    font-size: 18px;
   }
 } */
 
 .wrapper {
-  width: 800px; /* was 60% */
+  max-height: 100vh;
+  width: 133vh;
   display: inline-block;
   position: relative;
   background: blue;
@@ -48,8 +60,8 @@ html, body {
   /* background-image: url("../images/4by3.png"); */
   /* need to add background picture here */
   background-size: 100% 100%;
-  border: solid black;
-  border-radius: 10px;
+  border-bottom: solid black;
+  border-right: solid black;
 }
 
 .wrapper:after {
@@ -66,11 +78,11 @@ html, body {
 }
 
 #community-cards {
-  width: 300px;
+  width: 37.5%; /* 300px */
   background-color: yellow;
-  height: 100px;
-  top: 175px;
-  left: 250px;
+  height: 22.22%; /* 100px */
+  top: 38.89%; /* 175px */
+  left: 31.25%; /* 250px */
   position: relative;
   border-radius: 10px;
 }
@@ -98,8 +110,8 @@ html, body {
 
 
 .player-space {
-  width: 150px;
-  height: 120px;
+  width: 18.75%; /* 150px */
+  height: 26.67%; /* 120px */
   border-radius: 20px;
   background-color: gray;
   position: absolute;
@@ -135,7 +147,6 @@ html, body {
 
 .player-space p, b {
   margin-top: 5px;
-  font-size: 18px;
   display: inline-block;
 }
 .player-space b {
@@ -152,35 +163,35 @@ html, body {
   margin-left: 12px;
 }
 #p1, #p7 {
-  top: 102.5px;
+  top: 22.78%; /* 102.5px */
 }
 #p1, #p2 {
-  left: 10px;
+  left: 1.25%; /* 10px */
 }
 #p3, #p5, #p4 {
-  bottom: 10px;
+  bottom: 2.22%; /* 10px */
 }
 #p7, #p6 {
-  right: 10px;
+  right: 1.25%; /* 10px */
 }
 #p2, #p6 {
-  top: 227.5px;
+  top: 50.56%; /* 227.5px */
 }
 #p9, #p3 {
-  left: 170px;
+  left: 21.25%; /* 170px */
 }
 #p8, #p5 {
-  right: 170px;
+  right: 21.25%; /* 170px */
 }
 #p8, #p9 {
-  top: 10px;
+  top: 2.22%; /* 10px */
 }
 #p4 {
-  left: 325px;
+  left: 40.63%; /* 325px */
 }
 
 .toggle-visibility {
-   visibility: hidden; 
+   visibility: hidden;
   /* CHANGE THIS WHEN ACTUALLY PLAYING */
 }
 
@@ -337,9 +348,9 @@ h3 {
 button {
   background-image: linear-gradient(90deg , rgb(214,219,223) 0%, rgb(244,244,248) 100%);
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 1.9% 3.75%; /* 5px 10px */
   font-size: 14px;
-  margin: 5px;
+  margin: 1.9%; /* 5px */
 }
 
 h2 {
@@ -349,8 +360,8 @@ h2 {
 }
 
 #both, #l, #r, #half-pot, #three-fourths-pot, #pot {
-  margin-left: 2px;
-  margin-right: 2px;
+  margin-left: .75%; /* 2px */
+  margin-right: .75%; /* 2px */
 }
 
 #check, #fold, #call, #raise, #leave {
@@ -358,7 +369,7 @@ h2 {
 }
 
 #leave {
-  margin-top: 10px;
+  margin-top: 3.75%; /* 10px */ 
 }
 
 hr {
