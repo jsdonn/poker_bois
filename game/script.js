@@ -16,9 +16,11 @@ var stacks;
 var playerNames;
 var pot;
 
-var source = new EventSource("____________");
+
+
+var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var dataArray;
-source.onmessage = function(event) {
+ws.onmessage = function(event) {
 	dataDict = event.data;
 	holeCards = dataDict["hole_cards"];
 	riverHoleCards = dataDict["river_hole_cards"]; // make this at the end???
@@ -174,6 +176,23 @@ function changeRaise(scalar) {
 	var raiseSize = scalar * pot;
 	document.getElementById("raise-amount").value = Math.floor(raiseSize).toString();
 	// dunno if this works
+}
+
+function send(arg) {
+	var data;
+	if (arg == 'raise') {
+		data = "0 " + document.getElementById("raise-amount").value;
+	}
+	if (arg == 'call') {
+		data = "0 " + Math.max(bets).toString();
+	}
+	if (arg = 'leave') {
+		data = "";
+	}
+	if (typeof arg == "number") {
+		data = "0 " + arg.toString();
+	}
+	ws.send(data);
 }
 
 document.getElementById("player1").innerHTML = localStorage.getItem("username");
