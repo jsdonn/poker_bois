@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
   <!-- moved scripts to bottom of body -->
-  <link rel="icon" href="images/favicon.ico" type: image/x-icon" />
+  <link rel="icon" href="../images/favicon.png" type: image/x-icon" />
   <title> Poker Bois - Game </title>
 </head>
 
@@ -21,95 +21,113 @@
         <img class="river" src="../images/cards/AS.png" id="river1">
       </section>
       <section id="players">
-        <div class="player-space" id="left-top">
-          <p id="player1"> Player 1 </p>
-          <div class="right-align">
-            <b id="stack-p1"> $69.69 </b>
+        <div class="player-space" id="p1"> <!-- left top -->
+          <div class="toggle-visibility">
+            <p id="player1"> Player 1 </p>
+            <div class="right-align">
+              <b id="stack-p1"> $69.69 </b>
+            </div>
+            <img class="first" src="../images/cards/blue_back.png" id="first-p1">
+            <img class="second" src="../images/cards/blue_back.png" id="second-p1">
+            <p class="bet-size" id="bet-size-p1"> $40.20 </p>
+            <img class="dealer-chip" id="dealer-chip-p1" src="../images/dealer.png">
           </div>
-          <img class="first" src="../images/cards/AS.png">
-          <img class="second" src="../images/cards/AH.png">
-          <p class="bet-size" id="bet-size-p1"> $40.20 </p>
-          <img class="dealer-chip" id="dealer-chip-p1" src="../images/dealer.png">
         </div>
-        <div class="player-space" id="left-bottom">
-          <p> Player 2 </p>
-          <div class="right-align">
-            <b> $69.69 </b>
+        <div class="player-space" id="p2"> <!-- left-bottom -->
+          <div class="toggle-visibility">
+            <p id="player2"> Player 2 </p>
+            <div class="right-align">
+              <b id="stack-p2"> $69.69 </b>
+            </div>
+            <img class="first" src="../images/cards/blue_back.png" id="first-p2">
+            <img class="second" src="../images/cards/blue_back.png" id="second-p2">
+            <p class="bet-size" id="bet-size-p2"> $40.20 </p>
+            <img class="dealer-chip" id="dealer-chip-p2" src="../images/dealer.png">
           </div>
-          <img class="first" src="../images/cards/AS.png">
-          <img class="second" src="../images/cards/AH.png">
-          <p class="bet-size" id="bet-size-p2"> $40.20 </p>
-          <img class="dealer-chip" id="dealer-chip-p2" src="../images/dealer.png">
         </div>
-        <div class="player-space" id="bottom-left">
-          <p> Player 3 </p>
-          <div class="right-align">
-            <b> $69.69 </b>
-         </div>
-          <img class="first" src="../images/cards/AS.png">
-          <img class="second" src="../images/cards/AH.png">
-          <p class="bet-size" id="bet-size-p3"> $40.20 </p>
-          <img class="dealer-chip" id="dealer-chip-p3" src="../images/dealer.png">
-        </div> 
-        <div class="player-space" id="bottom-center">
-          <p> Player 4 </p>
-          <div class="right-align">
-            <b> $69.69 </b>
+        <div class="player-space" id="p3"> <!-- bottom-left -->
+          <div class="toggle-visibility">
+            <p id="player3"> Player 3 </p>
+            <div class="right-align">
+              <b id="stack-p3"> $69.69 </b>
+           </div>
+            <img class="first" src="../images/cards/blue_back.png" id="first-p3">
+            <img class="second" src="../images/cards/blue_back.png" id="second-p3">
+            <p class="bet-size" id="bet-size-p3"> $40.20 </p>
+            <img class="dealer-chip" id="dealer-chip-p3" src="../images/dealer.png">
           </div>
-          <img class="first" src="../images/cards/AS.png">
-          <img class="second" src="../images/cards/AH.png">
-          <p class="bet-size" id="bet-size-p4"> $40.20 </p>
-          <img class="dealer-chip" id="dealer-chip-p4" src="../images/dealer.png">
         </div> 
-        <div class="player-space" id="bottom-right">
-          <p> Player 5 </p>
-          <div class="right-align">
-            <b> $69.69 </b>
+        <div class="player-space" id="p4"> <!-- bottom-center -->
+          <div class="toggle-visibility">
+            <p id="player4"> Player 4 </p>
+            <div class="right-align">
+              <b id="stack-p4"> $69.69 </b>
+            </div>
+            <img class="first" src="../images/cards/blue_back.png" id="first-p4">
+            <img class="second" src="../images/cards/blue_back.png" id="second-p4">
+            <p class="bet-size" id="bet-size-p4"> $40.20 </p>
+            <img class="dealer-chip" id="dealer-chip-p4" src="../images/dealer.png">
           </div>
-          <img class="first" src="../images/cards/AS.png">
-          <img class="second" src="../images/cards/AH.png">
-          <p class="bet-size" id="bet-size-p5"> $40.20 </p>
-          <img class="dealer-chip" id="dealer-chip-p5" src="../images/dealer.png">
         </div> 
-        <div class="player-space" id="right-bottom">
-          <p> Player 6 </p>
-          <div class="right-align">
-            <b> $69.69 </b>
+        <div class="player-space" id="p5"> <!-- bottom-right -->
+          <div class="toggle-visibility">
+            <p id="player5"> Player 5 </p>
+            <div class="right-align">
+              <b id="stack-p5"> $69.69 </b>
+            </div>
+            <img class="first" src="../images/cards/blue_back.png" id="first-p5">
+            <img class="second" src="../images/cards/blue_back.png" id="second-p5">
+            <p class="bet-size" id="bet-size-p5"> $40.20 </p>
+            <img class="dealer-chip" id="dealer-chip-p5" src="../images/dealer.png">
           </div>
-          <img class="first" src="../images/cards/AS.png">
-          <img class="second" src="../images/cards/AH.png">
-          <p class="bet-size" id="bet-size-p6"> $40.20 </p>
-          <img class="dealer-chip" id="dealer-chip-p6" src="../images/dealer.png">
         </div> 
-        <div class="player-space" id="right-top">
-          <p> Player 7 </p>
-          <div class="right-align">
-            <b> $69.69 </b>
+        <div class="player-space" id="p6"> <!-- right-bottom -->
+          <div class="toggle-visibility">
+            <p id="player6"> Player 6 </p>
+            <div class="right-align">
+              <b id="stack-p6"> $69.69 </b>
+            </div>
+            <img class="first" src="../images/cards/blue_back.png" id="first-p6">
+            <img class="second" src="../images/cards/blue_back.png" id="second-p6">
+            <p class="bet-size" id="bet-size-p6"> $40.20 </p>
+            <img class="dealer-chip" id="dealer-chip-p6" src="../images/dealer.png">
           </div>
-          <img class="first" src="../images/cards/AS.png">
-          <img class="second" src="../images/cards/AH.png">
-          <p class="bet-size" id="bet-size-p7"> $40.20 </p>
-          <img class="dealer-chip" id="dealer-chip-p7" src="../images/dealer.png">
         </div> 
-        <div class="player-space" id="top-right">
-          <p> Player 8 </p>
-          <div class="right-align">
-            <b> $69.69 </b>
+        <div class="player-space" id="p7"> <!-- right-top -->
+          <div class="toggle-visibility">
+            <p id="player7"> Player 7 </p>
+            <div class="right-align">
+              <b id="stack-p7"> $69.69 </b>
+            </div>
+            <img class="first" src="../images/cards/blue_back.png" id="first-p7">
+            <img class="second" src="../images/cards/blue_back.png" id="second-p7">
+            <p class="bet-size" id="bet-size-p7"> $40.20 </p>
+            <img class="dealer-chip" id="dealer-chip-p7" src="../images/dealer.png">
           </div>
-          <img class="first" src="../images/cards/AS.png">
-          <img class="second" src="../images/cards/AH.png">
-          <p class="bet-size" id="bet-size-p8"> $40.20 </p>
-          <img class="dealer-chip" id="dealer-chip-p8" src="../images/dealer.png">
         </div> 
-        <div class="player-space" id="top-left">
-          <p> Player 9 </p>
-          <div class="right-align">
-            <b> $69.69 </b>
+        <div class="player-space" id="p8"> <!-- top-right -->
+          <div class="toggle-visibility">
+            <p id="player8"> Player 8 </p>
+            <div class="right-align">
+              <b id="stack-p8"> $69.69 </b>
+            </div>
+            <img class="first" src="../images/cards/blue_back.png" id="first-p8">
+            <img class="second" src="../images/cards/blue_back.png" id="second-p8">
+            <p class="bet-size" id="bet-size-p8"> $40.20 </p>
+            <img class="dealer-chip" id="dealer-chip-p8" src="../images/dealer.png">
           </div>
-          <img class="first" src="../images/cards/AS.png">
-          <img class="second" src="../images/cards/AH.png">
-          <p class="bet-size" id="bet-size-p9"> $40.20 </p>
-          <img class="dealer-chip" id="dealer-chip-p9" src="../images/dealer.png">
+        </div> 
+        <div class="player-space" id="p9"> <!-- top-left -->
+          <div class="toggle-visibility">
+            <p id="player9"> Player 9 </p>
+            <div class="right-align">
+              <b id="stack-p9"> $69.69 </b>
+            </div>
+            <img class="first" src="../images/cards/blue_back.png" id="first-p9">
+            <img class="second" src="../images/cards/blue_back.png" id="second-p9">
+            <p class="bet-size" id="bet-size-p9"> $40.20 </p>
+            <img class="dealer-chip" id="dealer-chip-p9" src="../images/dealer.png">
+          </div>
         </div> 
       </section> 
     </div>
@@ -117,20 +135,24 @@
       <div class="container" id="hand">
         <h1>Your Hand:</h1>
         <br>
-        <img src="../images/cards/AS.png" id="first-card">
-        <img src="../images/cards/AH.png" id="second-card">
+        <img src="../images/cards/blue_back.png" id="first-card">
+        <img src="../images/cards/blue_back.png" id="second-card">
       </div>
       <div class="container" id="user-input">
-        <br>
-        <button class="btn" id="fold">Fold</button>
-        <button class="btn" id="call">Call</button>
-        <br>
-        <button class="btn" id="raise">Raise</button>
-        <input type="text" name="raise-amount">
-        <br>
-        <button class="btn" id="half-pot">1/2 Pot</button>
-        <button class="btn" id="three-fourths-pot">3/4 Pot</button>
-        <button class="btn" id="pot">Pot</button>
+        <div class="toggle-visibility">
+          <br>
+          <button class="btn" id="check">Check</button>
+          <button class="btn" id="fold">Fold</button>
+          <button class="btn" id="call">Call</button>
+          <br>
+          <button class="btn" id="raise">Raise</button>
+          <input type="text" name="raise-amount" id="raise-amount">
+          <br>
+          <button onclick="changeRaise(0.5)"class="btn" id="half-pot">1/2 Pot</button>
+          <button onclick="changeRaise(0.75)" class="btn" id="three-fourths-pot">3/4 Pot</button>
+          <button onclick="changeRaise(1)" class="btn" id="pot">Pot</button>
+        </div>
+        <h3 id="fold-message">You folded.</h3>
       </div>
       <div class="container" id="other-options">
         <button class="btn" id="leave">Leave Game</button>

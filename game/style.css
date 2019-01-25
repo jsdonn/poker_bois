@@ -45,7 +45,7 @@ html, body {
   background: blue;
   margin: 0;
   overflow: hidden;
-  background-image: url("../images/4by3.png"); 
+  /* background-image: url("../images/4by3.png"); */
   /* need to add background picture here */
   background-size: 100% 100%;
   border: solid black;
@@ -77,18 +77,23 @@ html, body {
 
 #flop1 {
   left: 10%;
+  visibility: hidden;
 }
 #flop2 {
   left: 30%;
+  visibility: hidden;
 }
 #flop3 {
   left: 50%;
+  visibility: hidden;
 }
 #turn1 {
   left: 70%;
+  visibility: hidden;
 }
 #river1 {
   left: 90%;
+  visibility: hidden;
 }
 
 
@@ -146,32 +151,37 @@ html, body {
 .player-space p {
   margin-left: 12px;
 }
-#left-top, #right-top {
+#p1, #p7 {
   top: 102.5px;
 }
-#left-top, #left-bottom {
+#p1, #p2 {
   left: 10px;
 }
-#bottom-left, #bottom-right, #bottom-center {
+#p3, #p5, #p4 {
   bottom: 10px;
 }
-#right-top, #right-bottom {
+#p7, #p6 {
   right: 10px;
 }
-#left-bottom, #right-bottom {
+#p2, #p6 {
   top: 227.5px;
 }
-#top-left, #bottom-left {
+#p9, #p3 {
   left: 170px;
 }
-#top-right, #bottom-right {
+#p8, #p5 {
   right: 170px;
 }
-#top-right, #top-left {
+#p8, #p9 {
   top: 10px;
 }
-#bottom-center {
+#p4 {
   left: 325px;
+}
+
+.toggle-visibility {
+   visibility: hidden; 
+  /* CHANGE THIS WHEN ACTUALLY PLAYING */
 }
 
 .bet-size {
@@ -211,6 +221,7 @@ html, body {
 .dealer-chip {
   width: 20%;
   height: auto;
+  visibility: hidden;
 }
 
 #dealer-chip-p1 {
@@ -299,6 +310,14 @@ h1 {
   margin-top: 5px;
 }
 
+h3 {
+  margin-top: -20%;
+}
+
+#fold-message {
+  visibility: hidden;
+}
+
 .container img {
   display: inline-block;
   position: absolute;
@@ -334,7 +353,7 @@ h2 {
   margin-right: 2px;
 }
 
-#fold, #call, #raise, #leave {
+#check, #fold, #call, #raise, #leave {
   font-weight: 600;
 }
 
