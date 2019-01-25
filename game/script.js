@@ -194,5 +194,3 @@ function send(arg) {
 	}
 	ws.send(data);
 }
-
-document.getElementById("player1").innerHTML = localStorage.getItem("username");
