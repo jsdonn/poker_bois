@@ -196,4 +196,3 @@ function send(arg) {
 }
 
 document.getElementById("player1").innerHTML = localStorage.getItem("username");
-document.getElementById("stack-p1").innerHTML = localStorage.getItem("buyIn");
