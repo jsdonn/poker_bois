@@ -3,6 +3,9 @@ html, body {
   margin: 0;
   overflow: hidden;
 }
+html, body, input, textarea {
+  font-family: Mukta;
+}
 
 body {
   background-image: url(../images/emile1.png);
@@ -10,55 +13,18 @@ body {
   background-size: 150px;
 }
 
-/* @media screen and (min-width: 601px) {
-  .wrapper {
-    min-width: 600px;
-    width: 60%;
-  }
-  .player-space p, b {
-    font-size: 14px;
-  }
+@font-face {
+  font-family: 'Mukta';
+  src: url(../Mukta/Mukta-Regular.ttf) format('truetype');
 }
-
-@media screen and (max-width: 600px) {
-  .wrapper {
-    width: 600px;
-  }
-  .player-space p, b {
-    font-size: 14px;
-  }
-}
-
-@media screen and (max-width: 780px) {
-  .wrapper {
-    min-width: 600px;
-    width: 60%;
-  }
-  .player-space p, b {
-    font-size: 14px;
-  }
-}
-
-@media screen and (min-width: 781px) {
-  .wrapper {
-    min-width: 600px;
-    width: 60%;
-  }
-  .player-space p, b {
-    font-size: 18px;
-  }
-} */
 
 .wrapper {
   max-height: 100vh;
   width: 133vh;
   display: inline-block;
   position: relative;
-  background: blue;
   margin: 0;
   overflow: hidden;
-  /* background-image: url("../images/4by3.png"); */
-  /* need to add background picture here */
   background-size: 100% 100%;
   border-bottom: solid black;
   border-right: solid black;
@@ -71,19 +37,52 @@ body {
 }
 
 .board {
-  background-color: purple;
+  background-image: url(../images/green_poker.jpg);
+  background-size: cover;
   height: 75%;
   width: 100%;
   position: absolute;
 }
 
+#title {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+h4 {
+  position: absolute;
+  font-size: 36px;
+  margin-top: 5%;
+  width: 100%;
+}
+
+#pot-display {
+  top: 0;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+h5 {
+  position: absolute;
+  width: 100%;
+  margin-top: 15%;
+  font-size: 22px;
+  font-weight: 400;
+
+}
+
 #community-cards {
   width: 37.5%; /* 300px */
-  background-color: yellow;
+  background-color: rgb(0, 110, 0);
+  border: solid rgb(0, 80, 0);
   height: 22.22%; /* 100px */
   top: 38.89%; /* 175px */
   left: 31.25%; /* 250px */
-  position: relative;
+  position: absolute;
   border-radius: 10px;
 }
 
@@ -112,7 +111,7 @@ body {
   width: 18.75%; /* 150px */
   height: 26.67%; /* 120px */
   border-radius: 20px;
-  background-color: gray;
+  background-color: rgba(150, 150, 150, .8);
   position: absolute;
   text-align: left;
   display: inline-block;
@@ -144,23 +143,25 @@ body {
   left: 70%;
 }
 
-.player-space > .toggle-visibility p, b {
+.player-space > .toggle-visibility > p, b {
   margin-top: 5px;
   display: inline-block;
+  font-size: 18px;
 }
 .player-space b {
-  padding-right: 3px;
+  padding-right: 10%;
 }
 
 .right-align {
   text-align: right;
   float: right;
-  margin-right: 10px;
+  margin-right: 10%;
 }
 
-.player-space > .toggle-visibility p {
-  margin-left: 12px;
+.player-space > .toggle-visibility > p {
+  margin-left: 10%;
 }
+
 #p1, #p7 {
   top: 22.78%; /* 102.5px */
 }
@@ -190,42 +191,59 @@ body {
 }
 
 .toggle-visibility {
-   visibility: hidden;
+  visibility: hidden;
   /* UNCOMMENT THIS WHEN ACTUALLY PLAYING */
+  height: 100%;
 }
 
 .bet-size {
+  font-weight: 600;
+  color: white;
+  display: inline-block; 
+  margin: 5% 0 0 0;
+}
+
+.bet-holder {
+  background-color: rgba(50,50,50, .5);
+  border-radius: 10px;
   position: absolute;
+  height: 20%;
+  width: auto;
+  text-align: center;
+  padding: 0 5%;
+  margin: 0;
 }
 
-#bet-size-p1 {
-  right: -40%;
+#bet-holder-p1 {
+  left: 105%;
   top: 50%;
 }
 
-#bet-size-p2 {
-  right: -40%;
-  bottom: 40%;
+#bet-holder-p2 {
+  left: 105%;
+  bottom: 45%;
 }
 
-#bet-size-p3, #bet-size-p4, #bet-size-p5 {
+#bet-holder-p3, #bet-holder-p4, #bet-holder-p5 {
   top: -25%;
-  left: 25%;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
-#bet-size-p6 {
-  left: -45%;
-  bottom: 40%;
+#bet-holder-p6 {
+  right: 105%;
+  bottom: 45%;
 }
 
-#bet-size-p7 {
-  left: -45%;
+#bet-holder-p7 {
+  right: 105%;
   top: 50%;
 }
 
-#bet-size-p8, #bet-size-p9 {
-  left: 25%;
-  bottom: -35%;
+#bet-holder-p8, #bet-holder-p9 {
+  bottom: -25%;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .dealer-chip {
@@ -280,16 +298,38 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  display: table;
   font-size: 24px;
   text-align: center;
   color: white;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 20px;
-  /* visibility: hidden; */
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear .5s, opacity .5s linear;
+  vertical-align: middle;
+
+}
+
+.action-text-transition {
+  opacity: 1;
+  transition: none;
+  visibility: visible;
 }
 
 .action-text p {
-  padding-top: 30%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.interface {
+  background-image: url(../images/wood_panel2.jpg);
+  background-size: cover;
+  position: absolute;
+  top: 75%;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 .interface img {
@@ -298,10 +338,9 @@ body {
 }
 
 .container {
-  background: blue;
   width: 33.33%;
   height: 25%;
-  top: 75%;
+  top: 0;
   display: block;
   margin: 0;
   text-align: center;
@@ -311,24 +350,22 @@ body {
 }
 
 #hand {
-  background: green;
   left: 0;
   border-right: solid black;
   border-width: 2px;
+  color: white;
 }
 
 #user-input {
   left: 33.33%;
-  background: red;
   border-width: 2px;
   border-left: solid black;
-  border-right: solid black;
   border-width: 2px;
 }
 
 #other-options {
+  color: white;
   right: 0;
-  background: orange;
   border-left: solid black;
   border-width: 2px;
 }
@@ -368,6 +405,8 @@ button {
   padding: 1.9% 3.75%; /* 5px 10px */
   font-size: 14px;
   margin: 1.9%; /* 5px */
+  border: solid gray;
+  border-width: 1px;
 }
 
 h2 {
@@ -389,6 +428,20 @@ h2 {
   margin-top: 3.75%; /* 10px */ 
 }
 
+#clock, #straddle {
+  position: absolute;
+  display: inline-block;
+  bottom: 10%;
+}
+
+#clock {
+  left: 15%;
+}
+
+#straddle {
+  right: 15%;
+}
+
 hr {
-  border: 1px solid blue;
+  border: 1px solid black;
 }

@@ -88,6 +88,7 @@ function updateVariables() {
 	updateCurrentTurn(); // show user input if it's my turn, change current player's background to blue
 	updateDealerStacksAndNames();
 	updateBetsAndFolds();
+	updatePot();
 }
 
 function updateCards(cardID, fileName) {
@@ -175,17 +176,35 @@ function updateBetsAndFolds() {
 			document.getElementById("first-p" + actualPlayer.toString()).style.visibility = "hidden";
 			document.getElementById("second-p" + actualPlayer.toString()).style.visibility = "hidden";
 			document.getElementById("fold-message").style.visibility = "visible";
-			document.getElementById("action-text").style.visibility = "visible";
+			animateAction(actualPlayer, "Fold");
 		} else { // check or call or raise
+			if (bets[i] == 0) {
+				animateCheck(actualPlayer);
+			}
 			document.getElementById("bet-size-p" + actualPlayer.toString()).innerHTML = bets[i].toString();
 		}
 	} // not sure if this correctly removes players from inPlayers
 }
 
+function animateAction(playerID, message) {
+	var player = document.getElementById("action-text-p" + playerID.toString());
+	player.querySelector(".action-text p").innerHTML = message;
+	player.classList.add("action-text-transition");
+	setTimeout(function() {
+		player.classList.remove("action-text-transition");
+	}, 1000);
+	// pretty sure this works actually
+}
+
+
 function changeRaise(scalar) {
 	var raiseSize = scalar * pot;
 	document.getElementById("raise-amount").value = Math.floor(raiseSize).toString();
 	// dunno if this works
+}
+
+function updatePot() {
+	document.getElementById("pot-display").querySelector("h5").innerHTML = pot.toString();
 }
 
 function send(arg) {
