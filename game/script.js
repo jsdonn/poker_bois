@@ -135,13 +135,14 @@ function updateCommunityCards() {
 function updateCurrentTurn() {
 	var actualCurrPlayer = currPlayerTurn + 1;
 	document.getElementById("p" + actualCurrPlayer.toString()).style.backgroundColor = "deepskyblue";
-	if (actualCurrPlayer == myIndex) {
+	/* if (actualCurrPlayer == myIndex) {
 		// display current bet on Call button
 		document.getElementById("call").innerHTML = "Call " + Math.max(bets).toString();
 		showUserInput();
 	} else {
 		hideUserInput();
-	}
+	} */
+	// FIX THIS
 	// no idea if any of this works
 }
 
@@ -225,8 +226,14 @@ function send(arg) {
 	if (arg == "call") {
 		data = "0 " + Math.max(bets).toString();
 	}
-	if (arg = "leave") {
+	if (arg == "leave") {
 		data = "";
+	}
+	if (arg == 0) {
+		data = "0";
+	}
+	if (arg == -1) {
+		data = "-1";
 	}
 	if (typeof arg === "number") {
 		data = "0 " + arg.toString();
