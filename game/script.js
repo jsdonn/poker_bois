@@ -44,7 +44,6 @@ var stacks;
 var playerNames;
 var pot;
 
-
 var dataArray;
 ws.onmessage = function(event) {
 	dataDict = JSON.parse(event.data);
@@ -53,14 +52,20 @@ ws.onmessage = function(event) {
 	riverHoleCards = dataDict["river_hole_cards"]; // make this at the end???
 	communityCards = dataDict["board_cards"];
 	currPlayerTurn = dataDict["cur_turn"];
-	if (veryFirst) {
+	if (typeof prevTurn == "undefined") {
+		prevTurn = currPlayerTurn;
+		prevAction = "";
+	}
+
+	/* if (veryFirst) {
 		prevAction = "";
 		prevTurn = currPlayerTurn;
 		veryFirst = false;
-	}
-	if (typeof prevTurn !== "undefined" && prevTurn != currPlayerTurn) {
+	} */
+	if (typeof prevTurn != "undefined" && prevTurn != currPlayerTurn) {
 		animateAction(prevTurn, prevAction);
 	}
+	prevTurn = currPlayerTurn;
 	numPlayers = dataDict["num_players"];
 
 	// if the dealer position has moved, it is a new round
