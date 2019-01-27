@@ -96,7 +96,7 @@ function updateCards(cardID, fileName) {
 }
 
 function updateHoldCards() {
-	if (holeCards[0] > -1) {
+	if (holeCards[0] != -1) {
 		updateCards("first-card", holeCards[0]); // hole card 1 @ interface
 		updateCards("second-card", holeCards[1]); // hole card 2 @ interface
 		updateCards("first-p" + ((myIndex + 1).toString()), holeCards[0]); // hole card 1 @ playerspace
@@ -110,23 +110,23 @@ function updateCommunityCards() {
 	var flop3 = communityCards[2];
 	var turn1 = communityCards[3];
 	var river1 = communityCards[4];
-	if (flop1 > -1) {
+	if (flop1 != -1) {
 		updateCards("flop1", flop1 + ".png");
 		document.getElementById("flop1").style.visibility = "visible";
 	}
-	if (flop2 > -1) {
+	if (flop2 != -1) {
 		updateCards("flop2", flop2 + ".png");
 		document.getElementById("flop2").style.visibility = "visible";
 	}
-	if (flop3 > -1) {
+	if (flop3 != -1) {
 		updateCards("flop3", flop3 + ".png");
 		document.getElementById("flop3").style.visibility = "visible";
 	}
-	if (turn1 > -1) {
+	if (turn1 != -1) {
 		updateCards("turn1", turn1 + ".png");
 		document.getElementById("turn1").style.visibility = "visible";
 	}
-	if (river1 > -1) {
+	if (river1 != -1) {
 		updateCards("river1", river1 + ".png");
 		document.getElementById("river1").style.visibility = "visible";
 	}
