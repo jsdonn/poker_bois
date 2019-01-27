@@ -225,10 +225,10 @@ function send(arg) {
 		data = "";
 	}
 	if (arg == 0) {
-		data = "0";
+		data = "0 0";
 	}
 	if (arg == -1) {
-		data = "-1";
+		data = "0 -1";
 	}
 	if (typeof arg === "number") {
 		data = "0 " + arg.toString();
