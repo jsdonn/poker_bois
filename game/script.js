@@ -61,7 +61,7 @@ ws.onmessage = function(event) {
 
 	// set myIndex, should only have to do once
 	if (myIndex < 0) {
-		myIndex = playerNames.indexOf(myName);
+		myIndex = playerNames[myName];
 	}
 
 	// reset inPlayers and hide fold message at the start of each new round 
