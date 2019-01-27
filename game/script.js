@@ -12,7 +12,9 @@ var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username");
 var myBuyIn = localStorage.getItem("buyin");
 ws.onopen=(e)=>ws.send(myBuyIn + " " + myName);
-setInterval(()=>ws.send("1"), 2000);
+var interval = setInterval(()=>ws.send("1"), 2000);
+ws.onerror=(e)=>clearInterval(interval);
+ws.onclose=(e)=>clearInterval(interval);
 var myIndex = -1; // this is set when client receives data from server
 var inPlayers = [];
 var newRound = true;
