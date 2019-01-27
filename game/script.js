@@ -1,9 +1,9 @@
 // TODO: fold pile
-// 		 display check/fold/raise etc text when people make those actions
+// 		 display check/fold/raise etc text when people make those actions. DONE
 // 		 river hole cards
-//		 animations for text appearing and disappearing
-//		 find actual backgrounds for everything
-//		 display pot
+//		 animations for text appearing and disappearing. DONE
+//		 find actual backgrounds for everything. DONE
+//		 display pot.  DONE
 //		 display small/big blinds
 //		 auto check/auto fold
 //		 clock animation
@@ -179,7 +179,9 @@ function updateBetsAndFolds() {
 			animateAction(actualPlayer, "Fold");
 		} else { // check or call or raise
 			if (bets[i] == 0) {
-				animateCheck(actualPlayer);
+				animateAction(actualPlayer, "Check");
+			} else {
+				animateAction(actualPlayer, "Raise to " + bets[i].toString());
 			}
 			document.getElementById("bet-size-p" + actualPlayer.toString()).innerHTML = bets[i].toString();
 		}
@@ -204,7 +206,7 @@ function changeRaise(scalar) {
 }
 
 function updatePot() {
-	document.getElementById("pot-display").querySelector("h5").innerHTML = pot.toString();
+	document.getElementById("pot-display").querySelector("h5").innerHTML = "Pot: " + pot.toString();
 }
 
 function send(arg) {
