@@ -10,6 +10,8 @@
 //		 straddle, left, right (show cards) = toggle
 
 var myName = localStorage.getItem("username");
+var myBuyIn = localStorage.getItem("buyin");
+ws.send(name + " " + buyIn);
 var myIndex = -1; // this is set when client receives data from server
 var inPlayers = [];
 var newRound = true;
