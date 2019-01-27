@@ -283,5 +283,6 @@ function send(arg) {
 	if (typeof arg === "number") {
 		data = "0 " + arg.toString();
 	}
+	window.alert(data);
 	ws.send(data);
 }
