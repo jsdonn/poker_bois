@@ -20,7 +20,7 @@ var myIndex = -1; // this is set when client receives data from server
 var inPlayers = [];
 var newRound = true;
 var prevTurn;
-var prevAction = "";
+var prevAction;
 var veryFirst = true;
 
 // data to be received from server
@@ -42,6 +42,7 @@ var dataArray;
 ws.onmessage = function(event) {
 	dataDict = JSON.parse(event.data);
 	if (veryFirst) {
+		prevAction = "";
 		prevTurn = currPlayerTurn;
 		veryFirst = false;
 	}
@@ -114,7 +115,7 @@ ws.onmessage = function(event) {
 }
 
 function updateVariables() {
-	updateHoldCards();
+	updateHoleCards();
 	updateCommunityCards(); // flop, turn, river
 	updateCurrentTurn(); // show user input if it's my turn, change current player's background to blue
 	updateDealerStacksAndNames();
@@ -127,7 +128,7 @@ function updateCards(cardID, fileName) {
 	x.setAttribute("src", "../images/cards/" + fileName.toUpperCase() + ".png");
 }
 
-function updateHoldCards() {
+function updateHoleCards() {
 	if (holeCards[0] != -1) {
 		updateCards("first-card", holeCards[0]); // hole card 1 @ interface
 		updateCards("second-card", holeCards[1]); // hole card 2 @ interface
