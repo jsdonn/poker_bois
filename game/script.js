@@ -1,7 +1,7 @@
 // TODO: fold pile
 // 		 display check/fold/raise etc text when people make those actions. DONE
 // 		 river hole cards
-//		 animations for text appearing and disappearing. DONE
+//		 animations for text appearing and disappearing. fix this asap
 //		 find actual backgrounds for everything. DONE
 //		 display pot.  DONE
 //		 display small/big blinds
@@ -9,11 +9,13 @@
 //		 clock animation
 //		 straddle, left, right (show cards) = toggle
 //	   	 all in button 
+//		 clear raise textbox after hitting a button
+//		 leave game = close the tab
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
-var myName = localStorage.getItem("username").trim().substring(0, 20);
+var myName = localStorage.getItem("username").trim().substring(0, 15);
 var myBuyIn = localStorage.getItem("buyin");
 ws.onopen=(e)=>ws.send(myBuyIn + " " + myName);
-var interval = setInterval(()=>ws.send("1"), 2000);
+var interval = setInterval(()=>ws.send("1"), 1000);
 ws.onerror=(e)=>checks(e);
 ws.onclose=(e)=>checks(e);
 function checks(e) {
