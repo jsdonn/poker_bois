@@ -14,8 +14,12 @@ var myName = localStorage.getItem("username").trim().substring(0, 20);
 var myBuyIn = localStorage.getItem("buyin");
 ws.onopen=(e)=>ws.send(myBuyIn + " " + myName);
 var interval = setInterval(()=>ws.send("1"), 2000);
-ws.onerror=(e)=>clearInterval(interval);
-ws.onclose=(e)=>clearInterval(interval);
+ws.onerror=(e)=>checks(e);
+ws.onclose=(e)=>checks(e);
+function checks(e) {
+	console.log(e.data);
+	clearInterval(interval);
+}
 var myIndex = -1; // this is set when client receives data from server
 var inPlayers = [];
 var newRound = true;
