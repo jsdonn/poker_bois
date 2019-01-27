@@ -229,10 +229,10 @@ function send(arg) {
 	if (arg == "raise") {
 		data = "0 " + document.getElementById("raise-amount").value;
 	}
-	if (arg == "call") {
+	if (arg == "check/call") {
 		var maxBet = Math.max.apply(null, bets)
 		if (maxBet > stacks[myIndex]) {
-			data = "0 " + stacks[myIndex];
+			data = "0 " + stacks[myIndex].toString();
 		} else {
 			data = "0 " + maxBet.toString();
 		}
