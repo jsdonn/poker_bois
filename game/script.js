@@ -153,7 +153,7 @@ function hideUserInput () {
 
 function showUserInput () {
 	var toShow = document.getElementById("user-input").getElementsByClassName("toggle-visibility")[0];
-	toHide.style.visibility = 'visible';
+	toShow.style.visibility = 'visible';
 	/* no idea if this works */
 }
 
