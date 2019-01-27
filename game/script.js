@@ -51,7 +51,7 @@ ws.onmessage = function(event) {
 	riverHoleCards = dataDict["river_hole_cards"]; // make this at the end???
 	communityCards = dataDict["board_cards"];
 	currPlayerTurn = dataDict["cur_turn"];
-	if (prevTurn != currPlayerTurn) {
+	if (prevTurn != currPlayerTurn && typeof prevTurn !== "undefined") {
 		animateAction(prevTurn, prevAction);
 	}
 	numPlayers = dataDict["num_players"];
