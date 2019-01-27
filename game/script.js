@@ -11,7 +11,7 @@
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username");
 var myBuyIn = localStorage.getItem("buyin");
-ws.onopen=(e)=>ws.send(myName + " " + myBuyIn);
+ws.onopen=(e)=>ws.send(myBuyIn + " " + name);
 setInterval(()=>ws.send("1"), 2000);
 var myIndex = -1; // this is set when client receives data from server
 var inPlayers = [];
@@ -121,25 +121,25 @@ function updateCommunityCards() {
 		updateCards("flop2", flop2);
 		document.getElementById("flop2").style.visibility = "visible";
 	} else {
-		document.getElementById("flop1").style.visibility = "hidden";
+		document.getElementById("flop2").style.visibility = "hidden";
 	}
 	if (flop3 != -1) {
 		updateCards("flop3", flop3);
 		document.getElementById("flop3").style.visibility = "visible";
 	} else {
-		document.getElementById("flop1").style.visibility = "hidden";
+		document.getElementById("flop3").style.visibility = "hidden";
 	}
 	if (turn1 != -1) {
 		updateCards("turn1", turn1);
 		document.getElementById("turn1").style.visibility = "visible";
 	} else {
-		document.getElementById("flop1").style.visibility = "hidden";
+		document.getElementById("turn1").style.visibility = "hidden";
 	}
 	if (river1 != -1) {
 		updateCards("river1", river1);
 		document.getElementById("river1").style.visibility = "visible";
 	} else {
-		document.getElementById("flop1").style.visibility = "hidden";
+		document.getElementById("river1").style.visibility = "hidden";
 	}
 }
 
