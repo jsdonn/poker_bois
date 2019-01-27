@@ -114,22 +114,32 @@ function updateCommunityCards() {
 	if (flop1 != -1) {
 		updateCards("flop1", flop1);
 		document.getElementById("flop1").style.visibility = "visible";
+	} else {
+		document.getElementById("flop1").style.visibility = "hidden";
 	}
 	if (flop2 != -1) {
 		updateCards("flop2", flop2);
 		document.getElementById("flop2").style.visibility = "visible";
+	} else {
+		document.getElementById("flop1").style.visibility = "hidden";
 	}
 	if (flop3 != -1) {
 		updateCards("flop3", flop3);
 		document.getElementById("flop3").style.visibility = "visible";
+	} else {
+		document.getElementById("flop1").style.visibility = "hidden";
 	}
 	if (turn1 != -1) {
 		updateCards("turn1", turn1);
 		document.getElementById("turn1").style.visibility = "visible";
+	} else {
+		document.getElementById("flop1").style.visibility = "hidden";
 	}
 	if (river1 != -1) {
 		updateCards("river1", river1);
 		document.getElementById("river1").style.visibility = "visible";
+	} else {
+		document.getElementById("flop1").style.visibility = "hidden";
 	}
 }
 
@@ -163,9 +173,9 @@ function updateDealerStacksAndNames() {
 	for (i = 0; i < numPlayers; i++) {
 		document.getElementById("stack-p" + i.toString()).innerHTML = stacks[i].toString();
 		if (i == dealer) {
-			document.getElementById("dealer-chip-p" + dealer.toString()).style.visibility = "visible";
+			document.getElementById("dealer-chip-p" + i.toString()).style.visibility = "visible";
 		} else {
-			document.getElementById("dealer-chip-p" + dealer.toString()).style.visibility = "hidden";
+			document.getElementById("dealer-chip-p" + i.toString()).style.visibility = "hidden";
 		}
 		document.getElementById("player" + i.toString()).innerHTML = Object.keys(playerNames).find(key=>playerNames[key] === i); //does this work
 	}
@@ -220,13 +230,15 @@ function send(arg) {
 		data = "0 " + document.getElementById("raise-amount").value;
 	}
 	if (arg == "call") {
-		data = "0 " + Math.max.apply(null, bets).toString();
+		var maxBet = Math.max.apply(null, bets)
+		if (maxBet > stacks[myIndex]) {
+			data = "0 " + stacks[myIndex];
+		} else {
+			data = "0 " + maxBet.toString();
+		}
 	}
 	if (arg == "leave") {
 		data = "";
-	}
-	if (arg == 0) {
-		data = "0 0";
 	}
 	if (arg == -1) {
 		data = "0 -1";
