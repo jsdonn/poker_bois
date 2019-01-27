@@ -86,15 +86,15 @@ h5 {
   border-radius: 10px;
 }
 
-#flop1 {
+#flop0 {
   left: 10%;
   visibility: hidden;
 }
-#flop2 {
+#flop1 {
   left: 30%;
   visibility: hidden;
 }
-#flop3 {
+#flop2 {
   left: 50%;
   visibility: hidden;
 }
@@ -162,36 +162,36 @@ h5 {
   margin-left: 10%;
 }
 
-#p1, #p7 {
+#p0, #p6 {
   top: 22.78%; /* 102.5px */
 }
-#p1, #p2 {
+#p0, #p1 {
   left: 1.25%; /* 10px */
 }
-#p3, #p5, #p4 {
+#p2, #p4, #p3 {
   bottom: 2.22%; /* 10px */
 }
-#p7, #p6 {
+#p6, #p5 {
   right: 1.25%; /* 10px */
 }
-#p2, #p6 {
+#p1, #p5 {
   top: 50.56%; /* 227.5px */
 }
-#p9, #p3 {
+#p8, #p2 {
   left: 21.25%; /* 170px */
 }
-#p8, #p5 {
+#p7, #p4 {
   right: 21.25%; /* 170px */
 }
-#p8, #p9 {
+#p7, #p8 {
   top: 2.22%; /* 10px */
 }
-#p4 {
+#p3 {
   left: 40.63%; /* 325px */
 }
 
 .toggle-visibility {
-  visibility: hidden;
+   /* visibility: hidden;
   /* UNCOMMENT THIS WHEN ACTUALLY PLAYING */
   height: 100%;
 }
@@ -214,33 +214,33 @@ h5 {
   margin: 0;
 }
 
-#bet-holder-p1 {
+#bet-holder-p0 {
   left: 105%;
   top: 50%;
 }
 
-#bet-holder-p2 {
+#bet-holder-p1 {
   left: 105%;
   bottom: 45%;
 }
 
-#bet-holder-p3, #bet-holder-p4, #bet-holder-p5 {
+#bet-holder-p2, #bet-holder-p3, #bet-holder-p4 {
   top: -25%;
   left: 50%;
   transform: translate(-50%, 0);
 }
 
-#bet-holder-p6 {
+#bet-holder-p5 {
   right: 105%;
   bottom: 45%;
 }
 
-#bet-holder-p7 {
+#bet-holder-p6 {
   right: 105%;
   top: 50%;
 }
 
-#bet-holder-p8, #bet-holder-p9 {
+#bet-holder-p7, #bet-holder-p8 {
   bottom: -25%;
   left: 50%;
   transform: translate(-50%, 0);
@@ -249,45 +249,45 @@ h5 {
 .dealer-chip {
   width: 20%;
   height: auto;
-  visibility: hidden;
+  visibility: visible;
+}
+
+#dealer-chip-p0 {
+  right: -35%;
+  top: 88%;
 }
 
 #dealer-chip-p1 {
   right: -35%;
-  top: 88%;
-}
-
-#dealer-chip-p2 {
-  right: -35%;
   top: 15%;
 }
 
-#dealer-chip-p3, #dealer-chip-p4 {
+#dealer-chip-p2, #dealer-chip-p3 {
   right: -10%;
   top: -15%;
 }
 
-#dealer-chip-p5 {
+#dealer-chip-p4 {
   left: 10%;
   top: -15%;
 }
 
-#dealer-chip-p6 {
+#dealer-chip-p5 {
   left: -15%;
   top: 15%;
 }
 
-#dealer-chip-p7 {
+#dealer-chip-p6 {
   left: -15%;
   top: 88%;
 }
 
-#dealer-chip-p8 {
+#dealer-chip-p7 {
   left: 10%;
   top: 115%;
 }
 
-#dealer-chip-p9 {
+#dealer-chip-p8 {
   right: -10%;
   top: 115%;
 }

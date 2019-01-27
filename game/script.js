@@ -74,7 +74,7 @@ ws.onmessage = function(event) {
 	}
 
 	// update playerspaces (make visible if the player exists)
-	for (i = 1; i < numPlayers + 1; i++) {
+	for (i = 0; i < numPlayers; i++) {
 		document.getElementById("p" + i.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
 	}
 
@@ -133,9 +133,8 @@ function updateCommunityCards() {
 }
 
 function updateCurrentTurn() {
-	var actualCurrPlayer = (currPlayerTurn % numPlayers) + 1;
-	document.getElementById("p" + actualCurrPlayer.toString()).style.backgroundColor = "deepskyblue";
-	document.getElementById("p" + currPlayerTurn.toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
+	document.getElementById("p" + currPlayerTurn.toString()).style.backgroundColor = "deepskyblue";
+	document.getElementById("p" + ((currPlayerTurn - 1 + numPlayers) % numPlayers).toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
 	/* if (actualCurrPlayer == myIndex) {
 		// display current bet on Call button
 		document.getElementById("call").innerHTML = "Call " + Math.max(bets).toString();
@@ -160,40 +159,35 @@ function showUserInput () {
 }
 
 function updateDealerStacksAndNames() {
-	var actualPlayer;
-	var actualDealer = dealer + 1;
 	for (i = 0; i < numPlayers; i++) {
-		actualPlayer = i + 1;
-		document.getElementById("stack-p" + actualPlayer.toString()).innerHTML = stacks[i].toString();
-		if (i == actualDealer) {
-			document.getElementById("dealer-chip-p" + actualDealer.toString()).style.visibility = "visible";
+		document.getElementById("stack-p" + i.toString()).innerHTML = stacks[i].toString();
+		if (i == dealer) {
+			document.getElementById("dealer-chip-p" + dealer.toString()).style.visibility = "visible";
 		} else {
-			document.getElementById("dealer-chip-p" + actualDealer.toString()).style.visibility = "hidden";
+			document.getElementById("dealer-chip-p" + dealer.toString()).style.visibility = "hidden";
 		}
-		document.getElementById("player" + actualPlayer.toString()).innerHTML = playerNames[i];
+		document.getElementById("player" + i.toString()).innerHTML = Object.keys(playerNames).find(key=>playerNames[key] === i); //does this work
 	}
 	// dunno if this works either
 }
 
 function updateBetsAndFolds() {
-	var actualPlayer;
 	var removed = 0;
 	for (i = 0; i < numPlayers; i++) {
-		actualPlayer = i + 1;
 		if (bets[i] < 0) { // fold
 			inPlayers.splice(i - removed, 1);
 			removed++;
-			document.getElementById("first-p" + actualPlayer.toString()).style.visibility = "hidden";
-			document.getElementById("second-p" + actualPlayer.toString()).style.visibility = "hidden";
+			document.getElementById("first-p" + i.toString()).style.visibility = "hidden";
+			document.getElementById("second-p" + i.toString()).style.visibility = "hidden";
 			document.getElementById("fold-message").style.visibility = "visible";
-			animateAction(actualPlayer, "Fold");
+			animateAction(i, "Fold");
 		} else { // check or call or raise
 			if (bets[i] == 0) {
-				animateAction(actualPlayer, "Check");
+				animateAction(i, "Check");
 			} else {
-				animateAction(actualPlayer, "Raise to " + bets[i].toString());
+				animateAction(i, "Raise to " + bets[i].toString());
 			}
-			document.getElementById("bet-size-p" + actualPlayer.toString()).innerHTML = bets[i].toString();
+			document.getElementById("bet-size-p" + i.toString()).innerHTML = bets[i].toString();
 		}
 	} // not sure if this correctly removes players from inPlayers
 }
