@@ -10,7 +10,7 @@
 //		 straddle, left, right (show cards) = toggle
 //	   	 all in button 
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
-var myName = localStorage.getItem("username").substring(0, 20);
+var myName = localStorage.getItem("username").trim().substring(0, 20);
 var myBuyIn = localStorage.getItem("buyin");
 ws.onopen=(e)=>ws.send(myBuyIn + " " + myName);
 var interval = setInterval(()=>ws.send("1"), 2000);
@@ -257,10 +257,12 @@ function updatePot() {
 
 function send(arg) {
 	var data;
+	window.alert("Adfa");
 	if (arg == "raise") {
 		data = "0 " + document.getElementById("raise-amount").value;
 	}
 	if (arg == "check/call") {
+		window.alert("checkcall)");
 		var maxBet = Math.max.apply(null, bets);
 		if (maxBet > stacks[myIndex]) {
 			data = "0 " + stacks[myIndex].toString();
