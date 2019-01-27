@@ -41,19 +41,16 @@ var pot;
 var dataArray;
 ws.onmessage = function(event) {
 	dataDict = JSON.parse(event.data);
-	if (veryFirst) {
-		window.alert("veryFirst triggered");
-		prevAction = "";
-		prevTurn = currPlayerTurn;
-		window.alert("prevTurn = currPlayerTurn");
-		veryFirst = false;
-	}
-
 	holeCards = dataDict["hole_cards"];
 	// TODO: display the cards of all players who make it to the end of the river
 	riverHoleCards = dataDict["river_hole_cards"]; // make this at the end???
 	communityCards = dataDict["board_cards"];
 	currPlayerTurn = dataDict["cur_turn"];
+	if (veryFirst) {
+		prevAction = "";
+		prevTurn = currPlayerTurn;
+		veryFirst = false;
+	}
 	if (typeof prevTurn !== "undefined" && prevTurn != currPlayerTurn) {
 		animateAction(prevTurn, prevAction);
 	}
