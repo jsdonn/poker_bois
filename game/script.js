@@ -2,15 +2,14 @@
 // 		 display check/fold/raise etc text when people make those actions. DONE
 // 		 river hole cards
 //		 animations for text appearing and disappearing. fix this asap
-//		 find actual backgrounds for everything. DONE
-//		 display pot.  DONE
 //		 display small/big blinds
 //		 auto check/auto fold
 //		 clock animation
 //		 straddle, left, right (show cards) = toggle
 //	   	 all in button 
-//		 clear raise textbox after hitting a button
+//		 clear raise textbox after hitting a button done : i think
 //		 leave game = close the tab
+//		 fold message doesn't work
 
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username").trim().substring(0, 15);
@@ -96,6 +95,7 @@ ws.onmessage = function(event) {
 		for (i = 0; i < numPlayers; i++) {
 			inPlayers.push(i);
 		}
+		clearBoard();
 		document.getElementById("fold-message").style.visibility = "hidden";
 	}
 
@@ -123,7 +123,11 @@ ws.onmessage = function(event) {
 		}
 	}
 	updateVariables();
+	if (riverHoleCards.length != 0) {
+		showHoleCardsAtEnd();
+	}
 }
+
 
 function updateVariables() {
 	updateHoleCards();
@@ -134,17 +138,21 @@ function updateVariables() {
 	updatePot();
 }
 
-function updateCards(cardID, fileName) {
+function updateCards(cardID, fileName, playingCard) {
 	var x = document.getElementById(cardID);
-	x.setAttribute("src", "../images/cards/" + fileName.toUpperCase() + ".png");
+	if (playingCard) {
+		x.setAttribute("src", "../images/cards/" + fileName.toUpperCase() + ".png");
+	} else {
+		x.setAttribute("src", "../images/cards/" + fileName + ".png");
+	}
 }
 
 function updateHoleCards() {
 	if (holeCards[0] != -1) {
-		updateCards("first-card", holeCards[0]); // hole card 1 @ interface
-		updateCards("second-card", holeCards[1]); // hole card 2 @ interface
-		updateCards("first-p" + (myIndex.toString()), holeCards[0]); // hole card 1 @ playerspace
-		updateCards("second-p" + (myIndex.toString()), holeCards[1]); // hole card 2 @ playerspace
+		updateCards("first-card", holeCards[0], true); // hole card 1 @ interface
+		updateCards("second-card", holeCards[1], true); // hole card 2 @ interface
+		updateCards("first-p" + (myIndex.toString()), holeCards[0], true); // hole card 1 @ playerspace
+		updateCards("second-p" + (myIndex.toString()), holeCards[1], true); // hole card 2 @ playerspace
 	}
 }
 
@@ -155,40 +163,53 @@ function updateCommunityCards() {
 	var turn1 = communityCards[3];
 	var river1 = communityCards[4];
 	if (flop1 != -1) {
-		updateCards("flop1", flop1);
+		updateCards("flop1", flop1, true);
 		document.getElementById("flop1").style.visibility = "visible";
 	} else {
-		updateCards("flop1", blue_back);
+		updateCards("flop1", "blue_back", false);
 		document.getElementById("flop1").style.visibility = "hidden";
 	}
 	if (flop2 != -1) {
-		updateCards("flop2", flop2);
+		updateCards("flop2", flop2, true);
 		document.getElementById("flop2").style.visibility = "visible";
 	} else {
-		updateCards("flop2", blue_back);
+		updateCards("flop2", "blue_back", false);
 		document.getElementById("flop2").style.visibility = "hidden";
 	}
 	if (flop3 != -1) {
-		updateCards("flop3", flop3);
+		updateCards("flop3", flop3, true);
 		document.getElementById("flop3").style.visibility = "visible";
 	} else {
-		updateCards("flop3", blue_back);
+		updateCards("flop3", "blue_back", false);
 		document.getElementById("flop3").style.visibility = "hidden";
 	}
 	if (turn1 != -1) {
-		updateCards("turn1", turn1);
+		updateCards("turn1", turn1, true);
 		document.getElementById("turn1").style.visibility = "visible";
 	} else {
-		updateCards("turn1", blue_back);
+		updateCards("turn1", "blue_back", false);
 		document.getElementById("turn1").style.visibility = "hidden";
 	}
 	if (river1 != -1) {
-		updateCards("river1", river1);
+		updateCards("river1", river1, true);
 		document.getElementById("river1").style.visibility = "visible";
 	} else {
-		updateCards("river1", blue_back);
+		updateCards("river1", "blue_back", false);
 		document.getElementById("river1").style.visibility = "hidden";
 	}
+}
+
+function clearBoard() {
+	updateCards("flop1", "blue_back", false);
+	document.getElementById("flop1").style.visibility = "hidden";
+	updateCards("flop2", "blue_back", false);
+	document.getElementById("flop2").style.visibility = "hidden";
+	updateCards("flop3", "blue_back", false);
+	document.getElementById("flop3").style.visibility = "hidden";
+	updateCards("turn1", "blue_back", false);
+	document.getElementById("turn1").style.visibility = "hidden";
+	updateCards("river1", "blue_back", false);
+	document.getElementById("river1").style.visibility = "hidden";
 }
 
 function updateCurrentTurn() {
@@ -251,6 +272,13 @@ function updateBetsAndFolds() {
 	} // not sure if this correctly removes players from inPlayers but fairly confident
 }
 
+function showHoleCardsAtEnd() {
+	for (i = 0; i < inPlayers; i ++) {
+		updateCards("first-p" + i.toString(), riverHoleCards[i][0], true);
+		updateCards("second-p" + i.toString(), riverHoleCards[i][1], true)
+	}
+}
+
 function animateAction(playerID, message) {
 	var player = document.getElementById("action-text-p" + playerID.toString());
 	player.querySelector(".action-text p").innerHTML = message;
@@ -285,6 +313,9 @@ function send(arg) {
 			data = "0 " + maxBet.toString();
 		}
 	}
+	if (arg == "allin") {
+		data = "0 " + stacks[myIndex].toString();
+	}
 	if (arg == "leave") {
 		data = "";
 	}
@@ -294,5 +325,6 @@ function send(arg) {
 	if (typeof arg === "number") {
 		data = "0 " + arg.toString();
 	}
+	document.getElementById("raise-amount").value = "";
 	ws.send(data);
 }
