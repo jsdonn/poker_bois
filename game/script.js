@@ -92,7 +92,7 @@ function updateVariables() {
 
 function updateCards(cardID, fileName) {
 	var x = document.getElementById(cardID);
-	x.setAttribute("src", "../images/cards/" + fileName + ".png");
+	x.setAttribute("src", "../images/cards/" + fileName.toUpperCase() + ".png");
 }
 
 function updateHoldCards() {
