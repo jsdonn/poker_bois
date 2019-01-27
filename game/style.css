@@ -420,7 +420,7 @@ h2 {
   margin-right: .75%; /* 2px */
 }
 
-#check, #fold, #call, #raise, #leave {
+#check-call, #fold, #all-in, #raise, #leave {
   font-weight: 600;
 }
 
