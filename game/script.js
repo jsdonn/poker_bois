@@ -10,7 +10,7 @@
 //		 straddle, left, right (show cards) = toggle
 //	   	 all in button 
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
-var myName = localStorage.getItem("username");
+var myName = localStorage.getItem("username").substring(0, 20);
 var myBuyIn = localStorage.getItem("buyin");
 ws.onopen=(e)=>ws.send(myBuyIn + " " + myName);
 var interval = setInterval(()=>ws.send("1"), 2000);
