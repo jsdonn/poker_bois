@@ -8,7 +8,7 @@
 //		 auto check/auto fold
 //		 clock animation
 //		 straddle, left, right (show cards) = toggle
-
+var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username");
 var myBuyIn = localStorage.getItem("buyin");
 ws.send(name + " " + buyIn);
@@ -30,7 +30,7 @@ var stacks;
 var playerNames;
 var pot;
 
-var ws = new WebSocket("ws://poker.mkassaian.com:8080");
+
 var dataArray;
 ws.onmessage = function(event) {
 	dataDict = event.data;
