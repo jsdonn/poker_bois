@@ -82,8 +82,10 @@ ws.onmessage = function(event) {
 }
 
 function updateVariables() {
-	updateCards("first-card", holeCards[0]); // hole card 1 @ interface
-	updateCards("second-card", holeCards[1]); // hole card 2 @ interface
+	if (holdCards[0] > -1) {
+		updateCards("first-card", holeCards[0]); // hole card 1 @ interface
+		updateCards("second-card", holeCards[1]); // hole card 2 @ interface
+	}
 	updateCards("first-p" + ((myIndex + 1).toString()), holeCards[0]); // hole card 1 @ playerspace
 	updateCards("second-p" + ((myIndex + 1).toString()), holeCards[1]); // hole card 2 @ playerspace
 	updateCommunityCards(); // flop, turn, river
@@ -95,7 +97,7 @@ function updateVariables() {
 
 function updateCards(cardID, fileName) {
 	var x = document.getElementById(cardID);
-	x.setAttribute("src", "../images/cards/" + fileName + "png");
+	x.setAttribute("src", "../images/cards/" + fileName + ".png");
 }
 
 function updateCommunityCards() {
@@ -162,7 +164,7 @@ function updateDealerStacksAndNames() {
 		} else {
 			document.getElementById("dealer-chip-p" + actualDealer.toString()).style.visibility = "hidden";
 		}
-		document.getElementById("player" + actualPlayer.tostring()).innerHTML = playerNames[i];
+		document.getElementById("player" + actualPlayer.toString()).innerHTML = playerNames[i];
 	}
 	// dunno if this works either
 }
