@@ -230,7 +230,7 @@ function send(arg) {
 		data = "0 " + document.getElementById("raise-amount").value;
 	}
 	if (arg == "check/call") {
-		var maxBet = Math.max.apply(null, bets)
+		var maxBet = Math.max.apply(null, bets);
 		if (maxBet > stacks[myIndex]) {
 			data = "0 " + stacks[myIndex].toString();
 		} else {
