@@ -82,12 +82,7 @@ ws.onmessage = function(event) {
 }
 
 function updateVariables() {
-	if (holdCards[0] > -1) {
-		updateCards("first-card", holeCards[0]); // hole card 1 @ interface
-		updateCards("second-card", holeCards[1]); // hole card 2 @ interface
-		updateCards("first-p" + ((myIndex + 1).toString()), holeCards[0]); // hole card 1 @ playerspace
-		updateCards("second-p" + ((myIndex + 1).toString()), holeCards[1]); // hole card 2 @ playerspace
-	}
+	updateHoldCards();
 	updateCommunityCards(); // flop, turn, river
 	updateCurrentTurn(); // show user input if it's my turn, change current player's background to blue
 	updateDealerStacksAndNames();
@@ -98,6 +93,15 @@ function updateVariables() {
 function updateCards(cardID, fileName) {
 	var x = document.getElementById(cardID);
 	x.setAttribute("src", "../images/cards/" + fileName + ".png");
+}
+
+function updateHoldCards() {
+	if (holeCards[0] > -1) {
+		updateCards("first-card", holeCards[0]); // hole card 1 @ interface
+		updateCards("second-card", holeCards[1]); // hole card 2 @ interface
+		updateCards("first-p" + ((myIndex + 1).toString()), holeCards[0]); // hole card 1 @ playerspace
+		updateCards("second-p" + ((myIndex + 1).toString()), holeCards[1]); // hole card 2 @ playerspace
+	}
 }
 
 function updateCommunityCards() {
