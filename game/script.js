@@ -133,7 +133,7 @@ function updateCommunityCards() {
 }
 
 function updateCurrentTurn() {
-	var actualCurrPlayer = (currPlayerTurn + 1) % numPlayers;
+	var actualCurrPlayer = (currPlayerTurn % numPlayers) + 1;
 	document.getElementById("p" + actualCurrPlayer.toString()).style.backgroundColor = "deepskyblue";
 	document.getElementById("p" + currPlayerTurn.toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
 	/* if (actualCurrPlayer == myIndex) {
