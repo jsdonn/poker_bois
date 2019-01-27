@@ -261,12 +261,10 @@ function updatePot() {
 
 function send(arg) {
 	var data;
-	window.alert("Adfa");
 	if (arg == "raise") {
 		data = "0 " + document.getElementById("raise-amount").value;
 	}
 	if (arg == "check/call") {
-		window.alert("checkcall)");
 		var maxBet = Math.max.apply(null, bets);
 		if (maxBet > stacks[myIndex]) {
 			data = "0 " + stacks[myIndex].toString();
@@ -283,6 +281,5 @@ function send(arg) {
 	if (typeof arg === "number") {
 		data = "0 " + arg.toString();
 	}
-	window.alert(data);
 	ws.send(data);
 }
