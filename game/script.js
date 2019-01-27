@@ -111,30 +111,31 @@ function updateCommunityCards() {
 	var turn1 = communityCards[3];
 	var river1 = communityCards[4];
 	if (flop1 != -1) {
-		updateCards("flop1", flop1 + ".png");
+		updateCards("flop1", flop1);
 		document.getElementById("flop1").style.visibility = "visible";
 	}
 	if (flop2 != -1) {
-		updateCards("flop2", flop2 + ".png");
+		updateCards("flop2", flop2);
 		document.getElementById("flop2").style.visibility = "visible";
 	}
 	if (flop3 != -1) {
-		updateCards("flop3", flop3 + ".png");
+		updateCards("flop3", flop3);
 		document.getElementById("flop3").style.visibility = "visible";
 	}
 	if (turn1 != -1) {
-		updateCards("turn1", turn1 + ".png");
+		updateCards("turn1", turn1);
 		document.getElementById("turn1").style.visibility = "visible";
 	}
 	if (river1 != -1) {
-		updateCards("river1", river1 + ".png");
+		updateCards("river1", river1);
 		document.getElementById("river1").style.visibility = "visible";
 	}
 }
 
 function updateCurrentTurn() {
-	var actualCurrPlayer = currPlayerTurn + 1;
+	var actualCurrPlayer = (currPlayerTurn + 1) % numPlayers;
 	document.getElementById("p" + actualCurrPlayer.toString()).style.backgroundColor = "deepskyblue";
+	document.getElementById("p" + currPlayerTurn.toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
 	/* if (actualCurrPlayer == myIndex) {
 		// display current bet on Call button
 		document.getElementById("call").innerHTML = "Call " + Math.max(bets).toString();
