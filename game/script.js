@@ -8,6 +8,7 @@
 //		 auto check/auto fold
 //		 clock animation
 //		 straddle, left, right (show cards) = toggle
+//	   	 all in button 
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username");
 var myBuyIn = localStorage.getItem("buyin");
@@ -18,6 +19,9 @@ ws.onclose=(e)=>clearInterval(interval);
 var myIndex = -1; // this is set when client receives data from server
 var inPlayers = [];
 var newRound = true;
+var prevTurn;
+var prevAction = "";
+var veryFirst = true;
 
 // data to be received from server
 var holeCards;
@@ -37,12 +41,19 @@ var pot;
 var dataArray;
 ws.onmessage = function(event) {
 	dataDict = JSON.parse(event.data);
+	if (veryFirst) {
+		prevTurn = currPlayerTurn;
+		veryFirst = false;
+	}
 
 	holeCards = dataDict["hole_cards"];
 	// TODO: display the cards of all players who make it to the end of the river
 	riverHoleCards = dataDict["river_hole_cards"]; // make this at the end???
 	communityCards = dataDict["board_cards"];
 	currPlayerTurn = dataDict["cur_turn"];
+	if (prevTurn != currPlayerTurn) {
+		animateAction(prevTurn, prevAction);
+	}
 	numPlayers = dataDict["num_players"];
 
 	// if the dealer position has moved, it is a new round
@@ -81,6 +92,24 @@ ws.onmessage = function(event) {
 		document.getElementById("p" + i.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
 	}
 
+	// find prevAction
+	if (bets[currPlayerTurn] == 0) {
+		prevAction = "Check";
+	} else if (bets[currPlayerTurn] == -1) {
+		prevAction = "Fold";
+	} else {
+		var tempMax = 0;
+		for (i = 0; i < numPlayers; i++) {
+			if (currPlayerTurn != i && bets[i] > tempMax) {
+				tempMax = bets[i];
+			}
+		}
+		if (bets[currPlayerTurn] > tempMax) {
+			prevAction = "Raise to " + bets[currPlayerTurn].toString();
+		} else {
+			prevAction = "Call " + bets[tempMax];
+		}
+	}
 	updateVariables();
 }
 
@@ -193,13 +222,13 @@ function updateBetsAndFolds() {
 			document.getElementById("first-p" + i.toString()).style.visibility = "hidden";
 			document.getElementById("second-p" + i.toString()).style.visibility = "hidden";
 			document.getElementById("fold-message").style.visibility = "visible";
-			animateAction(i, "Fold");
+			/* animateAction(i, "Fold"); */
 		} else { // check or call or raise
-			if (bets[i] == 0) {
+			/*if (bets[i] == 0) {
 				animateAction(i, "Check");
 			} else {
 				animateAction(i, "Raise to " + bets[i].toString());
-			}
+			} */
 			document.getElementById("bet-size-p" + i.toString()).innerHTML = bets[i].toString();
 		}
 	} // not sure if this correctly removes players from inPlayers
