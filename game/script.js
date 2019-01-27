@@ -33,7 +33,7 @@ var pot;
 
 var dataArray;
 ws.onmessage = function(event) {
-	dataDict = event.data;
+	dataDict = JSON.parse(event.data);
 
 	holeCards = dataDict["hole_cards"];
 	// TODO: display the cards of all players who make it to the end of the river
