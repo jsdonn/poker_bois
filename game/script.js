@@ -99,8 +99,8 @@ function updateHoldCards() {
 	if (holeCards[0] != -1) {
 		updateCards("first-card", holeCards[0]); // hole card 1 @ interface
 		updateCards("second-card", holeCards[1]); // hole card 2 @ interface
-		updateCards("first-p" + ((myIndex + 1).toString()), holeCards[0]); // hole card 1 @ playerspace
-		updateCards("second-p" + ((myIndex + 1).toString()), holeCards[1]); // hole card 2 @ playerspace
+		updateCards("first-p" + (myIndex.toString()), holeCards[0]); // hole card 1 @ playerspace
+		updateCards("second-p" + (myIndex.toString()), holeCards[1]); // hole card 2 @ playerspace
 	}
 }
 
