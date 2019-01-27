@@ -317,7 +317,9 @@ function send(arg) {
 		data = "0 " + stacks[myIndex].toString();
 	}
 	if (arg == "leave") {
+
 		data = "";
+		window.alert("in leave")
 	}
 	if (arg == -1) {
 		data = "0 -1";
@@ -325,6 +327,7 @@ function send(arg) {
 	if (typeof arg === "number") {
 		data = "0 " + arg.toString();
 	}
-	//document.getElementById("raise-amount").value = "";
+	document.getElementById("raise-amount").value = "";
+	window.alert(data);
 	ws.send(data);
 }
