@@ -219,7 +219,7 @@ function send(arg) {
 		data = "0 " + document.getElementById("raise-amount").value;
 	}
 	if (arg == "call") {
-		data = "0 " + Math.max(bets).toString();
+		data = "0 " + Math.max.apply(null, bets).toString();
 	}
 	if (arg == "leave") {
 		data = "";
