@@ -81,7 +81,7 @@ ws.onmessage = function(event) {
 	pot = dataDict["pot"];
 
 	// set myIndex, should only have to do once
-	if (myIndex < 0) {
+	if (myIndex < 0 || typeof myIndex == "undefined") {
 		myIndex = playerNames[myName];
 	}
 
