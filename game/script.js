@@ -74,7 +74,7 @@ ws.onmessage = function(event) {
 	}
 
 	// update playerspaces (make visible if the player exists)
-	for (i = 0; i < numPlayers; i++) {
+	for (i = 1; i < numPlayers + 1; i++) {
 		document.getElementById("p" + i.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
 	}
 
