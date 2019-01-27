@@ -42,6 +42,7 @@ var dataArray;
 ws.onmessage = function(event) {
 	dataDict = JSON.parse(event.data);
 	if (veryFirst) {
+		window.alert("veryFirst triggered");
 		prevAction = "";
 		prevTurn = currPlayerTurn;
 		veryFirst = false;
