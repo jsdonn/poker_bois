@@ -249,7 +249,7 @@ h5 {
 .dealer-chip {
   width: 20%;
   height: auto;
-  visibility: visible;
+  visibility: hidden;
 }
 
 #dealer-chip-p0 {
