@@ -325,6 +325,6 @@ function send(arg) {
 	if (typeof arg === "number") {
 		data = "0 " + arg.toString();
 	}
-	document.getElementById("raise-amount").value = "";
+	//document.getElementById("raise-amount").value = "";
 	ws.send(data);
 }
