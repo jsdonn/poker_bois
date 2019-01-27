@@ -45,6 +45,7 @@ ws.onmessage = function(event) {
 		window.alert("veryFirst triggered");
 		prevAction = "";
 		prevTurn = currPlayerTurn;
+		window.alert("prevTurn = currPlayerTurn");
 		veryFirst = false;
 	}
 
