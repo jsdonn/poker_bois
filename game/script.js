@@ -16,7 +16,7 @@ var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username").trim().substring(0, 15);
 var myBuyIn = localStorage.getItem("buyin");
 ws.onopen=(e)=>ws.send(myBuyIn + " " + myName);
-var interval = setInterval(()=>ws.send("1"), 1000);
+var interval = setInterval(()=>ws.send("1"), 1200);
 ws.onerror=(e)=>error(e);
 ws.onclose=(e)=>window.location.replace("../images/emile1.png"); // does not work
 function error(e) {
@@ -158,30 +158,35 @@ function updateCommunityCards() {
 		updateCards("flop1", flop1);
 		document.getElementById("flop1").style.visibility = "visible";
 	} else {
+		updateCards("flop1", blue_back);
 		document.getElementById("flop1").style.visibility = "hidden";
 	}
 	if (flop2 != -1) {
 		updateCards("flop2", flop2);
 		document.getElementById("flop2").style.visibility = "visible";
 	} else {
+		updateCards("flop2", blue_back);
 		document.getElementById("flop2").style.visibility = "hidden";
 	}
 	if (flop3 != -1) {
 		updateCards("flop3", flop3);
 		document.getElementById("flop3").style.visibility = "visible";
 	} else {
+		updateCards("flop3", blue_back);
 		document.getElementById("flop3").style.visibility = "hidden";
 	}
 	if (turn1 != -1) {
 		updateCards("turn1", turn1);
 		document.getElementById("turn1").style.visibility = "visible";
 	} else {
+		updateCards("turn1", blue_back);
 		document.getElementById("turn1").style.visibility = "hidden";
 	}
 	if (river1 != -1) {
 		updateCards("river1", river1);
 		document.getElementById("river1").style.visibility = "visible";
 	} else {
+		updateCards("river1", blue_back);
 		document.getElementById("river1").style.visibility = "hidden";
 	}
 }
@@ -197,7 +202,7 @@ function updateCurrentTurn() {
 		hideUserInput();
 	} */
 	// FIX THIS
-	// no idea if any of this works
+	// i think this works
 }
 
 function hideUserInput () {
@@ -228,7 +233,7 @@ function updateDealerStacksAndNames() {
 function updateBetsAndFolds() {
 	var removed = 0;
 	for (i = 0; i < numPlayers; i++) {
-		if (bets[i] < 0) { // fold
+		if (bets[i] == -1) { // fold
 			inPlayers.splice(i - removed, 1);
 			removed++;
 			document.getElementById("first-p" + i.toString()).style.visibility = "hidden";
@@ -243,7 +248,7 @@ function updateBetsAndFolds() {
 			} */
 			document.getElementById("bet-size-p" + i.toString()).innerHTML = bets[i].toString();
 		}
-	} // not sure if this correctly removes players from inPlayers
+	} // not sure if this correctly removes players from inPlayers but fairly confident
 }
 
 function animateAction(playerID, message) {
@@ -260,7 +265,7 @@ function animateAction(playerID, message) {
 function changeRaise(scalar) {
 	var raiseSize = scalar * pot;
 	document.getElementById("raise-amount").value = Math.floor(raiseSize).toString();
-	// dunno if this works
+	// very confident this works, just need to clear after your turn is over
 }
 
 function updatePot() {
