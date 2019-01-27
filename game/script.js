@@ -11,6 +11,7 @@
 //	   	 all in button 
 //		 clear raise textbox after hitting a button
 //		 leave game = close the tab
+
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username").trim().substring(0, 15);
 var myBuyIn = localStorage.getItem("buyin");
