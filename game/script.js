@@ -97,7 +97,7 @@ ws.onmessage = function(event) {
 		}
 		resetGame();
 		document.getElementById("fold-message").style.visibility = "hidden";
-		alreadyAnimated = false;
+		alreadyAnimated = -1;
 	}
 
 	// update playerspaces (make visible if the player exists)
@@ -141,12 +141,12 @@ ws.onmessage = function(event) {
 	/*} else {
 		prevAction = false;
 	} */
-	if (!veryFirst && (nextPersonsTurn) && alreadyAnimated == prevTurn) {
+	if (!veryFirst && (nextPersonsTurn) && alreadyAnimated != prevTurn) {
 		animateAction(prevTurn, prevAction);
 		nextPersonsTurn = false;
 		alreadyAnimated = prevTurn;		
 	}
-	prevTurn = currPlayerTurn;
+	prevTurn = (currPlayerTurn -1 + numPlayers) % numPlayers;
 	
 	updateVariables();
 	if (riverHoleCards.length != 0 && inPlayers.length != 0) {
