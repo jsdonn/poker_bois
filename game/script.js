@@ -113,9 +113,9 @@ ws.onmessage = function(event) {
 	/* if (typeof prevTurn != "undefined" && prevTurn != (currPlayerTurn -1) % numPlayers) {
 		animateAction(prevTurn, prevAction);
 	} */
-	if (newBettingRound) {
+	/*if (newBettingRound) {
 
-	}
+	} */
 	var nextPersonsTurn = (prevTurn != (currPlayerTurn -1) % numPlayers);
 	// prevTurn = (currPlayerTurn -1) % numPlayers;
 
