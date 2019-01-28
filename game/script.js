@@ -279,14 +279,15 @@ function animations(actionList) {
 		var actualMessage = parseMessage(actionList[i])[1];
 		beginAnimation(sender, actualMessage);
 		window.alert("beginning animation: " + sender + actualMessage);
-
 	}
-	for (i = 0; i < actionList.length; i++) {
-		var sender = parseMessage(actionList[i])[0];
-		endAnimation(sender);
-		window.alert("ending animation: " + sender);
-
-	}
+	setTimeout(function() {
+		for (i = 0; i < actionList.length; i++) {
+			var sender = parseMessage(actionList[i])[0];
+			endAnimation(sender);
+			window.alert("ending animation: " + sender);
+		}
+	}, 1000);
+	
 }
 
 function parseMessage(message) {
