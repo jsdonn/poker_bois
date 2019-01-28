@@ -123,6 +123,7 @@ ws.onmessage = function(event) {
 
 	} */
 	if (actionIndex !== -1 && actionMessage !== "" && actionIndex !== prevActionIndex) {
+		window.alert("inside that if statement");
 		animateAction(actionIndex, actionMessage);
 	}
 	prevActionIndex = actionIndex;
@@ -378,17 +379,13 @@ function send(arg) {
 	if (arg == "allin") {
 		var allInAmount = stacks[myIndex] + bets[myIndex];
 		data = "0," + allInAmount.toString() + ",All in for " + allInAmount.toString() + "," + myIndex.toString();
-	}
-	if (arg == "leave") {
+	} else if (arg == "leave") {
 		data = "";
-	}
-	if (arg == -1) {
+	} else if (arg == -1) {
 		data = "0,-1," + "Fold," + myIndex.toString();
-	}
-	if (typeof arg === "number") {
+	} else if (typeof arg === "number") {
 		data = "0," + arg.toString() + ",Bet " + arg.toString() + "," + myIndex.toString();
 	}
 	document.getElementById("raise-amount").value = ""; // clear raise input field
-	window.alert("sent data: " + data);
 	ws.send(data);
 }
