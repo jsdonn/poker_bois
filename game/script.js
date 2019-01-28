@@ -15,7 +15,7 @@
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username").trim().substring(0, 15);
 var myBuyIn = localStorage.getItem("buyin");
-ws.onopen=(e)=>ws.send(myBuyIn + " " + myName);
+ws.onopen=(e)=>ws.send(myBuyIn + "," + myName);
 var interval = setInterval(()=>ws.send("1"), 1200);
 ws.onerror=(e)=>error(e);
 ws.onclose=(e)=>window.location.replace("../images/emile1.png"); // does work
@@ -353,30 +353,33 @@ function updatePot() {
 }
 
 function send(arg) {
+	// data in form of: "0,*integer corresponding to bet/check*,*action message for animations*,*myIndex*)
 	var data;
 	if (arg == "raise") {
-		data = "0 " + document.getElementById("raise-amount").value;
+		var raiseAmount = document.getElementById("raise-amount").value;
+		data = "0," + raiseAmount.toString()  + ",Raise to " + raiseAmount.toString() + "," + myIndex.toString();
 	}
 	if (arg == "check/call") {
 		var maxBet = Math.max.apply(null, bets);
-		if (maxBet > stacks[myIndex]) {
-			data = "0 " + stacks[myIndex].toString();
+		if (maxBet > stacks[myIndex] + bets[myIndex]) {
+			data = "0," + stacks[myIndex].toString() + ",All in for " + stacks[myIndex].toString() + "," + myIndex.toString();;
 		} else {
-			data = "0 " + maxBet.toString();
+			data = "0," + maxBet.toString() + ",Call " + maxBet.toString() + "," + myIndex.toString();
 		}
 	}
 	if (arg == "allin") {
-		data = "0 " + (stacks[myIndex] + bets[myIndex]).toString();
+		var allInAmount = stacks[myIndex] + bets[myIndex];
+		data = "0," + allInAmount.toString() + ",All in for " + allInAmount.toString() + "," + myIndex.toString();
 	}
 	if (arg == "leave") {
 		data = "";
 	}
 	if (arg == -1) {
-		data = "0 -1";
+		data = "0,-1," + "Fold," + myIndex.toString();
 	}
 	if (typeof arg === "number") {
-		data = "0 " + arg.toString();
+		data = "0," + arg.toString() + ",Bet " + arg.toString() + "," + myIndex.toString();
 	}
-	document.getElementById("raise-amount").value = "";
+	document.getElementById("raise-amount").value = ""; // clear raise input field
 	ws.send(data);
 }
