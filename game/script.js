@@ -97,7 +97,7 @@ ws.onmessage = function(event) {
 	myIndex = playerNames[myName];
 
 	// reset inPlayers and hide fold message at the start of each new round 
-	if (newRound) {
+	if (newRound && numPlayers >= 2) {
 		inPlayers = [];
 		for (i = 0; i < numPlayers; i++) {
 			inPlayers.push(i);
