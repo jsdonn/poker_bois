@@ -10,6 +10,7 @@
 //		 clear raise textbox after hitting a button done : i think
 //		 leave game = close the tab
 //		 fold message doesn't work
+// 		 number the players clockwise
 
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username").trim().substring(0, 15);
@@ -43,6 +44,7 @@ var bets;
 var stacks;
 var playerNames;
 var pot;
+var folded;
 
 var dataArray;
 ws.onmessage = function(event) {
@@ -59,7 +61,7 @@ ws.onmessage = function(event) {
 	stacks = dataDict["stacks"];
 	playerNames = dataDict["names"];
 	pot = dataDict["pot"];
-
+	folded = dataDict["folded"];
 
 	if (!veryFirst) {
 		// if the dealer position has moved, it is a new round
@@ -70,11 +72,11 @@ ws.onmessage = function(event) {
 		}
 
 		// if there are a differing number of -1's between board cards, it is a new betting round
-		/*if (countInArray(communityCards, -1) != countInArray(dataDict["board_cards"], -1)) {
+		if (countInArray(communityCards, -1) != countInArray(dataDict["board_cards"], -1)) {
 			newBettingRound = true;
 		} else {
 			newBettingRound = false;
-		} */
+		} 
 	}
 
 	// this has to be after the new round check!!
@@ -111,15 +113,18 @@ ws.onmessage = function(event) {
 	/* if (typeof prevTurn != "undefined" && prevTurn != (currPlayerTurn -1) % numPlayers) {
 		animateAction(prevTurn, prevAction);
 	} */
+	if (newBettingRound) {
+
+	}
 	var nextPersonsTurn = (prevTurn != (currPlayerTurn -1) % numPlayers);
-	prevTurn = (currPlayerTurn -1) % numPlayers;
+	// prevTurn = (currPlayerTurn -1) % numPlayers;
 
 	// find prevAction
 	//if (!newBettingRound) {
-		if (bets[prevTurn] == 0) {
-			prevAction = "Check";
-		} else if (bets[prevTurn] == -1) {
+		if (folded[prevTurn] == 1) {
 			prevAction = "Fold";
+		} else if (bets[prevTurn] == 0) {
+			prevAction = "Check";
 		} else {
 			var tempMax = 0;
 			for (i = 0; i < numPlayers; i++) {
@@ -136,13 +141,16 @@ ws.onmessage = function(event) {
 	/*} else {
 		prevAction = false;
 	} */
-	if (!veryFirst && nextPersonsTurn) {
+	if (!veryFirst && (nextPersonsTurn)) {
 		animateAction(prevTurn, prevAction);		
 	}
+	prevTurn = currPlayerTurn;
 	
 	updateVariables();
 	if (riverHoleCards.length != 0) {
+		window.alert("showing hole");
 		showHoleCardsAtEnd();
+		window.alert("showed hole");
 	}
 	veryFirst = false;
 }
