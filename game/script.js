@@ -360,6 +360,7 @@ function updateBetsAndFolds() {
 }
 
 function showHoleCardsAtEnd() {
+	window.alert("numPlayers " + numPlayers + "inPlayers.length " + inPlayers.length);
 	for (i = 0; i < numPlayers.length; i++) {
 
 		if (inPlayers.includes(i)) {
