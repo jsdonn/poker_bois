@@ -110,7 +110,7 @@ ws.onmessage = function(event) {
 		prevAction = "";
 	} */
 
-	if (!prevTurn && prevTurn != (currPlayerTurn -1) % numPlayers) {
+	if (typeof prevTurn != "undefined" && !prevTurn && prevTurn != (currPlayerTurn -1) % numPlayers) {
 		animateAction(prevTurn, prevAction);
 	}
 	prevTurn = (currPlayerTurn -1) % numPlayers;
