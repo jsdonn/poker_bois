@@ -146,7 +146,7 @@ ws.onmessage = function(event) {
 		nextPersonsTurn = false;
 		alreadyAnimated = prevTurn;		
 	}
-	prevTurn = (currPlayerTurn -1 + numPlayers) % numPlayers;
+	prevTurn = (currPlayerTurn - 1 + numPlayers) % numPlayers;
 	
 	updateVariables();
 	if (riverHoleCards.length != 0 && inPlayers.length != 0) {
