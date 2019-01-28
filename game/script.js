@@ -17,12 +17,12 @@ var myBuyIn = localStorage.getItem("buyin");
 ws.onopen=(e)=>ws.send(myBuyIn + " " + myName);
 var interval = setInterval(()=>ws.send("1"), 1200);
 ws.onerror=(e)=>error(e);
-ws.onclose=(e)=>window.location.replace("../images/emile1.png"); // does not work
+ws.onclose=(e)=>window.location.replace("../images/emile1.png"); // does work
 function error(e) {
 	console.log(e.data);
 	clearInterval(interval);
 }
-var myIndex = -1; // this is set when client receives data from server
+var myIndex = -1; // this is set when client receives data from server later
 var inPlayers = [];
 var newRound = true;
 var prevTurn;
@@ -105,7 +105,7 @@ ws.onmessage = function(event) {
 	}
 
 	// find prevAction
-	if (bets[currPlayerTurn] == 0) {
+	if (bets[(prevTurn - 1) % numPlayers] == 0) {
 		prevAction = "Check";
 	} else if (bets[currPlayerTurn] == -1) {
 		prevAction = "Fold";
