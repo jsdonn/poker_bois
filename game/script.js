@@ -333,9 +333,11 @@ function updateBetsAndFolds() {
 }
 
 function showHoleCardsAtEnd() {
-	for (i = 0; i < inPlayers.length; i++) {
-		updateCards("first-p" + i.toString(), riverHoleCards[i][0]);
-		updateCards("second-p" + i.toString(), riverHoleCards[i][1]);
+	for (i = 0; i < numPlayers.length; i++) {
+		if (inPlayers.includes(i)) {
+			updateCards("first-p" + i.toString(), riverHoleCards[i][0]);
+			updateCards("second-p" + i.toString(), riverHoleCards[i][1]);
+		}
 	}
 }
 
