@@ -324,8 +324,6 @@ function updateBetsAndFolds() {
 		if (bets[i] == -1) { // fold
 			inPlayers.splice(i - removed, 1);
 			removed++;
-			document.getElementById("first-p" + i.toString()).style.visibility = "hidden";
-			document.getElementById("second-p" + i.toString()).style.visibility = "hidden";
 			document.getElementById("fold-message").style.visibility = "visible";
 			/* animateAction(i, "Fold"); */
 		} else { // check or call or raise
@@ -335,6 +333,10 @@ function updateBetsAndFolds() {
 				animateAction(i, "Raise to " + bets[i].toString());
 			} */
 			document.getElementById("bet-size-p" + i.toString()).innerHTML = bets[i].toString();
+		}
+		if (folded[i] == 1) {
+			document.getElementById("first-p" + i.toString()).style.visibility = "hidden";
+			document.getElementById("second-p" + i.toString()).style.visibility = "hidden";
 		}
 	} // not sure if this correctly removes players from inPlayers but fairly confident
 }
