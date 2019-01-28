@@ -90,7 +90,6 @@ ws.onmessage = function(event) {
 		} else {
 			inPlayers = [0, 1];
 		}
-		
 		resetGame();
 	} 
 
@@ -218,6 +217,7 @@ function updateCurrentTurn() {
 
 		}
 	}
+}
 
 function updateDealerStacksAndNames() {
 	for (i = 0; i < numPlayers; i++) {
