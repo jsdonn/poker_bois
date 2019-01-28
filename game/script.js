@@ -359,7 +359,7 @@ function send(arg) {
 		}
 	}
 	if (arg == "allin") {
-		data = "0 " + stacks[myIndex].toString();
+		data = "0 " + (stacks[myIndex] + bets[myIndex]).toString();
 	}
 	if (arg == "leave") {
 		data = "";
