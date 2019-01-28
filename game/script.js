@@ -25,6 +25,7 @@ function error(e) {
 var myIndex = -1; // this is set when client receives data from server later
 var inPlayers = [];
 var newRound = true;
+var newBettingRound = true;
 var prevTurn;
 var prevAction;
 var veryFirst = true;
@@ -49,7 +50,6 @@ ws.onmessage = function(event) {
 	holeCards = dataDict["hole_cards"];
 	// TODO: display the cards of all players who make it to the end of the river
 	riverHoleCards = dataDict["river_hole_cards"]; // make this at the end???
-	communityCards = dataDict["board_cards"];
 	currPlayerTurn = dataDict["cur_turn"];
 	numPlayers = dataDict["num_players"];
 	smallBlind = dataDict["sb"];
@@ -60,20 +60,7 @@ ws.onmessage = function(event) {
 	playerNames = dataDict["names"];
 	pot = dataDict["pot"];
 
-	if (typeof prevTurn == "undefined") {
-		prevTurn = (currPlayerTurn -1) % numPlayers;
-		prevAction = "";
-	}
-
-	/* if (veryFirst) {
-		prevAction = "";
-		prevTurn = currPlayerTurn;
-		veryFirst = false;
-	} */
-	if (typeof prevTurn != "undefined" && prevTurn != (currPlayerTurn -1) % numPlayers) {
-		animateAction(prevTurn, prevAction);
-	}
-	prevTurn = (currPlayerTurn -1) % numPlayers;
+	
 
 	// if the dealer position has moved, it is a new round
 	if (dealer != dataDict["dealer"]) {
@@ -81,8 +68,16 @@ ws.onmessage = function(event) {
 	} else {
 		newRound = false;
 	}
-	// this has to after the new round check!!
+	// this has to b e after the new round check!!
 	dealer = dataDict["dealer"];
+
+	if (countInArray(communityCards, -1) != countInArray(dataDict["board_cards"], -1)) {
+		newBettingRound = true;
+	} else {
+		newBettingRound = false;
+	}
+	// this has to be after the new betting round check!!
+	communityCards = dataDict["board_cards"];
 
 	// set myIndex, should only have to do once
 	if (myIndex < 0 || typeof myIndex == "undefined") {
@@ -104,25 +99,39 @@ ws.onmessage = function(event) {
 		document.getElementById("p" + i.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
 	}
 
+	/* if (typeof prevTurn == "undefined") {
+		prevTurn = (currPlayerTurn -1) % numPlayers;
+		prevAction = "";
+	} */
+
+	if (!prevTurn && prevTurn != (currPlayerTurn -1) % numPlayers) {
+		animateAction(prevTurn, prevAction);
+	}
+	prevTurn = (currPlayerTurn -1) % numPlayers;
+
 	// find prevAction
-	var guyBefore = (prevTurn - 1) % numPlayers;
-	if (bets[guyBefore] == 0 && bets[prevTurn] == 0) {
-		prevAction = "Check";
-	} else if (bets[prevTurn] == -1) {
-		prevAction = "Fold";
-	} else {
-		var tempMax = 0;
-		for (i = 0; i < numPlayers; i++) {
-			if (prevTurn != i && bets[i] > tempMax) {
-				tempMax = bets[i];
+	if (!newBettingRound) {
+		if (bets[prevTurn] == 0) {
+			prevAction = "Check";
+		} else if (bets[prevTurn] == -1) {
+			prevAction = "Fold";
+		} else {
+			var tempMax = 0;
+			for (i = 0; i < numPlayers; i++) {
+				if (prevTurn != i && bets[i] > tempMax) {
+					tempMax = bets[i];
+				}
+			}
+			if (bets[prevTurn] > tempMax) {
+				prevAction = "Raise to " + bets[prevTurn].toString();
+			} else {
+				prevAction = "Call " + tempMax.toString();
 			}
 		}
-		if (bets[prevTurn] > tempMax) {
-			prevAction = "Raise to " + bets[prevTurn].toString();
-		} else {
-			prevAction = "Call " + tempMax.toString();
-		}
+	} else {
+		prevAction = false;
 	}
+	
 	updateVariables();
 	if (riverHoleCards.length != 0) {
 		showHoleCardsAtEnd();
@@ -137,6 +146,16 @@ function updateVariables() {
 	updateDealerStacksAndNames();
 	updateBetsAndFolds();
 	updatePot();
+}
+
+function countInArray(array, element) {
+	var count = 0;
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] == element) {
+            count++;
+        }
+    }
+    return count;
 }
 
 function updateCards(cardID, fileName, playingCard) {
