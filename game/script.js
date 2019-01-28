@@ -73,11 +73,11 @@ ws.onmessage = function(event) {
 		}
 
 		// if there are a differing number of -1's between board cards, it is a new betting round
-		if (countInArray(communityCards, -1) != countInArray(dataDict["board_cards"], -1)) {
+		/*if (countInArray(communityCards, -1) != countInArray(dataDict["board_cards"], -1)) {
 			newBettingRound = true;
 		} else {
 			newBettingRound = false;
-		} 
+		} */
 	}
 
 	// this has to be after the new round check!!
@@ -149,7 +149,7 @@ ws.onmessage = function(event) {
 	prevTurn = (currPlayerTurn - 1 + numPlayers) % numPlayers;
 	
 	updateVariables();
-	if (riverHoleCards.length != 0 && inPlayers.length != 0) {
+	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
 		showHoleCardsAtEnd();
 	}
 	veryFirst = false;
@@ -175,7 +175,7 @@ function countInArray(array, element) {
     return count;
 }
 
-function updateCards(cardID, fileName, playingCard) {
+function updateCards(cardID, fileName, playingCard = true) {
 	var x = document.getElementById(cardID);
 	if (playingCard) {
 		x.setAttribute("src", "../images/cards/" + fileName.toUpperCase() + ".png");
@@ -186,10 +186,10 @@ function updateCards(cardID, fileName, playingCard) {
 
 function updateHoleCards() {
 	if (holeCards[0] != -1) {
-		updateCards("first-card", holeCards[0], true); // hole card 1 @ interface
-		updateCards("second-card", holeCards[1], true); // hole card 2 @ interface
-		updateCards("first-p" + (myIndex.toString()), holeCards[0], true); // hole card 1 @ playerspace
-		updateCards("second-p" + (myIndex.toString()), holeCards[1], true); // hole card 2 @ playerspace
+		updateCards("first-card", holeCards[0]); // hole card 1 @ interface
+		updateCards("second-card", holeCards[1]); // hole card 2 @ interface
+		updateCards("first-p" + (myIndex.toString()), holeCards[0]); // hole card 1 @ playerspace
+		updateCards("second-p" + (myIndex.toString()), holeCards[1]); // hole card 2 @ playerspace
 	}
 }
 
@@ -200,35 +200,35 @@ function updateCommunityCards() {
 	var turn1 = communityCards[3];
 	var river1 = communityCards[4];
 	if (flop1 != -1) {
-		updateCards("flop1", flop1, true);
+		updateCards("flop1", flop1);
 		document.getElementById("flop1").style.visibility = "visible";
 	} else {
 		updateCards("flop1", "blue_back", false);
 		document.getElementById("flop1").style.visibility = "hidden";
 	}
 	if (flop2 != -1) {
-		updateCards("flop2", flop2, true);
+		updateCards("flop2", flop2);
 		document.getElementById("flop2").style.visibility = "visible";
 	} else {
 		updateCards("flop2", "blue_back", false);
 		document.getElementById("flop2").style.visibility = "hidden";
 	}
 	if (flop3 != -1) {
-		updateCards("flop3", flop3, true);
+		updateCards("flop3", flop3);
 		document.getElementById("flop3").style.visibility = "visible";
 	} else {
 		updateCards("flop3", "blue_back", false);
 		document.getElementById("flop3").style.visibility = "hidden";
 	}
 	if (turn1 != -1) {
-		updateCards("turn1", turn1, true);
+		updateCards("turn1", turn1);
 		document.getElementById("turn1").style.visibility = "visible";
 	} else {
 		updateCards("turn1", "blue_back", false);
 		document.getElementById("turn1").style.visibility = "hidden";
 	}
 	if (river1 != -1) {
-		updateCards("river1", river1, true);
+		updateCards("river1", river1);
 		document.getElementById("river1").style.visibility = "visible";
 	} else {
 		updateCards("river1", "blue_back", false);
@@ -273,17 +273,17 @@ function updateCurrentTurn() {
 	// i think this works
 }
 
-function hideUserInput () {
+/* function hideUserInput () {
 	var toHide = document.getElementById("user-input").getElementsByClassName("toggle-visibility")[0];
 	toHide.style.visibility = 'hidden';
-	/* no idea if this works */ 
-}
+	no idea if this works 
+} */
 
-function showUserInput () {
+/* function showUserInput () {
 	var toShow = document.getElementById("user-input").getElementsByClassName("toggle-visibility")[0];
 	toShow.style.visibility = 'visible';
-	/* no idea if this works */
-}
+	no idea if this works
+} */
 
 function updateDealerStacksAndNames() {
 	for (i = 0; i < numPlayers; i++) {
@@ -295,7 +295,7 @@ function updateDealerStacksAndNames() {
 		}
 		document.getElementById("player" + i.toString()).innerHTML = Object.keys(playerNames).find(key=>playerNames[key] === i); //does this work
 	}
-	// dunno if this works either
+	// p sure this works
 }
 
 function updateBetsAndFolds() {
@@ -324,10 +324,10 @@ function showHoleCardsAtEnd() {
 	//window.alert("p0 c1: " + riverHoleCards[0][1].toString());
 	//window.alert("p1 c0: " + riverHoleCards[1][0].toString());
 	//window.alert("p1 c1: " + riverHoleCards[1][1].toString());
-
+	window.alert(inPlayers.length);
 	for (i = 0; i < inPlayers.length; i++) {
-		updateCards("first-p" + i.toString(), riverHoleCards[i][0], true);
-		updateCards("second-p" + i.toString(), riverHoleCards[i][1], true);
+		updateCards("first-p" + i.toString(), riverHoleCards[i][0]);
+		updateCards("second-p" + i.toString(), riverHoleCards[i][1]);
 	}
 }
 
