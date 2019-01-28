@@ -273,8 +273,15 @@ function resetGame() {
 }
 
 function updateCurrentTurn() {
-	document.getElementById("p" + currPlayerTurn.toString()).style.backgroundColor = "deepskyblue";
-	document.getElementById("p" + ((currPlayerTurn - 1 + numPlayers) % numPlayers).toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
+	for (i = 0; i < numPlayers; i++) {
+		if (i != currPlayerTurn) {
+			document.getElementById("p" + i.toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
+
+		} else {
+			document.getElementById("p" + i.toString()).style.backgroundColor = "deepskyblue";
+
+		}
+	}
 	/* if (actualCurrPlayer == myIndex) {
 		// display current bet on Call button
 		document.getElementById("call").innerHTML = "Call " + Math.max(bets).toString();
