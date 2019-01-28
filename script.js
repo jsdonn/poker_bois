@@ -1,5 +1,5 @@
 function goToGame() {
-	var name = document.getElementById("username").value;
+	var name = document.getElementById("alias").value;
 	var buyIn = document.getElementById("buy-in").value;
 	localStorage.setItem("username", name); // store name in localStorage to be used in other HTMl file
 	localStorage.setItem("buyin", buyIn);
