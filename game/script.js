@@ -14,7 +14,7 @@
 
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username").trim().substring(0, 15);
-var myBuyIn = localStorage.getItem("buyin");
+var myBuyIn = localStorage.getItem("buyin").trim().substring(0, 7);
 ws.onopen=(e)=>ws.send(myBuyIn + "," + myName);
 var interval = setInterval(()=>ws.send("1"), 1200);
 ws.onerror=(e)=>error(e);
