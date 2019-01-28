@@ -105,21 +105,22 @@ ws.onmessage = function(event) {
 	}
 
 	// find prevAction
-	if (bets[(prevTurn - 1) % numPlayers] == 0) {
+	var guyBefore = (prevTurn - 1) % numPlayers;
+	if (bets[guyBefore] == 0) {
 		prevAction = "Check";
-	} else if (bets[currPlayerTurn] == -1) {
+	} else if (bets[guyBefore] == -1) {
 		prevAction = "Fold";
 	} else {
 		var tempMax = 0;
 		for (i = 0; i < numPlayers; i++) {
-			if (currPlayerTurn != i && bets[i] > tempMax) {
+			if (guyBefore != i && bets[i] > tempMax) {
 				tempMax = bets[i];
 			}
 		}
-		if (bets[currPlayerTurn] > tempMax) {
-			prevAction = "Raise to " + bets[currPlayerTurn].toString();
+		if (bets[guyBefore] > tempMax) {
+			prevAction = "Raise to " + bets[guyBefore].toString();
 		} else {
-			prevAction = "Call " + bets[tempMax];
+			prevAction = "Call " + tempMax.toString();
 		}
 	}
 	updateVariables();
