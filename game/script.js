@@ -318,7 +318,11 @@ function updateBetsAndFolds() {
 }
 
 function showHoleCardsAtEnd() {
-	window.alert(riverHoleCards.toString());
+	window.alert("p0 c0: " + riverHoleCards[0][0].toString());
+	window.alert("p0 c1: " + riverHoleCards[0][1].toString());
+	window.alert("p1 c0: " + riverHoleCards[1][0].toString());
+	window.alert("p1 c1: " + riverHoleCards[1][1].toString());
+
 	for (i = 0; i < inPlayers.length; i++) {
 		updateCards("first-p" + i.toString(), riverHoleCards[i][0], true);
 		updateCards("second-p" + i.toString(), riverHoleCards[i][1], true);
