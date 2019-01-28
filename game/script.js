@@ -60,22 +60,28 @@ ws.onmessage = function(event) {
 	playerNames = dataDict["names"];
 	pot = dataDict["pot"];
 
-	
 
-	// if the dealer position has moved, it is a new round
-	if (dealer != dataDict["dealer"]) {
-		newRound = true;
+	if (!veryFirst) {
+		// if the dealer position has moved, it is a new round
+		if (dealer != dataDict["dealer"]) {
+			newRound = true;
+		} else {
+			newRound = false;
+		}
+
+		// if there are a differing number of -1's between board cards, it is a new betting round
+		if (countInArray(communityCards, -1) != countInArray(dataDict["board_cards"], -1)) {
+			newBettingRound = true;
+		} else {
+			newBettingRound = false;
+		}
 	} else {
-		newRound = false;
+		veryFirst = false;
 	}
-	// this has to b e after the new round check!!
+
+	// this has to be after the new round check!!
 	dealer = dataDict["dealer"];
 
-	if (countInArray(communityCards, -1) != countInArray(dataDict["board_cards"], -1)) {
-		newBettingRound = true;
-	} else {
-		newBettingRound = false;
-	}
 	// this has to be after the new betting round check!!
 	communityCards = dataDict["board_cards"];
 
