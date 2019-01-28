@@ -74,6 +74,10 @@ ws.onmessage = function(event) {
 	actionIndex = dataDict["action_index"];
 	handNumber = dataDict["hand_number"];
 
+	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
+		showHoleCardsAtEnd();
+	}
+
 	if (handNumber != prevHand) {
 		// if the dealer position has moved, it is a new round
 		newRound = true;
@@ -174,9 +178,7 @@ ws.onmessage = function(event) {
 
 	*/
 	updateVariables();
-	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
-		showHoleCardsAtEnd();
-	}
+	
 	veryFirst = false;	
 }
 
