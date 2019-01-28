@@ -104,6 +104,7 @@ ws.onmessage = function(event) {
 	} */
 	// unnecesssary check, but why not
 	if (actions.length != 0) {
+		window.alert("if statement in main triggered" + actions.length);
 		animations(actions);
 	}
 	updateVariables();
@@ -272,14 +273,19 @@ function animateAction(playerID, message) {
 }
 
 function animations(actionList) {
+	window.alert("inside animations");
 	for (i = 0; i < actionList.length; i++) {
 		var sender = parseMessage(actionList[i])[0];
 		var actualMessage = parseMessage(actionList[i])[1];
 		beginAnimation(sender, actualMessage);
+		window.alert("beginning animation: " + sender + actualMessage);
+
 	}
 	for (i = 0; i < actionList.length; i++) {
 		var sender = parseMessage(actionList[i])[0];
 		endAnimation(sender);
+		window.alert("ending animation: " + sender);
+
 	}
 }
 
