@@ -108,9 +108,10 @@ ws.onmessage = function(event) {
 		prevAction = "";
 	} */
 
-	if (typeof prevTurn != "undefined" && prevTurn != (currPlayerTurn -1) % numPlayers) {
+	/* if (typeof prevTurn != "undefined" && prevTurn != (currPlayerTurn -1) % numPlayers) {
 		animateAction(prevTurn, prevAction);
-	}
+	} */
+	var nextPersonsTurn = (prevTurn != (currPlayerTurn -1) % numPlayers);
 	prevTurn = (currPlayerTurn -1) % numPlayers;
 
 	// find prevAction
@@ -135,7 +136,7 @@ ws.onmessage = function(event) {
 	/*} else {
 		prevAction = false;
 	} */
-	if (!veryFirst) {
+	if (!veryFirst && nextPersonsTurn) {
 		animateAction(prevTurn, prevAction);		
 	}
 	
