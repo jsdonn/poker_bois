@@ -73,11 +73,8 @@ ws.onmessage = function(event) {
 	actionMessage = dataDict["action_message"];
 	actionIndex = dataDict["action_index"];
 	handNumber = dataDict["hand_number"];
+	window.alert(actionMessage + " + " + handNumber);
 
-	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
-		window.alert("??");
-		showHoleCardsAtEnd();
-	}
 
 	if (handNumber != prevHand) {
 		// if the dealer position has moved, it is a new round
@@ -179,7 +176,9 @@ ws.onmessage = function(event) {
 
 	*/
 	updateVariables();
-	
+	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
+		showHoleCardsAtEnd();
+	}
 	veryFirst = false;	
 }
 
@@ -362,7 +361,6 @@ function updateBetsAndFolds() {
 function showHoleCardsAtEnd() {
 	for (i = 0; i < numPlayers; i++) {
 		if (inPlayers.includes(i)) {
-			window.alert(i);
 			updateCards("first-p" + i.toString(), riverHoleCards[i][0]);
 			updateCards("second-p" + i.toString(), riverHoleCards[i][1]);
 		}
