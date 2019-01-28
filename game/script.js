@@ -74,9 +74,10 @@ ws.onmessage = function(event) {
 	actionIndex = dataDict["action_index"];
 	handNumber = dataDict["hand_number"];
 
-	if (handNumber == prevhand) {
+	if (handNumber != prevHand) {
 		// if the dealer position has moved, it is a new round
-		newRound = false;
+		newRound = true;
+		prevHand = handNumber;
 
 		// if there are a differing number of -1's between board cards, it is a new betting round
 		/*if (countInArray(communityCards, -1) != countInArray(dataDict["board_cards"], -1)) {
@@ -84,6 +85,8 @@ ws.onmessage = function(event) {
 		} else {
 			newBettingRound = false;
 		} */
+	} else {
+		newRound = false;
 	}
 
 	// this has to be after the new round check!!
