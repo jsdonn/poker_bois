@@ -167,8 +167,9 @@ ws.onmessage = function(event) {
 
 	*/
 	updateVariables();
-	window.alert(riverHoleCards.toString());
+	window.alert(inPlayers.length.toString());
 	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
+		window.alert(riverHoleCards.toString());
 		showHoleCardsAtEnd();
 	}
 	veryFirst = false;
