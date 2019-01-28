@@ -122,7 +122,7 @@ ws.onmessage = function(event) {
 	/*if (newBettingRound) {
 
 	} */
-	if (actionMessage !== "" && actionIndex !== -1 && actionIndex !== prevActionIndex) {
+	if (actionIndex !== -1 && actionMessage !== "" && actionIndex !== prevActionIndex) {
 		animateAction(actionIndex, actionMessage);
 	}
 	prevActionIndex = actionIndex;
@@ -339,6 +339,7 @@ function showHoleCardsAtEnd() {
 }
 
 function animateAction(playerID, message) {
+	window.alert("in animateAction");
 	var player = document.getElementById("action-text-p" + playerID.toString());
 	player.querySelector(".action-text p").innerHTML = message;
 	player.classList.add("action-text-transition");
@@ -388,5 +389,6 @@ function send(arg) {
 		data = "0," + arg.toString() + ",Bet " + arg.toString() + "," + myIndex.toString();
 	}
 	document.getElementById("raise-amount").value = ""; // clear raise input field
+	window.alert("sent data: " + data);
 	ws.send(data);
 }
