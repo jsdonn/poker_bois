@@ -319,7 +319,7 @@ function updateBetsAndFolds() {
 
 function showHoleCardsAtEnd() {
 	window.alert(riverHoleCards.toString());
-	for (i = 0; i < inPlayer.length; i++) {
+	for (i = 0; i < inPlayers.length; i++) {
 		updateCards("first-p" + i.toString(), riverHoleCards[i][0], true);
 		updateCards("second-p" + i.toString(), riverHoleCards[i][1], true);
 	}
