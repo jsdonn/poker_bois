@@ -116,7 +116,7 @@ ws.onmessage = function(event) {
 	/*if (newBettingRound) {
 
 	} */
-	var nextPersonsTurn = (prevTurn != (currPlayerTurn -1) % numPlayers);
+	var nextPersonsTurn = (prevTurn != (currPlayerTurn - 1 + numPlayers) % numPlayers);
 	// prevTurn = (currPlayerTurn -1) % numPlayers;
 
 	// find prevAction
