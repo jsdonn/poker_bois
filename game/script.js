@@ -11,12 +11,13 @@
 //		 leave game = close the tab
 //		 fold message doesn't work
 // 		 number the players clockwise
+// 		 allow people to pick seats
 
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
-var myName = localStorage.getItem("username").trim().substring(0, 15);
-var myBuyIn = localStorage.getItem("buyin").trim().substring(0, 7);
+var myName = localStorage.getItem("username").trim().substring(0, 15); // limit size of name to be 15 chars
+var myBuyIn = localStorage.getItem("buyin").trim().substring(0, 7); // limit size of buyin to be 7 digits
 ws.onopen=(e)=>ws.send(myBuyIn + "," + myName);
-var interval = setInterval(()=>ws.send("1"), 1200);
+var interval = setInterval(()=>ws.send("1"), 1200); // server pings client w data every 1200 ms
 ws.onerror=(e)=>error(e);
 ws.onclose=(e)=>window.location.replace("../images/emile1.png"); // does work
 function error(e) {
@@ -31,6 +32,9 @@ var newRound = true;
 //var prevAction;
 var veryFirst = true;
 //var alreadyAnimated;
+var prevActionIndex;
+var prevActionMessage;
+
 
 // data to be received from server
 var holeCards;
@@ -48,7 +52,6 @@ var pot;
 var folded;
 var actionMessage;
 var actionIndex;
-var prevActionIndex;
 
 var dataArray;
 ws.onmessage = function(event) {
@@ -102,6 +105,7 @@ ws.onmessage = function(event) {
 		resetGame();
 		document.getElementById("fold-message").style.visibility = "hidden";
 		prevActionIndex = -1;
+		prevActionMessage = "";
 		actionIndex = -1;
 		actionMessage = "";
 	}
@@ -122,11 +126,12 @@ ws.onmessage = function(event) {
 	/*if (newBettingRound) {
 
 	} */
-	if (actionIndex !== -1 && actionMessage !== "" && actionIndex !== prevActionIndex) {
+	if ((actionIndex !== -1) && (actionMessage !== "") && (actionIndex !== prevActionIndex) && (actionMessage !== prevActionMessage)) {
 		window.alert("inside that if statement");
 		animateAction(actionIndex, actionMessage);
+		prevActionIndex = actionIndex;
+		prevActionMessage = actionMessage;
 	}
-	prevActionIndex = actionIndex;
 	/*
 	var nextPersonsTurn = (prevTurn != (currPlayerTurn - 1 + numPlayers) % numPlayers);
 	// prevTurn = (currPlayerTurn -1) % numPlayers;
@@ -162,6 +167,7 @@ ws.onmessage = function(event) {
 
 	*/
 	updateVariables();
+	window.alert(riverHoleCards.toString());
 	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
 		showHoleCardsAtEnd();
 	}
