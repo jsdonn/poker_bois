@@ -337,6 +337,9 @@ function updateBetsAndFolds() {
 		if (folded[i] == 1) {
 			document.getElementById("first-p" + i.toString()).style.visibility = "hidden";
 			document.getElementById("second-p" + i.toString()).style.visibility = "hidden";
+		} else {
+			document.getElementById("first-p" + i.toString()).style.visibility = "visible";
+			document.getElementById("second-p" + i.toString()).style.visibility = "visible";
 		}
 	} // not sure if this correctly removes players from inPlayers but fairly confident
 }
@@ -382,7 +385,7 @@ function send(arg) {
 	if (arg == "check/call") {
 		var maxBet = Math.max.apply(null, bets);
 		if (maxBet > stacks[myIndex] + bets[myIndex]) {
-			data = "0," + stacks[myIndex].toString() + ",All in for " + stacks[myIndex].toString() + "," + myIndex.toString();;
+			data = "0," + (stacks[myIndex] + bets[myIndex]).toString() + ",All in for " + (stacks[myIndex] + bets[myIndex]).toString() + "," + myIndex.toString();;
 		} else {
 			data = "0," + maxBet.toString() + ",Call " + maxBet.toString() + "," + myIndex.toString();
 		}
