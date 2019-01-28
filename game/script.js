@@ -25,7 +25,7 @@ function error(e) {
 var myIndex = -1; // this is set when client receives data from server later
 var inPlayers = [];
 var newRound = true;
-var newBettingRound = true;
+//var newBettingRound = true;
 var prevTurn;
 var prevAction;
 var veryFirst = true;
@@ -70,13 +70,11 @@ ws.onmessage = function(event) {
 		}
 
 		// if there are a differing number of -1's between board cards, it is a new betting round
-		if (countInArray(communityCards, -1) != countInArray(dataDict["board_cards"], -1)) {
+		/*if (countInArray(communityCards, -1) != countInArray(dataDict["board_cards"], -1)) {
 			newBettingRound = true;
 		} else {
 			newBettingRound = false;
-		}
-	} else {
-		veryFirst = false;
+		} */
 	}
 
 	// this has to be after the new round check!!
@@ -110,13 +108,13 @@ ws.onmessage = function(event) {
 		prevAction = "";
 	} */
 
-	if (typeof prevTurn != "undefined" && !prevTurn && prevTurn != (currPlayerTurn -1) % numPlayers) {
+	if (typeof prevTurn != "undefined" && prevTurn != (currPlayerTurn -1) % numPlayers) {
 		animateAction(prevTurn, prevAction);
 	}
 	prevTurn = (currPlayerTurn -1) % numPlayers;
 
 	// find prevAction
-	if (!newBettingRound) {
+	//if (!newBettingRound) {
 		if (bets[prevTurn] == 0) {
 			prevAction = "Check";
 		} else if (bets[prevTurn] == -1) {
@@ -134,14 +132,18 @@ ws.onmessage = function(event) {
 				prevAction = "Call " + tempMax.toString();
 			}
 		}
-	} else {
+	/*} else {
 		prevAction = false;
+	} */
+	if (!veryFirst) {
+		animateAction(prevTurn, prevAction);		
 	}
 	
 	updateVariables();
 	if (riverHoleCards.length != 0) {
 		showHoleCardsAtEnd();
 	}
+	veryFirst = false;
 }
 
 
