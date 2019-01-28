@@ -30,6 +30,7 @@ var newRound = true;
 var prevTurn;
 var prevAction;
 var veryFirst = true;
+var alreadyAnimated;
 
 // data to be received from server
 var holeCards;
@@ -96,6 +97,7 @@ ws.onmessage = function(event) {
 		}
 		resetGame();
 		document.getElementById("fold-message").style.visibility = "hidden";
+		alreadyAnimated = false;
 	}
 
 	// update playerspaces (make visible if the player exists)
@@ -139,9 +141,10 @@ ws.onmessage = function(event) {
 	/*} else {
 		prevAction = false;
 	} */
-	if (!veryFirst && (nextPersonsTurn)) {
+	if (!veryFirst && (nextPersonsTurn) && alreadyAnimated == prevTurn) {
 		animateAction(prevTurn, prevAction);
-		nextPersonsTurn = false;		
+		nextPersonsTurn = false;
+		alreadyAnimated = prevTurn;		
 	}
 	prevTurn = currPlayerTurn;
 	
