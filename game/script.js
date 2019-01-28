@@ -75,6 +75,7 @@ ws.onmessage = function(event) {
 	handNumber = dataDict["hand_number"];
 
 	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
+		window.alert("??");
 		showHoleCardsAtEnd();
 	}
 
