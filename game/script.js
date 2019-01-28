@@ -94,7 +94,7 @@ ws.onmessage = function(event) {
 		for (i = 0; i < numPlayers; i++) {
 			inPlayers.push(i);
 		}
-		clearBoard();
+		resetGame();
 		document.getElementById("fold-message").style.visibility = "hidden";
 	}
 
@@ -148,7 +148,6 @@ ws.onmessage = function(event) {
 	updateVariables();
 	if (riverHoleCards.length != 0 && inPlayers.length != 0) {
 		showHoleCardsAtEnd();
-		resetGame();
 	}
 	veryFirst = false;
 }
