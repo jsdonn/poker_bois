@@ -6,7 +6,7 @@
 //		 auto check/auto fold
 //		 clock animation
 //		 straddle, left, right (show cards) = toggle
-//	   	 all in button 
+//	   	 all in button DONE
 //		 clear raise textbox after hitting a button done : i think
 //		 leave game = close the tab
 //		 fold message doesn't work
