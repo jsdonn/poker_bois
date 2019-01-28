@@ -34,6 +34,7 @@ var veryFirst = true;
 //var alreadyAnimated;
 var prevActionIndex;
 var prevActionMessage;
+var prevHand = -1;
 
 
 // data to be received from server
@@ -52,6 +53,7 @@ var pot;
 var folded;
 var actionMessage;
 var actionIndex;
+var handNumber;
 
 var dataArray;
 ws.onmessage = function(event) {
@@ -70,14 +72,11 @@ ws.onmessage = function(event) {
 	folded = dataDict["folded"];
 	actionMessage = dataDict["action_message"];
 	actionIndex = dataDict["action_index"];
+	handNumber = dataDict["hand_number"];
 
-	if (!veryFirst) {
+	if (handNumber == prevhand) {
 		// if the dealer position has moved, it is a new round
-		if (dealer != dataDict["dealer"]) {
-			newRound = true;
-		} else {
-			newRound = false;
-		}
+		newRound = false;
 
 		// if there are a differing number of -1's between board cards, it is a new betting round
 		/*if (countInArray(communityCards, -1) != countInArray(dataDict["board_cards"], -1)) {
@@ -98,17 +97,22 @@ ws.onmessage = function(event) {
 
 	// reset inPlayers and hide fold message at the start of each new round 
 	if (newRound) {
-		inPlayers = [];
-		for (i = 0; i < numPlayers; i++) {
-			inPlayers.push(i);
+		if (numPlayers >= 2) {
+			inPlayers = [];
+			for (i = 0; i < numPlayers; i++) {
+				inPlayers.push(i);
+			}
+		} else {
+			inPlayers = [0, 1];
 		}
+		
 		resetGame();
-		document.getElementById("fold-message").style.visibility = "hidden";
+		//document.getElementById("fold-message").style.visibility = "hidden";
 		prevActionIndex = -1;
 		prevActionMessage = "";
 		actionIndex = -1;
 		actionMessage = "";
-	}
+	} 
 
 	// update playerspaces (make visible if the player exists)
 	for (i = 0; i < numPlayers; i++) {
@@ -170,9 +174,7 @@ ws.onmessage = function(event) {
 	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
 		showHoleCardsAtEnd();
 	}
-	if (numPlayers >= 2) {
-		veryFirst = false;	
-	}
+	veryFirst = false;	
 }
 
 
