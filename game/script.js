@@ -1,12 +1,9 @@
 // TODO: fold pile
 // 		 display check/fold/raise etc text when people make those actions. DONE
-// 		 river hole cards
-//		 animations for text appearing and disappearing. fix this asap
 //		 display small/big blinds
 //		 auto check/auto fold
 //		 clock animation
 //		 straddle, left, right (show cards) = toggle
-//	   	 all in button DONE
 //		 clear raise textbox after hitting a button done : i think
 //		 leave game = close the tab
 //		 fold message doesn't work
@@ -15,6 +12,9 @@
 // 		 display winner of the hand
 //		 add sound to signal your turn/moving chips around/when you check
 // 		 properly discard of kicked players
+//		 check for legitimate min raise
+//		 can see other players previous hole cards...fix
+//		 a check is sending the message "Call 0"
 
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username").trim().substring(0, 15); // limit size of name to be 15 chars
@@ -98,10 +98,6 @@ ws.onmessage = function(event) {
 		document.getElementById("p" + i.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
 	}
 
-	/* if ((actionIndex !== -1) && (actionMessage !== "")) {
-		window.alert("inside that if statement");
-		animateAction(actionIndex, actionMessage);
-	} */
 	// unnecesssary check, but why not
 	if (actions.length != 0) {
 		animations(actions);
@@ -199,6 +195,7 @@ function clearBoard() {
 
 function resetGame() {
 	for (i = 0; i < numPlayers; i++) {
+		alert("resetting player " + i.toString());
 		updateCards("first-p" + i.toString(), "blue_back", false);
 		updateCards("second-p" + i.toString(), "blue_back", false);
 	}
@@ -268,6 +265,7 @@ function animateAction(playerID, message) {
 		player.classList.remove("action-text-transition");
 	}, 1000);
 	// pretty sure this works actually
+	// i dont actually use this anymore :(
 }
 
 function animations(actionList) {
@@ -321,9 +319,11 @@ function send(arg) {
 	}
 	if (arg == "check/call") {
 		var maxBet = Math.max.apply(null, bets);
-		if (maxBet > stacks[myIndex] + bets[myIndex]) {
+		if (maxBet > stacks[myIndex] + bets[myIndex]) { // max bet is more than my stack + current bet
 			data = "0," + (stacks[myIndex] + bets[myIndex]).toString() + "," + myIndex.toString() + "All in for " + (stacks[myIndex] + bets[myIndex]).toString();
-		} else {
+		} else if (maxBet == 0) { // if the max bet is 0, i can check
+			data = "0,0," + myIndex.toString() + "Check"; 
+		} else { // it is a normal call otherwise
 			data = "0," + maxBet.toString() + "," + myIndex.toString() + "Call " + maxBet.toString();
 		}
 	}
