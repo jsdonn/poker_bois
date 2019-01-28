@@ -12,6 +12,8 @@
 //		 fold message doesn't work
 // 		 number the players clockwise
 // 		 allow people to pick seats
+// 		 display winner of the hand
+//		 add sound to signal your turn/moving chips around/when you check
 
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username").trim().substring(0, 15); // limit size of name to be 15 chars
@@ -32,8 +34,8 @@ var newRound = true;
 //var prevAction;
 var veryFirst = true;
 //var alreadyAnimated;
-var prevActionIndex;
-var prevActionMessage;
+//var prevActionIndex;
+//var prevActionMessage;
 var prevHand = -1;
 
 
@@ -113,10 +115,10 @@ ws.onmessage = function(event) {
 		
 		resetGame();
 		//document.getElementById("fold-message").style.visibility = "hidden";
-		prevActionIndex = -1;
-		prevActionMessage = "";
-		actionIndex = -1;
-		actionMessage = "";
+		//prevActionIndex = -1;
+		//prevActionMessage = "";
+		//actionIndex = -1;
+		//actionMessage = "";
 	} 
 
 	// update playerspaces (make visible if the player exists)
@@ -135,11 +137,11 @@ ws.onmessage = function(event) {
 	/*if (newBettingRound) {
 
 	} */
-	if ((actionIndex !== -1) && (actionMessage !== "") && (actionIndex !== prevActionIndex) && (actionMessage !== prevActionMessage)) {
+	if ((actionIndex !== -1) && (actionMessage !== "")) {
 		window.alert("inside that if statement");
 		animateAction(actionIndex, actionMessage);
-		prevActionIndex = actionIndex;
-		prevActionMessage = actionMessage;
+		//prevActionIndex = actionIndex;
+		//prevActionMessage = actionMessage;
 	}
 	/*
 	var nextPersonsTurn = (prevTurn != (currPlayerTurn - 1 + numPlayers) % numPlayers);
