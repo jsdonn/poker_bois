@@ -51,8 +51,17 @@ ws.onmessage = function(event) {
 	riverHoleCards = dataDict["river_hole_cards"]; // make this at the end???
 	communityCards = dataDict["board_cards"];
 	currPlayerTurn = dataDict["cur_turn"];
+	numPlayers = dataDict["num_players"];
+	smallBlind = dataDict["sb"];
+	bigBlind = dataDict["bb"];
+	// display small/big blind in the corner, just need to do it once
+	bets = dataDict["bets"];
+	stacks = dataDict["stacks"];
+	playerNames = dataDict["names"];
+	pot = dataDict["pot"];
+
 	if (typeof prevTurn == "undefined") {
-		prevTurn = currPlayerTurn;
+		prevTurn = (currPlayerTurn -1) % numPlayers;
 		prevAction = "";
 	}
 
@@ -61,11 +70,10 @@ ws.onmessage = function(event) {
 		prevTurn = currPlayerTurn;
 		veryFirst = false;
 	} */
-	if (typeof prevTurn != "undefined" && prevTurn != currPlayerTurn) {
+	if (typeof prevTurn != "undefined" && prevTurn != (currPlayerTurn -1) % numPlayers) {
 		animateAction(prevTurn, prevAction);
 	}
-	prevTurn = currPlayerTurn;
-	numPlayers = dataDict["num_players"];
+	prevTurn = (currPlayerTurn -1) % numPlayers;
 
 	// if the dealer position has moved, it is a new round
 	if (dealer != dataDict["dealer"]) {
@@ -73,16 +81,8 @@ ws.onmessage = function(event) {
 	} else {
 		newRound = false;
 	}
-
+	// this has to after the new round check!!
 	dealer = dataDict["dealer"];
-	smallBlind = dataDict["sb"];
-	bigBlind = dataDict["bb"];
-
-	// display small/big blind in the corner, just need to do it once
-	bets = dataDict["bets"];
-	stacks = dataDict["stacks"];
-	playerNames = dataDict["names"];
-	pot = dataDict["pot"];
 
 	// set myIndex, should only have to do once
 	if (myIndex < 0 || typeof myIndex == "undefined") {
@@ -106,19 +106,19 @@ ws.onmessage = function(event) {
 
 	// find prevAction
 	var guyBefore = (prevTurn - 1) % numPlayers;
-	if (bets[guyBefore] == 0) {
+	if (bets[guyBefore] == 0 && bets[prevTurn] == 0) {
 		prevAction = "Check";
-	} else if (bets[guyBefore] == -1) {
+	} else if (bets[prevTurn] == -1) {
 		prevAction = "Fold";
 	} else {
 		var tempMax = 0;
 		for (i = 0; i < numPlayers; i++) {
-			if (guyBefore != i && bets[i] > tempMax) {
+			if (prevTurn != i && bets[i] > tempMax) {
 				tempMax = bets[i];
 			}
 		}
-		if (bets[guyBefore] > tempMax) {
-			prevAction = "Raise to " + bets[guyBefore].toString();
+		if (bets[prevTurn] > tempMax) {
+			prevAction = "Raise to " + bets[prevTurn].toString();
 		} else {
 			prevAction = "Call " + tempMax.toString();
 		}
