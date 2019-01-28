@@ -97,7 +97,7 @@ ws.onmessage = function(event) {
 	myIndex = playerNames[myName];
 
 	// reset inPlayers and hide fold message at the start of each new round 
-	if (newRound && numPlayers >= 2) {
+	if (newRound) {
 		inPlayers = [];
 		for (i = 0; i < numPlayers; i++) {
 			inPlayers.push(i);
@@ -170,7 +170,9 @@ ws.onmessage = function(event) {
 	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
 		showHoleCardsAtEnd();
 	}
-	veryFirst = false;
+	if (numPlayers >= 2) {
+		veryFirst = false;	
+	}
 }
 
 
