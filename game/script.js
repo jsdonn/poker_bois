@@ -86,9 +86,7 @@ ws.onmessage = function(event) {
 	communityCards = dataDict["board_cards"];
 
 	// set myIndex, should only have to do once
-	if (myIndex < 0 || typeof myIndex == "undefined") {
-		myIndex = playerNames[myName];
-	}
+	myIndex = playerNames[myName];
 
 	// reset inPlayers and hide fold message at the start of each new round 
 	if (newRound) {
@@ -147,10 +145,9 @@ ws.onmessage = function(event) {
 	prevTurn = currPlayerTurn;
 	
 	updateVariables();
-	if (riverHoleCards.length != 0) {
-		window.alert("showing hole");
+	if (riverHoleCards.length != 0 && inPlayers.length != 0) {
 		showHoleCardsAtEnd();
-		window.alert("showed hole");
+		resetGame();
 	}
 	veryFirst = false;
 }
@@ -247,6 +244,16 @@ function clearBoard() {
 	document.getElementById("turn1").style.visibility = "hidden";
 	updateCards("river1", "blue_back", false);
 	document.getElementById("river1").style.visibility = "hidden";
+}
+
+function resetGame() {
+	for (i = 0; i < numPlayers; i++) {
+		updateCards("first-p" + i.toString(), "blue_back", false);
+		updateCards("second-p" + i.toString(), "blue_back", false);
+	}
+	updateCards("first-card", "blue_back", false);
+	updateCards("second-card", "blue_back", false); 
+	clearBoard();
 }
 
 function updateCurrentTurn() {
