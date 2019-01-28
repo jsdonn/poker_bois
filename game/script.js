@@ -124,8 +124,8 @@ ws.onmessage = function(event) {
 	} */
 	if (actionMessage !== "" && actionIndex !== -1 && actionIndex !== prevActionIndex) {
 		animateAction(actionIndex, actionMessage);
-		prevActionIndex = actionIndex;
 	}
+	prevActionIndex = actionIndex;
 	/*
 	var nextPersonsTurn = (prevTurn != (currPlayerTurn - 1 + numPlayers) % numPlayers);
 	// prevTurn = (currPlayerTurn -1) % numPlayers;
