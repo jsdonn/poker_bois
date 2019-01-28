@@ -360,12 +360,7 @@ function updateBetsAndFolds() {
 }
 
 function showHoleCardsAtEnd() {
-	window.alert("numPlayers " + numPlayers + "inPlayers " + inPlayers);
-	window.alert("include 1" + inPlayers.includes(1));
-	window.alert("include 0" + inPlayers.includes(0));
-
-	for (i = 0; i < numPlayers.length; i++) {
-
+	for (i = 0; i < numPlayers; i++) {
 		if (inPlayers.includes(i)) {
 			window.alert(i);
 			updateCards("first-p" + i.toString(), riverHoleCards[i][0]);
