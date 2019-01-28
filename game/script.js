@@ -27,10 +27,10 @@ var myIndex = -1; // this is set when client receives data from server later
 var inPlayers = [];
 var newRound = true;
 //var newBettingRound = true;
-var prevTurn;
-var prevAction;
+//var prevTurn;
+//var prevAction;
 var veryFirst = true;
-var alreadyAnimated;
+//var alreadyAnimated;
 
 // data to be received from server
 var holeCards;
@@ -46,13 +46,15 @@ var stacks;
 var playerNames;
 var pot;
 var folded;
+var actionMessage;
+var actionIndex;
+var prevActionIndex;
 
 var dataArray;
 ws.onmessage = function(event) {
 	dataDict = JSON.parse(event.data);
 	holeCards = dataDict["hole_cards"];
-	// TODO: display the cards of all players who make it to the end of the river
-	riverHoleCards = dataDict["river_hole_cards"]; // make this at the end???
+	riverHoleCards = dataDict["river_hole_cards"];
 	currPlayerTurn = dataDict["cur_turn"];
 	numPlayers = dataDict["num_players"];
 	smallBlind = dataDict["sb"];
@@ -63,6 +65,8 @@ ws.onmessage = function(event) {
 	playerNames = dataDict["names"];
 	pot = dataDict["pot"];
 	folded = dataDict["folded"];
+	actionMessage = dataDict["action_message"];
+	actionIndex = dataDict["action_index"];
 
 	if (!veryFirst) {
 		// if the dealer position has moved, it is a new round
@@ -97,7 +101,9 @@ ws.onmessage = function(event) {
 		}
 		resetGame();
 		document.getElementById("fold-message").style.visibility = "hidden";
-		alreadyAnimated = -1;
+		prevActionIndex = -1;
+		actionIndex = -1;
+		actionMessage = "";
 	}
 
 	// update playerspaces (make visible if the player exists)
@@ -116,6 +122,11 @@ ws.onmessage = function(event) {
 	/*if (newBettingRound) {
 
 	} */
+	if (actionMessage !== "" && actionIndex !== -1 && actionIndex !== prevActionIndex) {
+		animateAction(actionIndex, actionMessage);
+		prevActionIndex = actionIndex;
+	}
+	/*
 	var nextPersonsTurn = (prevTurn != (currPlayerTurn - 1 + numPlayers) % numPlayers);
 	// prevTurn = (currPlayerTurn -1) % numPlayers;
 
@@ -138,16 +149,17 @@ ws.onmessage = function(event) {
 				prevAction = "Call " + tempMax.toString();
 			}
 		}
-	/*} else {
+	} else {
 		prevAction = false;
-	} */
+	} 
 	if (!veryFirst && (nextPersonsTurn) && alreadyAnimated != prevTurn) {
 		animateAction(prevTurn, prevAction);
 		nextPersonsTurn = false;
 		alreadyAnimated = prevTurn;		
 	}
 	prevTurn = (currPlayerTurn - 1 + numPlayers) % numPlayers;
-	
+
+	*/
 	updateVariables();
 	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
 		showHoleCardsAtEnd();
@@ -320,11 +332,6 @@ function updateBetsAndFolds() {
 }
 
 function showHoleCardsAtEnd() {
-	//window.alert("p0 c0: " + riverHoleCards[0][0].toString());
-	//window.alert("p0 c1: " + riverHoleCards[0][1].toString());
-	//window.alert("p1 c0: " + riverHoleCards[1][0].toString());
-	//window.alert("p1 c1: " + riverHoleCards[1][1].toString());
-	window.alert(inPlayers.length);
 	for (i = 0; i < inPlayers.length; i++) {
 		updateCards("first-p" + i.toString(), riverHoleCards[i][0]);
 		updateCards("second-p" + i.toString(), riverHoleCards[i][1]);
