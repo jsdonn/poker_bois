@@ -14,7 +14,6 @@
 // 		 properly discard of kicked players
 //		 check for legitimate min raise
 //		 can see other players previous hole cards...fix
-//		 a check is sending the message "Call 0"
 
 var ws = new WebSocket("ws://poker.mkassaian.com:8080");
 var myName = localStorage.getItem("username").trim().substring(0, 15); // limit size of name to be 15 chars
@@ -94,7 +93,7 @@ ws.onmessage = function(event) {
 	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
 		showHoleCardsAtEnd();
 	}
-	
+
 	// reset inPlayers and hide fold message at the start of each new round 
 	if (newRound) {
 		if (numPlayers >= 2) {
@@ -194,6 +193,9 @@ function clearBoard() {
 	document.getElementById("turn1").style.visibility = "hidden";
 	updateCards("river1", "blue_back", false);
 	document.getElementById("river1").style.visibility = "hidden";
+	for (i = 0; i < 9; i++) {
+		document.getElementById("p" + i.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "hidden";
+	}
 }
 
 function resetGame() {
