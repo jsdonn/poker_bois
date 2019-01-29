@@ -80,6 +80,21 @@ ws.onmessage = function(event) {
 	} else {
 		newRound = false;
 	}
+
+	// update playerspaces (make visible if the player exists)
+	for (i = 0; i < numPlayers; i++) {
+		document.getElementById("p" + i.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
+	}
+	updateVariables();
+	// unnecesssary check, but why not
+	if (actions.length != 0) {
+		animations(actions);
+	}
+	
+	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
+		showHoleCardsAtEnd();
+	}
+	
 	// reset inPlayers and hide fold message at the start of each new round 
 	if (newRound) {
 		if (numPlayers >= 2) {
@@ -93,19 +108,7 @@ ws.onmessage = function(event) {
 		resetGame();
 	} 
 
-	// update playerspaces (make visible if the player exists)
-	for (i = 0; i < numPlayers; i++) {
-		document.getElementById("p" + i.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
-	}
 
-	// unnecesssary check, but why not
-	if (actions.length != 0) {
-		animations(actions);
-	}
-	updateVariables();
-	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
-		showHoleCardsAtEnd();
-	}
 	veryFirst = false;	
 }
 
