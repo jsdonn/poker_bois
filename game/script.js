@@ -194,10 +194,18 @@ function clearBoard() {
 }
 
 function resetGame() {
-	for (i = 0; i < numPlayers; i++) {
+	/* for (i = 0; i < numPlayers; i++) {
 		alert("resetting player " + i.toString());
 		updateCards("first-p" + i.toString(), "blue_back", false);
 		updateCards("second-p" + i.toString(), "blue_back", false);
+	} */
+	var everyoneFirst = document.getElementsByClassName("first");
+	var everyoneSecond = document.getElementsByClassName("second");
+	for (i = 0; i < everyoneFirst.length; i++) {
+		everyoneFirst[i].setAttribute("src", "../images/cards/blue_back.png");
+	}
+	for (i = 0; i < everyoneSecond.length; i++) {
+		everyoneSecond[i].setAttribute("src", "../images/cards/blue_back.png");
 	}
 	updateCards("first-card", "blue_back", false);
 	updateCards("second-card", "blue_back", false); 
