@@ -374,6 +374,7 @@ function send(arg) {
 		window.alert("allin");
 		var allInAmount = stacks[myIndex] + bets[myIndex];
 		data = "0," + allInAmount.toString() + "," + myIndex.toString() + "All in for " + allInAmount.toString();
+		window.alert(data);
 	} else if (arg == "leave") {
 		data = "";
 	} else if (arg == -1) {
