@@ -49,6 +49,7 @@ var folded;
 var actions;
 var handNumber;
 var winners;
+var winnings;
 var sidePots;
 var inPlayers;
 
@@ -73,6 +74,7 @@ ws.onmessage = function(event) {
 	communityCards = dataDict["board_cards"];
 	actions = dataDict["actions"];
 	winners = dataDict["winners"];
+	winnings = dataDict["final_winnings"];
 	sidePots = dataDict["side_pots"];
 	inPlayers = dataDict["player_order"];
 
@@ -334,17 +336,13 @@ function updatePot() {
 function winnersMessage() {
 	var message;
 	if (winners.length = 1) {
-		var winnerIndex = winners[0];
-		var winnerName = Object.keys(playerNames).find(key=>playerNames[key] === winnerIndex);
-		message = winnerName + " wins the pot of " + sidePots[winnerIndex].toString();
+		message = winners[0] + " wins the pot of " + winnings[0].toString();
 	} else {
 		for (i = 0; i < winners.length; i++) {
-			var winnerIndex = winners[i];
-			var winnerName = Object.keys(playerNames).find(key=>playerNames[key] === winnerIndex);
 			if (i == winners.length -1) {
-				message += winnerName + " wins " + sidePots[winnerIndex].toString();
+				message += winners[i] + " wins " + winnings[i].toString();
 			} else {
-				message += winnerName + " wins " + sidePots[winnerIndex].toString() + ", ";
+				message += winners[i] + " wins " + winnings[i].toString() + ", ";
 			}
 		}
 	}
