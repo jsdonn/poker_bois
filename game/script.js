@@ -27,7 +27,6 @@ function error(e) {
 	clearInterval(interval);
 }
 var myIndex = -1; // this is set when client receives data from server later
-var inPlayers = [];
 var newRound = true;
 var veryFirst = true;
 var prevHand = -1;
@@ -49,6 +48,10 @@ var pot;
 var folded;
 var actions;
 var handNumber;
+var winners;
+var sidePots;
+var inPlayers;
+
 
 var dataArray;
 ws.onmessage = function(event) {
@@ -69,6 +72,9 @@ ws.onmessage = function(event) {
 	dealer = dataDict["dealer"];
 	communityCards = dataDict["board_cards"];
 	actions = dataDict["actions"];
+	winners = dataDict["winners"];
+	sidePots = dataDict["side_pots"];
+	inPlayers = dataDict["player_order"];
 
 	// set myIndex, should only have to do once
 	myIndex = playerNames[myName];
@@ -90,24 +96,22 @@ ws.onmessage = function(event) {
 		animations(actions);
 	}
 	
-	if (riverHoleCards.length > 1 && inPlayers.length != 0) {
+	if (riverHoleCards.length > 1) { // && inPlayers.length != 0
 		showHoleCardsAtEnd();
 	}
 
 	// reset inPlayers and hide fold message at the start of each new round 
 	if (newRound) {
-		if (numPlayers >= 2) {
+		/* if (numPlayers >= 2) {
 			inPlayers = [];
 			for (i = 0; i < numPlayers; i++) {
 				inPlayers.push(i);
 			}
 		} else {
 			inPlayers = [0, 1];
-		}
+		} */
 		resetGame();
 	} 
-
-
 	veryFirst = false;	
 }
 
@@ -214,6 +218,7 @@ function resetGame() {
 	}
 	updateCards("first-card", "blue_back", false);
 	updateCards("second-card", "blue_back", false); 
+	document.getElementsById("winner-message").innerHTML = "";
 	clearBoard();
 }
 
@@ -323,6 +328,26 @@ function updatePot() {
 	document.getElementById("pot-display").querySelector("h5").innerHTML = "Pot: " + pot.toString();
 }
 
+function winnersMessage() {
+	var message;
+	if (winners.length = 1) {
+		var winnerIndex = winners[0];
+		var winnerName = Object.keys(playerNames).find(key=>playerNames[key] === winnerIndex);
+		message = winnerName + " wins the pot of " + sidePots[winnerIndex].toString();
+	} else {
+		for (i = 0; i < winners.length; i++) {
+			var winnerIndex = winners[i];
+			var winnerName = Object.keys(playerNames).find(key=>playerNames[key] === winnerIndex);
+			if (i == winners.length -1) {
+				message += winnerName + " wins " + sidePots[winnerIndex].toString();
+			} else {
+				message += winnerName + " wins " + sidePots[winnerIndex].toString() + ", ";
+			}
+		}
+	}
+	document.getElementsById("winner-message").innerHTML = message;
+}
+
 function send(arg) {
 	// data in form of: "0,*integer corresponding to bet/check*,*myIndex + action message for animations*)
 	var data;
@@ -334,10 +359,10 @@ function send(arg) {
 		var maxBet = Math.max.apply(null, bets);
 		if (maxBet > stacks[myIndex] + bets[myIndex]) { // max bet is more than my stack + current bet
 			data = "0," + (stacks[myIndex] + bets[myIndex]).toString() + "," + myIndex.toString() + "All in for " + (stacks[myIndex] + bets[myIndex]).toString();
-		} else if (maxBet == 0) { // if the max bet is 0, i can check
+		} else if (maxBet == 0 || maxBet == bets[myIndex]) { // if the max bet is 0 or if my current bet is the max bet, i can check
 			data = "0,0," + myIndex.toString() + "Check"; 
 		} else { // it is a normal call otherwise
-			data = "0," + maxBet.toString() + "," + myIndex.toString() + "Call " + maxBet.toString();
+			data = "0," + maxBet.toString() + "," + myIndex.toString() + "Call " + (maxBet - bets[myIndex]).toString();
 		}
 	}
 	if (arg == "allin") {

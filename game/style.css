@@ -66,6 +66,14 @@ h4 {
   color: white;
 }
 
+#winner-message {
+  position: absolute;
+  margin-top: 18%;
+  font-size: 22px;
+  font-weight: 400;
+  width: 100%;
+}
+
 h5 {
   position: absolute;
   width: 100%;
@@ -162,32 +170,32 @@ h5 {
   margin-left: 10%;
 }
 
-#p0, #p6 {
-  top: 22.78%; /* 102.5px */
+#p0, #p3 {
+  top: 22.78%; /* 102.5px 0, 6*/
 }
-#p0, #p1 {
-  left: 1.25%; /* 10px */
+#p0, #p8 {
+  left: 1.25%; /* 10px 0, 1*/
 }
-#p2, #p4, #p3 {
-  bottom: 2.22%; /* 10px */
+#p7, #p5, #p6 {
+  bottom: 2.22%; /* 10px 2, 4, 3*/
 }
-#p6, #p5 {
-  right: 1.25%; /* 10px */
+#p3, #p4 {
+  right: 1.25%; /* 10px 6, 5*/
 }
-#p1, #p5 {
-  top: 50.56%; /* 227.5px */
+#p8, #p4 {
+  top: 50.56%; /* 227.5px 1, 5*/
 }
-#p8, #p2 {
-  left: 21.25%; /* 170px */
+#p1, #p7 {
+  left: 21.25%; /* 170px 8, 2*/
 }
-#p7, #p4 {
-  right: 21.25%; /* 170px */
+#p2, #p5 {
+  right: 21.25%; /* 170px 7, 4*/
 }
-#p7, #p8 {
-  top: 2.22%; /* 10px */
+#p2, #p1 {
+  top: 2.22%; /* 10px 7, 8*/
 }
-#p3 {
-  left: 40.63%; /* 325px */
+#p6 {
+  left: 40.63%; /* 325px 3 */
 }
 
 .toggle-visibility {
