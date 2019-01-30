@@ -98,8 +98,9 @@ ws.onmessage = function(event) {
 		animations(actions);
 	}
 	
-	if (riverHoleCards.length > 1) { // && inPlayers.length != 0
+	if (riverHoleCards.length > 1 && inPlayers.length != 0) { 
 		showHoleCardsAtEnd();
+		winnersMessage();
 	}
 
 	// reset inPlayers and hide fold message at the start of each new round 
