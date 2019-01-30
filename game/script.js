@@ -88,7 +88,9 @@ ws.onmessage = function(event) {
 
 	// update playerspaces (make visible if the player exists)
 	for (i = 0; i < numPlayers; i++) {
-		document.getElementById("p" + i.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
+		if (folded[i] == 0) { // show if not folded
+			document.getElementById("p" + i.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
+		}
 	}
 	updateVariables();
 	// unnecesssary check, but why not
@@ -218,7 +220,7 @@ function resetGame() {
 	}
 	updateCards("first-card", "blue_back", false);
 	updateCards("second-card", "blue_back", false); 
-	document.getElementsById("winner-message").innerHTML = "";
+	document.getElementById("winner-message").innerHTML = "";
 	clearBoard();
 }
 
@@ -345,7 +347,7 @@ function winnersMessage() {
 			}
 		}
 	}
-	document.getElementsById("winner-message").innerHTML = message;
+	document.getElementById("winner-message").innerHTML = message;
 }
 
 function send(arg) {
@@ -360,7 +362,7 @@ function send(arg) {
 		if (maxBet > stacks[myIndex] + bets[myIndex]) { // max bet is more than my stack + current bet
 			data = "0," + (stacks[myIndex] + bets[myIndex]).toString() + "," + myIndex.toString() + "All in for " + (stacks[myIndex] + bets[myIndex]).toString();
 		} else if (maxBet == 0 || maxBet == bets[myIndex]) { // if the max bet is 0 or if my current bet is the max bet, i can check
-			data = "0,0," + myIndex.toString() + "Check"; 
+			data = "0," + maxBet.toString() + "," + myIndex.toString() + "Check"; 
 		} else { // it is a normal call otherwise
 			data = "0," + maxBet.toString() + "," + myIndex.toString() + "Call " + (maxBet - bets[myIndex]).toString();
 		}

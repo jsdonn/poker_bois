@@ -227,28 +227,28 @@ h5 {
   top: 50%;
 }
 
-#bet-holder-p1 {
+#bet-holder-p8 {
   left: 105%;
   bottom: 45%;
 }
 
-#bet-holder-p2, #bet-holder-p3, #bet-holder-p4 {
+#bet-holder-p7, #bet-holder-p6, #bet-holder-p5 {
   top: -25%;
   left: 50%;
   transform: translate(-50%, 0);
 }
 
-#bet-holder-p5 {
+#bet-holder-p4 {
   right: 105%;
   bottom: 45%;
 }
 
-#bet-holder-p6 {
+#bet-holder-p3 {
   right: 105%;
   top: 50%;
 }
 
-#bet-holder-p7, #bet-holder-p8 {
+#bet-holder-p2, #bet-holder-p1 {
   bottom: -25%;
   left: 50%;
   transform: translate(-50%, 0);
@@ -265,37 +265,37 @@ h5 {
   top: 88%;
 }
 
-#dealer-chip-p1 {
+#dealer-chip-p8 {
   right: -35%;
   top: 15%;
 }
 
-#dealer-chip-p2, #dealer-chip-p3 {
+#dealer-chip-p7, #dealer-chip-p6 {
   right: -10%;
   top: -15%;
 }
 
-#dealer-chip-p4 {
+#dealer-chip-p5 {
   left: 10%;
   top: -15%;
 }
 
-#dealer-chip-p5 {
+#dealer-chip-p4 {
   left: -15%;
   top: 15%;
 }
 
-#dealer-chip-p6 {
+#dealer-chip-p3 {
   left: -15%;
   top: 88%;
 }
 
-#dealer-chip-p7 {
+#dealer-chip-p2 {
   left: 10%;
   top: 115%;
 }
 
-#dealer-chip-p8 {
+#dealer-chip-p1 {
   right: -10%;
   top: 115%;
 }
