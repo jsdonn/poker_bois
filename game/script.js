@@ -335,7 +335,7 @@ function updatePot() {
 
 function winnersMessage() {
 	var message;
-	if (winners.length = 1) {
+	if (winners.length == 1 && winnings.length == 1) {
 		message = winners[0] + " wins the pot of " + winnings[0].toString();
 	} else {
 		for (i = 0; i < winners.length; i++) {
