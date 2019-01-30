@@ -4,10 +4,8 @@
 //		 auto check/auto fold
 //		 clock animation
 //		 straddle, left, right (show cards) = toggle
-//		 clear raise textbox after hitting a button done : i think
 //		 leave game = close the tab
 //		 fold message doesn't work
-// 		 number the players clockwise
 // 		 allow people to pick seats
 // 		 display winner of the hand
 //		 add sound to signal your turn/moving chips around/when you check
@@ -351,13 +349,19 @@ function winnersMessage() {
 
 function send(arg) {
 	// data in form of: "0,*integer corresponding to bet/check*,*myIndex + action message for animations*)
+	var maxBet = Math.max.apply(null, bets);
+	bets.splice(bets.indexOf(maxBet), 1);
+	var secondHighestBet = Math.max.apply(null, bets);
 	var data;
 	if (arg == "raise") {
 		var raiseAmount = document.getElementById("raise-amount").value;
-		data = "0," + raiseAmount.toString()  + "," +  myIndex.toString() + "Raise to " + raiseAmount.toString();
+		if (raiseAmount < 2 * maxBet - secondHighestBet) {
+			data = "0," + raiseAmount.toString()  + "," +  myIndex.toString() + "Tried to make an invalid bet";
+		} else {
+			data = "0," + raiseAmount.toString()  + "," +  myIndex.toString() + "Raise to " + raiseAmount.toString();
+		}
 	}
 	if (arg == "check/call") {
-		var maxBet = Math.max.apply(null, bets);
 		if (maxBet > stacks[myIndex] + bets[myIndex]) { // max bet is more than my stack + current bet
 			data = "0," + (stacks[myIndex] + bets[myIndex]).toString() + "," + myIndex.toString() + "All in for " + (stacks[myIndex] + bets[myIndex]).toString();
 		} else if (maxBet == 0 || maxBet == bets[myIndex]) { // if the max bet is 0 or if my current bet is the max bet, i can check
