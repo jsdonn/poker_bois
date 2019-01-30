@@ -350,8 +350,9 @@ function winnersMessage() {
 function send(arg) {
 	// data in form of: "0,*integer corresponding to bet/check*,*myIndex + action message for animations*)
 	var maxBet = Math.max.apply(null, bets);
-	bets.splice(bets.indexOf(maxBet), 1);
-	var secondHighestBet = Math.max.apply(null, bets);
+	var copyOfBets = bets.slice(0);
+	copyOfBets.splice(copyOfBets.indexOf(maxBet), 1);
+	var secondHighestBet = Math.max.apply(null, copyOfBets);
 	var data;
 	if (arg == "raise") {
 		var raiseAmount = document.getElementById("raise-amount").value;
@@ -371,10 +372,8 @@ function send(arg) {
 		}
 	}
 	if (arg == "allin") {
-		window.alert("allin");
 		var allInAmount = stacks[myIndex] + bets[myIndex];
 		data = "0," + allInAmount.toString() + "," + myIndex.toString() + "All in for " + allInAmount.toString();
-		window.alert(data);
 	} else if (arg == "leave") {
 		data = "";
 	} else if (arg == -1) {
