@@ -332,7 +332,7 @@ function updatePot() {
 }
 
 function winnersMessage() {
-	var message;
+	var message = "";
 	if (winners.length == 1 && winnings.length == 1) {
 		message = winners[0] + " wins the pot of " + winnings[0].toString();
 	} else {
@@ -371,6 +371,7 @@ function send(arg) {
 		}
 	}
 	if (arg == "allin") {
+		window.alert("allin");
 		var allInAmount = stacks[myIndex] + bets[myIndex];
 		data = "0," + allInAmount.toString() + "," + myIndex.toString() + "All in for " + allInAmount.toString();
 	} else if (arg == "leave") {
