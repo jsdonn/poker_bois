@@ -109,17 +109,6 @@ ws.onmessage = function(event) {
 		newRound = false;
 	}
 
-	// update playerspaces (make visible if the player exists)
-	for (i = 0; i < numPlayers; i++) {
-		var name = playerList[i][0];
-		var index = playerList[i][1];
-		if (folded[index] == 0 && stacks[index] !== -1) { // show if not folded
-			document.getElementById("p" + index.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
-			document.getElementById("first-p" + index.toString()).style.visibility = "visible";
-			document.getElementById("second-p" + index.toString()).style.visibility = "visible";
-		}
-	}
-
 	// update almost everything!
 	updateVariables();
 
@@ -149,6 +138,7 @@ function updateVariables() {
 	updateBetsAndFolds(); // update people's actions
 	updatePot(); // update the pot
 	updateHoleCards(); // update your hole cards in bottom left and also on the board
+	updatePlayerSpaces(); // update playerspaces (make visible if the player exists)
 }
 
 function updateCards(cardID, fileName, playingCard = true) {
@@ -209,6 +199,18 @@ function updateCommunityCards() {
 	} else {
 		updateCards("river1", "blue_back", false);
 		document.getElementById("river1").style.visibility = "hidden";
+	}
+}
+
+function updatePlayerSpaces() {
+	for (i = 0; i < numPlayers; i++) {
+		var name = playerList[i][0];
+		var index = playerList[i][1];
+		if (folded[index] == 0 && stacks[index] !== -1) { // show if not folded
+			document.getElementById("p" + index.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
+			document.getElementById("first-p" + index.toString()).style.visibility = "visible";
+			document.getElementById("second-p" + index.toString()).style.visibility = "visible";
+		}
 	}
 }
 
@@ -302,7 +304,7 @@ function updateBetsAndFolds() {
 		} else { // check or call or raise
 			document.getElementById("bet-size-p" + index.toString()).innerHTML = bets[index].toString();
 		}
-		if (folded[i] == 1) {
+		if (folded[index] == 1) {
 			document.getElementById("first-p" + index.toString()).style.visibility = "hidden";
 			document.getElementById("second-p" + index.toString()).style.visibility = "hidden";
 		} else {
