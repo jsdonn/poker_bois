@@ -250,14 +250,12 @@ function updateCurrentTurn() {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
 		if (stacks[index] !== -1) {
-			if (i != currPlayerTurn) {
-			document.getElementById("p" + index.toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
-
+			if (index != currPlayerTurn) {
+				document.getElementById("p" + index.toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
 			} else {
 				document.getElementById("p" + index.toString()).style.backgroundColor = "deepskyblue";
 			}
 		}
-		
 	}
 }
 
@@ -267,7 +265,7 @@ function updateDealerStacksAndNames() {
 		var index = playerList[i][1];
 		if (stacks[index] !== -1) {
 			document.getElementById("stack-p" + index.toString()).innerHTML = stacks[index].toString();
-			if (i == dealer) {
+			if (index == dealer) {
 				document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "visible";
 			} else {
 				document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "hidden";
