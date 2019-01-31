@@ -32,7 +32,6 @@ var winnings;
 var sidePots;
 var inPlayers;
 var standingPlayers;
-var errors;
 
 
 var myName = localStorage.getItem("username").trim().substring(0, 15); // limit size of name to be 15 chars
@@ -49,14 +48,13 @@ function close(e) {
 	if (typeof playerNames === "undefined") {
 		document.getElementById("_body").innerHTML = "The server is not running right now. Please contact Matin.";
 	} else {
-		window.location.replace("../images/emile1.jpg");
+		window.location.replace("../images/emile1.png");
 	}
 }
 var myIndex = -1; // this is set when client receives data from server later
 var newRound = true;
 var veryFirst = true;
 var prevHand = -1;
-var playerList = [];
 
 
 var dataDict;
@@ -83,23 +81,10 @@ ws.onmessage = function(event) {
 	sidePots = dataDict["side_pots"];
 	inPlayers = dataDict["player_order"];
 	standingPlayers = dataDict["standing"];
-	errors = dataDict["error"];
-
-	// error check
-	if (errors.length !== 0) {
-		window.alert(errors);
-	}
-
-	playerList = [];
-
-	for (var [key, value] of Object.entries(playerNames)) {
-		playerList.push([key, value]);
-	}
 
 	// set myIndex, should only have to do once
 	myIndex = playerNames[myName];
 
-	// determine if it is a new round
 	if (handNumber != prevHand) {
 		newRound = true;
 		prevHand = handNumber;
@@ -109,22 +94,16 @@ ws.onmessage = function(event) {
 
 	// update playerspaces (make visible if the player exists)
 	for (i = 0; i < numPlayers; i++) {
-		var name = playerList[i][0];
-		var index = playerList[i][1];
 		if (folded[i] == 0) { // show if not folded
-			document.getElementById("p" + index.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
+			document.getElementById("p" + i.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
 		}
 	}
-
-	// update almost everything!
 	updateVariables();
-
-	// display animations if there are any
+	// unnecesssary check, but why not
 	if (actions.length != 0) {
 		animations(actions);
 	}
 	
-	// if it is the end of the round and there are still players in, display their hole cards
 	if (riverHoleCards.length > 1 && inPlayers.length != 0) { 
 		showHoleCardsAtEnd();
 		winnersMessage();
@@ -139,20 +118,20 @@ ws.onmessage = function(event) {
 
 
 function updateVariables() {
-	updateHoleCards(); // update your hole cards in bottom left and also on the board
+	updateHoleCards();
 	updateCommunityCards(); // flop, turn, river
-	updateCurrentTurn(); // change current player's background to blue
-	updateDealerStacksAndNames(); // move dealer chip, update names and stacks
-	updateBetsAndFolds(); // update people's actions
-	updatePot(); // update the pot
+	updateCurrentTurn(); // show user input if it's my turn, change current player's background to blue
+	updateDealerStacksAndNames();
+	updateBetsAndFolds();
+	updatePot();
 }
 
 function updateCards(cardID, fileName, playingCard = true) {
 	var x = document.getElementById(cardID);
-	if (playingCard) { // if it's a playing card, capitalize the name
-		x.setAttribute("src", "../images/cards/jpgs/" + fileName.toUpperCase() + ".jpg");
-	} else { // otherwise, it is a card back
-		x.setAttribute("src", "../images/cards/jpgs/card_backs/" + fileName + ".jpg");
+	if (playingCard) {
+		x.setAttribute("src", "../images/cards/" + fileName.toUpperCase() + ".png");
+	} else {
+		x.setAttribute("src", "../images/cards/" + fileName + ".png");
 	}
 }
 
@@ -232,11 +211,11 @@ function resetGame() {
 	} */
 	var everyoneFirst = document.getElementsByClassName("first");
 	var everyoneSecond = document.getElementsByClassName("second");
-	for (i = 0; i < 9; i++) {
-		everyoneFirst[i].setAttribute("src", "../images/cards/jpgs/blue_back.jpg");
+	for (i = 0; i < everyoneFirst.length; i++) {
+		everyoneFirst[i].setAttribute("src", "../images/cards/blue_back.png");
 	}
-	for (i = 0; i < 9; i++) {
-		everyoneSecond[i].setAttribute("src", "../images/cards/jpgs/blue_back.jpg");
+	for (i = 0; i < everyoneSecond.length; i++) {
+		everyoneSecond[i].setAttribute("src", "../images/cards/blue_back.png");
 	}
 	updateCards("first-card", "blue_back", false);
 	updateCards("second-card", "blue_back", false); 
@@ -246,13 +225,11 @@ function resetGame() {
 
 function updateCurrentTurn() {
 	for (i = 0; i < numPlayers; i++) {
-		var name = playerList[i][0];
-		var index = playerList[i][1];
 		if (i != currPlayerTurn) {
-			document.getElementById("p" + index.toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
+			document.getElementById("p" + i.toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
 
 		} else {
-			document.getElementById("p" + index.toString()).style.backgroundColor = "deepskyblue";
+			document.getElementById("p" + i.toString()).style.backgroundColor = "deepskyblue";
 
 		}
 	}
@@ -260,15 +237,13 @@ function updateCurrentTurn() {
 
 function updateDealerStacksAndNames() {
 	for (i = 0; i < numPlayers; i++) {
-		var name = playerList[i][0];
-		var index = playerList[i][1];
-		document.getElementById("stack-p" + index.toString()).innerHTML = stacks[index].toString();
+		document.getElementById("stack-p" + i.toString()).innerHTML = stacks[i].toString();
 		if (i == dealer) {
-			document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "visible";
+			document.getElementById("dealer-chip-p" + i.toString()).style.visibility = "visible";
 		} else {
-			document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "hidden";
+			document.getElementById("dealer-chip-p" + i.toString()).style.visibility = "hidden";
 		}
-		document.getElementById("player" + index.toString()).innerHTML = Object.keys(playerNames).find(key=>playerNames[key] === i); //does this work
+		document.getElementById("player" + i.toString()).innerHTML = Object.keys(playerNames).find(key=>playerNames[key] === i); //does this work
 	}
 	// p sure this works
 	for (i = 0; i < standingPlayers.length; i++) {
@@ -290,31 +265,27 @@ function spectatorMode(name, stack, seat) {
 function updateBetsAndFolds() {
 	var removed = 0;
 	for (i = 0; i < numPlayers; i++) {
-		var name = playerList[i][0];
-		var index = playerList[i][1];
-		if (bets[index] == -1) { // fold; do i still need this?
-			inPlayers.splice(index - removed, 1);
+		if (bets[i] == -1) { // fold
+			inPlayers.splice(i - removed, 1);
 			removed++;
 		} else { // check or call or raise
-			document.getElementById("bet-size-p" + index.toString()).innerHTML = bets[index].toString();
+			document.getElementById("bet-size-p" + i.toString()).innerHTML = bets[i].toString();
 		}
 		if (folded[i] == 1) {
-			document.getElementById("first-p" + index.toString()).style.visibility = "hidden";
-			document.getElementById("second-p" + index.toString()).style.visibility = "hidden";
+			document.getElementById("first-p" + i.toString()).style.visibility = "hidden";
+			document.getElementById("second-p" + i.toString()).style.visibility = "hidden";
 		} else {
-			document.getElementById("first-p" + index.toString()).style.visibility = "visible";
-			document.getElementById("second-p" + index.toString()).style.visibility = "visible";
+			document.getElementById("first-p" + i.toString()).style.visibility = "visible";
+			document.getElementById("second-p" + i.toString()).style.visibility = "visible";
 		}
-	}
+	} // not sure if this correctly removes players from inPlayers but fairly confident
 }
 
 function showHoleCardsAtEnd() {
 	for (i = 0; i < numPlayers; i++) {
-		var name = playerList[i][0];
-		var index = playerList[i][1];
-		if (inPlayers.includes(index)) {
-			updateCards("first-p" + index.toString(), riverHoleCards[i][0]);
-			updateCards("second-p" + index.toString(), riverHoleCards[i][1]);
+		if (inPlayers.includes(i)) {
+			updateCards("first-p" + i.toString(), riverHoleCards[i][0]);
+			updateCards("second-p" + i.toString(), riverHoleCards[i][1]);
 		}
 	}
 }
@@ -351,14 +322,14 @@ function parseMessage(message) {
 	return returnList;
 }
 
-function beginAnimation(playerIndex, message) {
-	var player = document.getElementById("action-text-p" + playerIndex.toString());
+function beginAnimation(playerID, message) {
+	var player = document.getElementById("action-text-p" + playerID.toString());
 	player.querySelector(".action-text p").innerHTML = message;
 	player.classList.add("action-text-transition");
 }
 
-function endAnimation(playerIndex) {
-	var player = document.getElementById("action-text-p" + playerIndex.toString());
+function endAnimation(playerID) {
+	var player = document.getElementById("action-text-p" + playerID.toString());
 	player.classList.remove("action-text-transition");
 }
 

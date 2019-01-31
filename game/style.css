@@ -72,6 +72,7 @@ h4 {
   font-size: 22px;
   font-weight: 400;
   width: 100%;
+  z-index: 50;
 }
 
 h5 {
