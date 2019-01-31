@@ -275,6 +275,8 @@ function updateDealerStacksAndNames() {
 			document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "hidden";
 		}
 		document.getElementById("player" + index.toString()).innerHTML = name; //does this work
+		document.getElementById("first-p" + index.toString()).style.visibility = "visible";
+		document.getElementById("second-p" + index.toString()).style.visibility = "visible";
 	}
 	// p sure this works
 	for (i = 0; i < standingPlayers.length; i++) {
@@ -290,7 +292,7 @@ function spectatorMode(name, stack, seat) {
 	document.getElementById("player" + seat.toString()).innerHTML = name;
 	document.getElementById("stack-p" + seat.toString()).innerHTML = stack.toString();
 	document.getElementById("action-text-p" + seat.toString()).innerHTML = "Sitting out";
-	document.getElementById("action-text-p" + seat.toString()).style.visibility = "visible";
+	document.getElementById("action-text-p" + seat.toString()).style.opacity = "1"; //might need to change this for animations
 } // untested!
 
 function updateBetsAndFolds() {
