@@ -246,7 +246,7 @@ function resetGame() {
 }
 
 function updateCurrentTurn() {
-	/* for (i = 0; i < 9; i++) {
+	for (i = 0; i < 9; i++) {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
 		if (stacks[index] !== -1) {
@@ -256,14 +256,14 @@ function updateCurrentTurn() {
 				document.getElementById("p" + index.toString()).style.backgroundColor = "deepskyblue";
 			}
 		}
-	} */
-	for (i = 0; i < inPlayers.length; i++) {
+	}
+	/*for (i = 0; i < inPlayers.length; i++) {
 		if (i != currPlayerTurn) {
 			document.getElementById("p" + inPlayers[i].toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
 		} else {
 			document.getElementById("p" + inPlayers[i].toString()).style.backgroundColor = "deepskyblue";
 		}
-	} // until chris fixed his legacy code
+	} */// until chris fixes his legacy code
 }
 
 function updateDealerStacksAndNames() {
@@ -276,12 +276,19 @@ function updateDealerStacksAndNames() {
 				document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "visible";
 			} else {
 				document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "hidden";
-			}
+			} 
 			document.getElementById("player" + index.toString()).innerHTML = name; //does this work
 			document.getElementById("first-p" + index.toString()).style.visibility = "visible";
 			document.getElementById("second-p" + index.toString()).style.visibility = "visible";
 		}	
 	}
+	/*for (i = 0; i < inPlayers.length; i++) {
+		if (i == dealer) {
+			document.getElementById("dealer-chip-p" + inPlayers[i].toString()).style.visibility = "visible";
+		} else {
+			document.getElementById("dealer-chip-p" + inPlayers[i].toString()).style.visibility = "hidden";
+		} */
+	} // chris legacy code ....
 	// p sure this works
 	for (i = 0; i < standingPlayers.length; i++) {
 		spectatorMode(standingPlayers[i][0], standingPlayers[i][1], standingPlayers[i][2]);
