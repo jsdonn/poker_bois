@@ -287,8 +287,8 @@ function updateDealerStacksAndNames() {
 			document.getElementById("dealer-chip-p" + inPlayers[i].toString()).style.visibility = "visible";
 		} else {
 			document.getElementById("dealer-chip-p" + inPlayers[i].toString()).style.visibility = "hidden";
-		} */
-	} // chris legacy code ....
+		} 
+	} */// chris legacy code ....
 	// p sure this works
 	for (i = 0; i < standingPlayers.length; i++) {
 		spectatorMode(standingPlayers[i][0], standingPlayers[i][1], standingPlayers[i][2]);
