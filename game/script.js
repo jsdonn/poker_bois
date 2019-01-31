@@ -246,7 +246,7 @@ function resetGame() {
 }
 
 function updateCurrentTurn() {
-	for (i = 0; i < 9; i++) {
+	/* for (i = 0; i < 9; i++) {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
 		if (stacks[index] !== -1) {
@@ -256,7 +256,14 @@ function updateCurrentTurn() {
 				document.getElementById("p" + index.toString()).style.backgroundColor = "deepskyblue";
 			}
 		}
-	}
+	} */
+	for (i = 0; i < inPlayers.length; i++) {
+		if (inPlayers[i] != currPlayerTurn) {
+			document.getElementById("p" + index.toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
+		} else {
+			document.getElementById("p" + index.toString()).style.backgroundColor = "deepskyblue";
+		}
+	} // until chris fixed his legacy code
 }
 
 function updateDealerStacksAndNames() {
