@@ -113,8 +113,10 @@ ws.onmessage = function(event) {
 	for (i = 0; i < numPlayers; i++) {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
-		if (folded[i] == 0) { // show if not folded
+		if (folded[index] == 0 && stacks[index] !== -1) { // show if not folded
 			document.getElementById("p" + index.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
+			document.getElementById("first-p" + index.toString()).style.visibility = "visible";
+			document.getElementById("second-p" + index.toString()).style.visibility = "visible";
 		}
 	}
 
@@ -141,12 +143,12 @@ ws.onmessage = function(event) {
 
 
 function updateVariables() {
-	updateHoleCards(); // update your hole cards in bottom left and also on the board
+	updateDealerStacksAndNames(); // move dealer chip, update names and stacks
 	updateCommunityCards(); // flop, turn, river
 	updateCurrentTurn(); // change current player's background to blue
-	updateDealerStacksAndNames(); // move dealer chip, update names and stacks
 	updateBetsAndFolds(); // update people's actions
 	updatePot(); // update the pot
+	updateHoleCards(); // update your hole cards in bottom left and also on the board
 }
 
 function updateCards(cardID, fileName, playingCard = true) {
