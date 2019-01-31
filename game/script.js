@@ -203,7 +203,7 @@ function updateCommunityCards() {
 }
 
 function updatePlayerSpaces() {
-	for (i = 0; i < numPlayers; i++) {
+	for (i = 0; i < 9; i++) {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
 		if (folded[index] == 0 && stacks[index] !== -1) { // show if not folded
@@ -231,11 +231,6 @@ function clearBoard() {
 }
 
 function resetGame() {
-	/* for (i = 0; i < numPlayers; i++) {
-		alert("resetting player " + i.toString());
-		updateCards("first-p" + i.toString(), "blue_back", false);
-		updateCards("second-p" + i.toString(), "blue_back", false);
-	} */
 	var everyoneFirst = document.getElementsByClassName("first");
 	var everyoneSecond = document.getElementsByClassName("second");
 	for (i = 0; i < 9; i++) {
@@ -251,32 +246,36 @@ function resetGame() {
 }
 
 function updateCurrentTurn() {
-	for (i = 0; i < numPlayers; i++) {
+	for (i = 0; i < 9; i++) {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
-		if (i != currPlayerTurn) {
+		if (stacks[index] !== -1) {
+			if (i != currPlayerTurn) {
 			document.getElementById("p" + index.toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
 
-		} else {
-			document.getElementById("p" + index.toString()).style.backgroundColor = "deepskyblue";
-
+			} else {
+				document.getElementById("p" + index.toString()).style.backgroundColor = "deepskyblue";
+			}
 		}
+		
 	}
 }
 
 function updateDealerStacksAndNames() {
-	for (i = 0; i < numPlayers; i++) {
+	for (i = 0; i < 9; i++) {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
-		document.getElementById("stack-p" + index.toString()).innerHTML = stacks[index].toString();
-		if (i == dealer) {
-			document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "visible";
-		} else {
-			document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "hidden";
-		}
-		document.getElementById("player" + index.toString()).innerHTML = name; //does this work
-		document.getElementById("first-p" + index.toString()).style.visibility = "visible";
-		document.getElementById("second-p" + index.toString()).style.visibility = "visible";
+		if (stacks[index] !== -1) {
+			document.getElementById("stack-p" + index.toString()).innerHTML = stacks[index].toString();
+			if (i == dealer) {
+				document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "visible";
+			} else {
+				document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "hidden";
+			}
+			document.getElementById("player" + index.toString()).innerHTML = name; //does this work
+			document.getElementById("first-p" + index.toString()).style.visibility = "visible";
+			document.getElementById("second-p" + index.toString()).style.visibility = "visible";
+		}	
 	}
 	// p sure this works
 	for (i = 0; i < standingPlayers.length; i++) {
@@ -297,30 +296,32 @@ function spectatorMode(name, stack, seat) {
 
 function updateBetsAndFolds() {
 	var removed = 0;
-	for (i = 0; i < numPlayers; i++) {
+	for (i = 0; i < 9; i++) {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
-		if (bets[index] == -1) { // fold; do i still need this?
-			inPlayers.splice(index - removed, 1);
-			removed++;
-		} else { // check or call or raise
-			document.getElementById("bet-size-p" + index.toString()).innerHTML = bets[index].toString();
-		}
-		if (folded[index] == 1) {
-			document.getElementById("first-p" + index.toString()).style.visibility = "hidden";
-			document.getElementById("second-p" + index.toString()).style.visibility = "hidden";
-		} else {
-			document.getElementById("first-p" + index.toString()).style.visibility = "visible";
-			document.getElementById("second-p" + index.toString()).style.visibility = "visible";
+		if (stacks[index] !== -1) {
+			if (bets[index] == -1) { // fold; do i still need this?
+				inPlayers.splice(index - removed, 1);
+				removed++;
+			} else { // check or call or raise
+				document.getElementById("bet-size-p" + index.toString()).innerHTML = bets[index].toString();
+			}
+			if (folded[index] == 1) {
+				document.getElementById("first-p" + index.toString()).style.visibility = "hidden";
+				document.getElementById("second-p" + index.toString()).style.visibility = "hidden";
+			} else {
+				document.getElementById("first-p" + index.toString()).style.visibility = "visible";
+				document.getElementById("second-p" + index.toString()).style.visibility = "visible";
+			}
 		}
 	}
 }
 
 function showHoleCardsAtEnd() {
-	for (i = 0; i < numPlayers; i++) {
+	for (i = 0; i < 9; i++) {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
-		if (inPlayers.includes(index)) {
+		if (inPlayers.includes(index) && stacks[index] !== -1) {
 			updateCards("first-p" + index.toString(), riverHoleCards[i][0]);
 			updateCards("second-p" + index.toString(), riverHoleCards[i][1]);
 		}
