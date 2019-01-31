@@ -235,10 +235,10 @@ function resetGame() {
 	var everyoneFirst = document.getElementsByClassName("first");
 	var everyoneSecond = document.getElementsByClassName("second");
 	for (i = 0; i < 9; i++) {
-		everyoneFirst[i].setAttribute("src", "../images/cards/jpgs/blue_back.jpg");
+		everyoneFirst[i].setAttribute("src", "../images/cards/jpgs/card_backs/blue_back.jpg");
 	}
 	for (i = 0; i < 9; i++) {
-		everyoneSecond[i].setAttribute("src", "../images/cards/jpgs/blue_back.jpg");
+		everyoneSecond[i].setAttribute("src", "../images/cards/jpgs/card_backs/blue_back.jpg");
 	}
 	updateCards("first-card", "blue_back", false);
 	updateCards("second-card", "blue_back", false); 
@@ -285,8 +285,8 @@ function spectatorMode(name, stack, seat) {
 	document.getElementById("p" + seat.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
 	document.getElementById("player" + seat.toString()).innerHTML = name;
 	document.getElementById("stack-p" + seat.toString()).innerHTML = stack.toString();
-	document.getElementById("action-test-p" + seat.toString()).innerHTML = "Sitting out";
-	document.getElementById("action-test-p" + seat.toString()).style.visibility = "visible";
+	document.getElementById("action-text-p" + seat.toString()).innerHTML = "Sitting out";
+	document.getElementById("action-text-p" + seat.toString()).style.visibility = "visible";
 } // untested!
 
 function updateBetsAndFolds() {
