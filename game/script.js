@@ -259,9 +259,9 @@ function updateCurrentTurn() {
 	} */
 	for (i = 0; i < inPlayers.length; i++) {
 		if (inPlayers[i] != currPlayerTurn) {
-			document.getElementById("p" + index.toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
+			document.getElementById("p" + i.toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
 		} else {
-			document.getElementById("p" + index.toString()).style.backgroundColor = "deepskyblue";
+			document.getElementById("p" + i.toString()).style.backgroundColor = "deepskyblue";
 		}
 	} // until chris fixed his legacy code
 }
