@@ -51,7 +51,7 @@ function close(e) {
 		document.getElementById("_body").style.fontSize = "100px";
 		document.getElementById("_body").style.color = "red";
 	} else {
-		window.location.replace("../images/emile1.jpg");
+		window.location.replace("../images/emile1.png");
 	}
 }
 var myIndex = -1; // this is set when client receives data from server later
@@ -270,7 +270,7 @@ function updateDealerStacksAndNames() {
 		} else {
 			document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "hidden";
 		}
-		document.getElementById("player" + index.toString()).innerHTML = Object.keys(playerNames).find(key=>playerNames[key] === i); //does this work
+		document.getElementById("player" + index.toString()).innerHTML = name; //does this work
 	}
 	// p sure this works
 	for (i = 0; i < standingPlayers.length; i++) {
