@@ -38,16 +38,18 @@ var errors;
 var myName = localStorage.getItem("username").trim().substring(0, 15); // limit size of name to be 15 chars
 var myBuyIn = localStorage.getItem("buyin").trim().substring(0, 7); // limit size of buyin to be 7 digits
 ws.onopen=(e)=>ws.send(myBuyIn + "," + myName);
-var interval = setInterval(()=>ws.send("1"), 1200); // server pings client w data every 1200 ms
+// var interval = setInterval(()=>ws.send("1"), 1200); // server pings client w data every 1200 ms
 ws.onerror=(e)=>error(e);
 ws.onclose=(e)=>close(e); // does work
 function error(e) {
 	console.log(e.data);
-	clearInterval(interval);
+	// clearInterval(interval);
 }
 function close(e) {
 	if (typeof playerNames === "undefined") {
 		document.getElementById("_body").innerHTML = "The server is not running right now. Please contact Matin.";
+		document.getElementById("_body").style.fontSize = "100px";
+		document.getElementById("_body").style.color = "red";
 	} else {
 		window.location.replace("../images/emile1.jpg");
 	}
