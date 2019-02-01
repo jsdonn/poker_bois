@@ -318,10 +318,7 @@ function updateBetsAndFolds() {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
 		if (stacks[index] !== -1) {
-			if (bets[index] == -1) { // fold; do i still need this?
-				inPlayers.splice(index - removed, 1);
-				removed++;
-			} else { // check or call or raise
+			if (bets[index] !== -1) { // check or call or raise
 				document.getElementById("bet-size-p" + index.toString()).innerHTML = bets[index].toString();
 			}
 			if (folded[index] == 1) {
@@ -339,8 +336,8 @@ function showHoleCardsAtEnd() {
 	for (i = 0; i < 9; i++) {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
-		if (inPlayers.includes(index) && stacks[index] !== -1) {
-			updateCards("first-p" + index.toString(), riverHoleCards[i][0]);
+		if (inPlayers.includes(index) && stacks[index] !== -1 && folded[index] !== 1) {
+			updateCards("first-p" + index.toString(), riverHoleCards[inPlayers.indexOf(index)][0]);
 			updateCards("second-p" + index.toString(), riverHoleCards[i][1]);
 		}
 	}

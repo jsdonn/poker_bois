@@ -18,6 +18,10 @@ body {
   src: url(../other_files/Mukta/Mukta-Regular.ttf) format('truetype');
 }
 
+body img {
+  border-radius: 6.5%%;
+}
+
 .wrapper {
   max-height: 100vh;
   width: 133vh;
