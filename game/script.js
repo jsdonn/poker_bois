@@ -206,7 +206,7 @@ function updatePlayerSpaces() {
 	for (i = 0; i < 9; i++) {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
-		if (folded[index] == 0 && stacks[index] !== -1) { // show if not folded
+		if (folded[index] === 0 && stacks[index] !== -1) { // show if not folded
 			document.getElementById("p" + index.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
 			document.getElementById("first-p" + index.toString()).style.visibility = "visible";
 			document.getElementById("second-p" + index.toString()).style.visibility = "visible";
@@ -257,13 +257,6 @@ function updateCurrentTurn() {
 			}
 		}
 	}
-	/*for (i = 0; i < inPlayers.length; i++) {
-		if (i != currPlayerTurn) {
-			document.getElementById("p" + inPlayers[i].toString()).style.backgroundColor = "rgba(150, 150, 150, .8)";
-		} else {
-			document.getElementById("p" + inPlayers[i].toString()).style.backgroundColor = "deepskyblue";
-		}
-	} */// until chris fixes his legacy code
 }
 
 function updateDealerStacksAndNames() {
@@ -282,13 +275,6 @@ function updateDealerStacksAndNames() {
 			document.getElementById("second-p" + index.toString()).style.visibility = "visible";
 		}	
 	}
-	/*for (i = 0; i < inPlayers.length; i++) {
-		if (i == dealer) {
-			document.getElementById("dealer-chip-p" + inPlayers[i].toString()).style.visibility = "visible";
-		} else {
-			document.getElementById("dealer-chip-p" + inPlayers[i].toString()).style.visibility = "hidden";
-		} 
-	} */// chris legacy code ....
 	// p sure this works
 	for (i = 0; i < standingPlayers.length; i++) {
 		spectatorMode(standingPlayers[i][0], standingPlayers[i][1], standingPlayers[i][2]);
