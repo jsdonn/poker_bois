@@ -264,9 +264,9 @@ function updateDealerStacksAndNames() {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
 		if (stacks[index] !== -1) {
-			document.getElementById("action-text-p" + seat.toString()).querySelector(".action-text p").innerHTML = "";
-			document.getElementById("action-text-p" + seat.toString()).style.opacity = "0";
-			document.getElementById("action-text-p" + seat.toString()).style.visibility = "hidden";
+			document.getElementById("action-text-p" + index.toString()).querySelector(".action-text p").innerHTML = "";
+			document.getElementById("action-text-p" + index.toString()).style.opacity = "0";
+			document.getElementById("action-text-p" + index.toString()).style.visibility = "hidden";
 			document.getElementById("stack-p" + index.toString()).innerHTML = stacks[index].toString();
 			if (index == dealer) {
 				document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "visible";
