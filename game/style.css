@@ -324,11 +324,11 @@ h5 {
   z-index: 5;
 }
 
-.action-text-transition {
+/* .action-text-transition {
   opacity: 1;
   transition: none;
   visibility: visible;
-}
+} */
 
 .action-text p {
   display: table-cell;

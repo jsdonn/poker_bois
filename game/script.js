@@ -59,7 +59,9 @@ var veryFirst = true;
 var prevHand = -1;
 var playerList = [];
 var tick = new Audio('../other_files/tick.mp3');
+tick.volume = .75;
 var shuffle = new Audio('../other_files/shuffle.mp3');
+shuffle.volume = .75;
 
 var dataDict;
 ws.onmessage = function(event) {
@@ -122,7 +124,7 @@ ws.onmessage = function(event) {
 		if (currPlayerTurn === myIndex) {
 			tick.play();
 		}
-	}, 1000);
+	}, 3000);
 	
 	// if it is the end of the round and there are still players in, display their hole cards
 	if (riverHoleCards.length > 1 && inPlayers.length != 0) { 
@@ -378,7 +380,6 @@ function parseMessage(message) {
 function beginAnimation(playerIndex, message) {
 	var player = document.getElementById("action-text-p" + playerIndex);
 	player.querySelector(".action-text p").innerHTML = message;
-	//player.classList.add("action-text-transition");
 	player.style.transition = "none";
 	player.style.visibility = "visible";
 	player.style.opacity = "1";
@@ -386,7 +387,6 @@ function beginAnimation(playerIndex, message) {
 
 function endAnimation(playerIndex) {
 	var player = document.getElementById("action-text-p" + playerIndex);
-	//player.classList.remove("action-text-transition");
 	player.style.transition = "visibility 0s linear .5s, opacity .5s linear";
 	player.style.visibility = "hidden";
 	player.style.opacity = "0";
