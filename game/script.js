@@ -358,9 +358,13 @@ function animation(action) {
 	var parsed = parseMessage(action);
 	var sender = parsed[0];
 	var actualMessage = parsed[1];
+	alert("sender is " + sender);
+	alert("message is " + actualMessage);
 	beginAnimation(sender, actualMessage);
+	alert("animation begun");
 	setTimeout(function() {
 		endAnimation(sender);
+		alert("animation done");
 	}, 1000);
 }
 
@@ -372,13 +376,13 @@ function parseMessage(message) {
 }
 
 function beginAnimation(playerIndex, message) {
-	var player = document.getElementById("action-text-p" + playerIndex.toString());
+	var player = document.getElementById("action-text-p" + playerIndex);
 	player.querySelector(".action-text p").innerHTML = message;
 	player.classList.add("action-text-transition");
 }
 
 function endAnimation(playerIndex) {
-	var player = document.getElementById("action-text-p" + playerIndex.toString());
+	var player = document.getElementById("action-text-p" + playerIndex);
 	player.classList.remove("action-text-transition");
 }
 
