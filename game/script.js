@@ -360,13 +360,9 @@ function animation(action) {
 	var parsed = parseMessage(action);
 	var sender = parsed[0];
 	var actualMessage = parsed[1];
-	alert("sender is " + sender);
-	alert("message is " + actualMessage);
 	beginAnimation(sender, actualMessage);
-	alert("animation begun");
 	setTimeout(function() {
 		endAnimation(sender);
-		alert("animation done");
 	}, 1000);
 }
 
