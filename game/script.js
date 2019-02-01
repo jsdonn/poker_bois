@@ -376,16 +376,16 @@ function parseMessage(message) {
 function beginAnimation(playerIndex, message) {
 	var player = document.getElementById("action-text-p" + playerIndex);
 	player.querySelector(".action-text p").innerHTML = message;
+	player.style.opacity = "1";
 	player.style.transition = "none";
 	player.style.visibility = "visible";
-	player.style.opacity = "1";
 }
 
 function endAnimation(playerIndex) {
 	var player = document.getElementById("action-text-p" + playerIndex);
+	player.style.opacity = "0";
 	player.style.transition = "visibility 0s linear .5s, opacity .5s linear";
 	player.style.visibility = "hidden";
-	player.style.opacity = "0";
 }
 
 function changeRaise(scalar) {
