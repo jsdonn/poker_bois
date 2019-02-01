@@ -1,5 +1,4 @@
 // TODO: fold pile
-// 		 display check/fold/raise etc text when people make those actions. DONE
 //		 display small/big blinds
 //		 auto check/auto fold
 //		 clock animation
@@ -25,7 +24,7 @@ var stacks;
 var playerNames;
 var pot;
 var folded;
-var actions;
+var action;
 var handNumber;
 var winners;
 var winnings;
@@ -59,7 +58,8 @@ var newRound = true;
 var veryFirst = true;
 var prevHand = -1;
 var playerList = [];
-
+var tick = new Audio('../other_files/tick.mp3');
+var shuffle = new Audio('../other_files/shuffle.mp3');
 
 var dataDict;
 ws.onmessage = function(event) {
@@ -79,7 +79,7 @@ ws.onmessage = function(event) {
 	handNumber = dataDict["hand_number"];
 	dealer = dataDict["dealer"];
 	communityCards = dataDict["board_cards"];
-	actions = dataDict["actions"];
+	action = dataDict["action"];
 	winners = dataDict["winners"];
 	winnings = dataDict["final_winnings"];
 	sidePots = dataDict["side_pots"];
@@ -113,9 +113,16 @@ ws.onmessage = function(event) {
 	updateVariables();
 
 	// display animations if there are any
-	if (actions.length != 0) {
-		animations(actions);
+	if (action.length != 0) {
+		animation(action);
 	}
+
+	// play a ticking noise if it's your turn
+	setInterval(function() {
+		if (currPlayerTurn === myIndex) {
+			tick.play();
+		}
+	}, 1000);
 	
 	// if it is the end of the round and there are still players in, display their hole cards
 	if (riverHoleCards.length > 1 && inPlayers.length != 0) { 
@@ -126,6 +133,7 @@ ws.onmessage = function(event) {
 	// reset inPlayers and hide fold message at the start of each new round 
 	if (newRound) {
 		resetGame();
+		shuffle.play();
 	} 
 	veryFirst = false;	
 }
@@ -265,8 +273,11 @@ function updateDealerStacksAndNames() {
 		var index = playerList[i][1];
 		if (stacks[index] !== -1) {
 			document.getElementById("action-text-p" + index.toString()).querySelector(".action-text p").innerHTML = "";
-			document.getElementById("action-text-p" + index.toString()).style.opacity = "0";
-			document.getElementById("action-text-p" + index.toString()).style.visibility = "hidden";
+			for (j = 0; j < 9; j++) {
+				document.getElementById("action-text-p" + j.toString()).style.opacity = "0";
+				document.getElementById("action-text-p" + j.toString()).style.visibility = "hidden";
+				document.getElementById("action-text-p" + j.toString()).querySelector(".action-text p").innerHTML = "";
+			}
 			document.getElementById("stack-p" + index.toString()).innerHTML = stacks[index].toString();
 			if (index == dealer) {
 				document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "visible";
@@ -342,18 +353,13 @@ function animateAction(playerID, message) {
 	// i dont actually use this anymore :(
 }
 
-function animations(actionList) {
-	for (i = 0; i < actionList.length; i++) {
-		var parsed = parseMessage(actionList[i]);
-		var sender = parsed[0];
-		var actualMessage = parsed[1];
-		beginAnimation(sender, actualMessage);
-	}
+function animation(action) {
+	var parsed = parseMessage(action);
+	var sender = parsed[0];
+	var actualMessage = parsed[1];
+	beginAnimation(sender, actualMessage);
 	setTimeout(function() {
-		for (i = 0; i < actionList.length; i++) {
-			var sender = parseMessage(actionList[i])[0];
-			endAnimation(sender);
-		}
+		endAnimation(sender);
 	}, 1000);
 }
 

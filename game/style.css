@@ -15,7 +15,7 @@ body {
 
 @font-face {
   font-family: 'Mukta';
-  src: url(../Mukta/Mukta-Regular.ttf) format('truetype');
+  src: url(../other_files/Mukta/Mukta-Regular.ttf) format('truetype');
 }
 
 .wrapper {
