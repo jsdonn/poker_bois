@@ -362,6 +362,7 @@ function parseMessage(message) {
 
 function beginAnimation(playerIndex, message) {
 	var player = document.getElementById("action-text-p" + playerIndex.toString());
+	alert(player);
 	player.querySelector(".action-text p").innerHTML = message;
 	player.classList.add("action-text-transition");
 }
