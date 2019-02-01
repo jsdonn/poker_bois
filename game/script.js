@@ -302,8 +302,10 @@ function spectatorMode(name, stack, seat) {
 	document.getElementById("p" + seat.toString()).getElementsByClassName("toggle-visibility")[0].style.visibility = "visible";
 	document.getElementById("player" + seat.toString()).innerHTML = name;
 	document.getElementById("stack-p" + seat.toString()).innerHTML = stack.toString();
-	document.getElementById("action-text-p" + seat.toString()).innerHTML = "Sitting out";
+	document.getElementById("action-text-p" + seat.toString()).querySelector(".action-text p").innerHTML = "Sitting out";
 	document.getElementById("action-text-p" + seat.toString()).style.opacity = "1"; //might need to change this for animations
+	document.getElementById("action-text-p" + seat.toString()).style.visibility = "visible";
+	document.getElementById("action-text-p" + seat.toString()).style.zIndex = "10";
 } // untested!
 
 function updateBetsAndFolds() {
@@ -441,7 +443,11 @@ function send(arg) {
 	} else if (arg == -1) {
 		data = "0,-1," + myIndex.toString() + "Fold";
 	} else if (typeof arg === "number") {
-		data = "0," + arg.toString() + "," + myIndex.toString() + "Bet " + arg.toString();
+		if (arg < 10) {
+			data = "1," + arg.toString();
+		} else {
+			data = "0," + arg.toString() + "," + myIndex.toString() + "Bet " + arg.toString();
+		}
 	}
 	document.getElementById("raise-amount").value = ""; // clear raise input field
 	ws.send(data);
