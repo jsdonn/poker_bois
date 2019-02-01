@@ -272,12 +272,16 @@ function updateDealerStacksAndNames() {
 		var name = playerList[i][0];
 		var index = playerList[i][1];
 		if (stacks[index] !== -1) {
-			document.getElementById("action-text-p" + index.toString()).querySelector(".action-text p").innerHTML = "";
-			for (j = 0; j < 9; j++) {
-				document.getElementById("action-text-p" + j.toString()).style.opacity = "0";
-				document.getElementById("action-text-p" + j.toString()).style.visibility = "hidden";
-				document.getElementById("action-text-p" + j.toString()).querySelector(".action-text p").innerHTML = "";
+			if (myIndex === index) {
+				for (j = 0; j < 9; j++) {
+					document.getElementById("action-text-p" + j.toString()).style.opacity = "0";
+					document.getElementById("action-text-p" + j.toString()).style.visibility = "hidden";
+					document.getElementById("action-text-p" + j.toString()).querySelector(".action-text p").innerHTML = "";
+				}
 			}
+			document.getElementById("action-text-p" + index.toString()).querySelector(".action-text p").innerHTML = "";
+			document.getElementById("action-text-p" + index.toString()).style.opacity = "0";
+			document.getElementById("action-text-p" + index.toString()).style.visibility = "hidden";
 			document.getElementById("stack-p" + index.toString()).innerHTML = stacks[index].toString();
 			if (index == dealer) {
 				document.getElementById("dealer-chip-p" + index.toString()).style.visibility = "visible";
@@ -287,7 +291,7 @@ function updateDealerStacksAndNames() {
 			document.getElementById("player" + index.toString()).innerHTML = name; //does this work
 			document.getElementById("first-p" + index.toString()).style.visibility = "visible";
 			document.getElementById("second-p" + index.toString()).style.visibility = "visible";
-		}	
+		}
 	}
 	// p sure this works
 	for (i = 0; i < standingPlayers.length; i++) {
