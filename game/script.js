@@ -343,9 +343,11 @@ function animateAction(playerID, message) {
 }
 
 function animations(actionList) {
+	alert("actions length is " +actionList.length);
 	for (i = 0; i < actionList.length; i++) {
-		var sender = parseMessage(actionList[i])[0];
-		var actualMessage = parseMessage(actionList[i])[1];
+		var parsed = parseMessage(actionList[i]);
+		var sender = parsed[0];
+		var actualMessage = parsed[1];
 		beginAnimation(sender, actualMessage);
 	}
 	setTimeout(function() {
