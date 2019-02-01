@@ -340,7 +340,7 @@ function showHoleCardsAtEnd() {
 		var index = playerList[i][1];
 		if (inPlayers.includes(index) && stacks[index] !== -1 && folded[index] !== 1) {
 			updateCards("first-p" + index.toString(), riverHoleCards[inPlayers.indexOf(index)][0]);
-			updateCards("second-p" + index.toString(), riverHoleCards[i][1]);
+			updateCards("second-p" + index.toString(), riverHoleCards[inPlayers.indexOf(index)][1]);
 		}
 	}
 }
@@ -357,11 +357,14 @@ function animateAction(playerID, message) {
 }
 
 function animation(action) {
+	console.log("in animatino function; action is " + action)
 	var parsed = parseMessage(action);
 	var sender = parsed[0];
 	var actualMessage = parsed[1];
+	console.log("begin");
 	beginAnimation(sender, actualMessage);
 	setTimeout(function() {
+		console.log("end");
 		endAnimation(sender);
 	}, 1000);
 }
